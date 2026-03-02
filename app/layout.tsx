@@ -22,10 +22,29 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
+  icons: {
+    icon: "/brand/favicon-circle.png",
+    shortcut: "/brand/favicon-circle.png",
+    apple: "/brand/favicon-circle.png",
+  },
   openGraph: {
     title: "ToolStrategyHub | Strategic Decision Tools",
     description: "Data-driven tools to validate, calculate, and execute smarter business decisions.",
     siteName: "ToolStrategyHub",
+    images: [
+      {
+        url: "/brand/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "ToolStrategyHub Logo",
+      }
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "ToolStrategyHub",
+    description: "Strategic decision tools for builders and founders.",
+    images: ["/brand/og-image.png"],
   }
 };
 

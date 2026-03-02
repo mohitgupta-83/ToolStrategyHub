@@ -4,6 +4,8 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
+import Image from 'next/image';
+
 export default function Header() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const pathname = usePathname();
@@ -20,8 +22,29 @@ export default function Header() {
             zIndex: 100
         }}>
             <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <Link href="/" style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', color: 'var(--text-primary)', fontWeight: 600, letterSpacing: '-0.02em', zIndex: 101 }}>
-                    ToolStrategy<span style={{ color: 'var(--accent-primary)' }}>Hub</span>
+                <Link href="/" className="brand-logo" style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '10px',
+                    fontFamily: 'var(--font-serif)',
+                    fontSize: '1.5rem',
+                    color: 'var(--text-primary)',
+                    fontWeight: 600,
+                    letterSpacing: '-0.02em',
+                    zIndex: 101,
+                    textDecoration: 'none'
+                }}>
+                    <div className="logo-icon-wrapper" style={{ display: 'flex', alignItems: 'center', transition: 'filter 0.3s ease' }}>
+                        <Image
+                            src="/brand/logo-main.png"
+                            alt="ToolStrategyHub Icon"
+                            width={32}
+                            height={32}
+                            style={{ width: 'auto' }}
+                            className="logo-icon"
+                        />
+                    </div>
+                    <span>ToolStrategy<span style={{ color: 'var(--accent-primary)' }}>Hub</span></span>
                 </Link>
 
                 {/* Desktop Navigation */}
@@ -81,7 +104,17 @@ export default function Header() {
             </div>
 
             <style jsx>{`
+                .brand-logo:hover .logo-icon-wrapper {
+                    filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.6));
+                }
+                .logo-icon {
+                    height: 28px;
+                    width: auto;
+                }
                 @media (min-width: 768px) {
+                    .logo-icon {
+                        height: 32px;
+                    }
                     .desktop-nav {
                         display: flex !important;
                     }

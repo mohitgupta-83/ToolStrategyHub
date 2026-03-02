@@ -38,7 +38,12 @@ export default function AdminLogin() {
     return (
         <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "80vh" }}>
             <div className="admin-glass-panel" style={{ width: "100%", maxWidth: "400px" }}>
-                <div className="admin-header-title" style={{ marginBottom: "2rem", justifyContent: "center" }}>
+                <div className="admin-header-title" style={{ marginBottom: "2rem", justifyContent: "center", display: "flex", alignItems: "center", gap: "10px" }}>
+                    <img
+                        src="/brand/logo-main.png"
+                        alt="Logo"
+                        style={{ width: '24px', height: 'auto', filter: 'drop-shadow(0 0 6px var(--admin-accent))' }}
+                    />
                     SYS.ADMIN.AUTH
                 </div>
 

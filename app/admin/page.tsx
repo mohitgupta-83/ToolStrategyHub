@@ -126,7 +126,14 @@ export default function AdminDashboard() {
         <>
             {/* Header */}
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1px solid var(--admin-border)", paddingBottom: "1rem" }}>
-                <h1 className="admin-header-title">SYS.ADMIN.DASHBOARD</h1>
+                <div className="admin-header-title" style={{ display: "flex", alignItems: "center", gap: "12px", margin: 0 }}>
+                    <img
+                        src="/brand/logo-main.png"
+                        alt="Logo"
+                        style={{ width: '28px', height: 'auto', filter: 'drop-shadow(0 0 8px var(--admin-accent))' }}
+                    />
+                    SYS.ADMIN.DASHBOARD
+                </div>
                 <div style={{ display: "flex", gap: "1rem" }}>
                     <button onClick={fetchStats} className="admin-btn">Reroute Feed</button>
                     <button onClick={handleExportCSV} className="admin-btn">Extract Datadump (CSV)</button>

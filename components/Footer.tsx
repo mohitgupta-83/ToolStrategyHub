@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
 export default function Footer() {
@@ -7,8 +8,29 @@ export default function Footer() {
         <footer style={{ marginTop: '5rem', padding: '5rem 0', borderTop: '1px solid var(--border-color)', backgroundColor: 'var(--bg-secondary)' }}>
             <div className="container" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '3rem' }}>
                 <div style={{ maxWidth: '300px' }}>
-                    <Link href="/" style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', color: 'var(--text-primary)', fontWeight: 600, letterSpacing: '-0.02em', display: 'block', marginBottom: '1rem' }}>
-                        ToolStrategy<span style={{ color: 'var(--accent-primary)' }}>Hub</span>
+                    <Link href="/" style={{
+                        fontFamily: 'var(--font-serif)',
+                        fontSize: '1.25rem',
+                        color: 'var(--text-primary)',
+                        fontWeight: 600,
+                        letterSpacing: '-0.02em',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '8px',
+                        marginBottom: '1rem',
+                        opacity: 0.85,
+                        textDecoration: 'none'
+                    }}>
+                        <div style={{ display: 'flex', alignItems: 'center', filter: 'drop-shadow(0 0 4px rgba(16, 185, 129, 0.3))' }}>
+                            <Image
+                                src="/brand/logo-main.png"
+                                alt="ToolStrategyHub Icon"
+                                width={24}
+                                height={24}
+                                style={{ width: 'auto', height: '24px' }}
+                            />
+                        </div>
+                        <span>ToolStrategy<span style={{ color: 'var(--accent-primary)' }}>Hub</span></span>
                     </Link>
                     <p style={{ color: 'var(--text-secondary)', fontSize: '0.875rem', lineHeight: 1.6 }}>
                         High-authority data-driven tools for founders, builders, and strategists to validate, calculate, and execute smarter business decisions.
