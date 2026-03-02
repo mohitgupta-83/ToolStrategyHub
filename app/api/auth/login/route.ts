@@ -19,9 +19,9 @@ export async function POST(req: Request) {
             return NextResponse.json({ error: "Missing password" }, { status: 400 });
         }
 
-        // FOR DEBUGGING ONLY: Let's see if the plumbing works
-        // We compare raw string AND hardcoded hash
-        const isMatch = (password === "admin123") || await bcrypt.compare(password, "$2b$10$JUl.0EmP5X/LSK.0FAIV5e03CM9Z7gwgUk6IObrqljGnGMp4LAofK");
+        // Use the environment variable for security
+        const storedHash = process.env.ADMIN_PASSWORD_HASH || "$2b$10$JUl.0EmP5X/LSK.0FAIV5e03CM9Z7gwgUk6IObrqljGnGMp4LAofK";
+        const isMatch = await bcrypt.compare(password, storedHash);
 
         if (!isMatch) {
             console.log("LOGIN FAILED: Input was:", `|${password}|`);
