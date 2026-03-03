@@ -64,26 +64,84 @@ export default function ToolsDirectoryClient() {
             </header>
 
             {/* CATEGORY FILTER SYSTEM */}
-            <section id="categories" className="stagger-2" style={{ marginBottom: '4rem', display: 'flex', flexWrap: 'wrap', gap: '0.75rem', justifyContent: 'center' }}>
-                {CATEGORIES.map(category => (
-                    <button
-                        key={category}
-                        onClick={() => setActiveCategory(category)}
-                        style={{
-                            padding: '0.5rem 1.25rem',
-                            borderRadius: 'var(--radius-full)',
-                            backgroundColor: activeCategory === category ? 'var(--accent-primary)' : 'var(--bg-secondary)',
-                            color: activeCategory === category ? 'var(--bg-primary)' : 'var(--text-secondary)',
-                            border: `1px solid ${activeCategory === category ? 'var(--accent-primary)' : 'var(--border-color)'}`,
-                            fontSize: '0.875rem',
-                            fontWeight: 'bold',
-                            cursor: 'pointer',
-                            transition: 'all 0.2s ease'
-                        }}
-                    >
-                        {category}
-                    </button>
-                ))}
+            <section id="categories" className="stagger-2 filter-container" style={{ marginBottom: '4rem', display: 'flex', flexWrap: 'wrap', gap: '0.75rem', justifyContent: 'center' }}>
+                <style jsx>{`
+                    .desktop-filters {
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 0.75rem;
+                        justify-content: center;
+                    }
+                    .mobile-filters {
+                        display: none;
+                        position: sticky;
+                        top: 5rem;
+                        z-index: 20;
+                        width: 100%;
+                    }
+                    .mobile-filters select {
+                        width: 100%;
+                        padding: 1rem;
+                        border-radius: var(--radius-md);
+                        background-color: var(--bg-secondary);
+                        border: 1px solid var(--border-color);
+                        color: var(--text-primary);
+                        font-size: 1rem;
+                        font-family: var(--font-sans);
+                        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+                        appearance: none;
+                        -webkit-appearance: none;
+                    }
+                    @media (max-width: 768px) {
+                        .desktop-filters {
+                            display: none;
+                        }
+                        .mobile-filters {
+                            display: block;
+                        }
+                    }
+                `}</style>
+
+                {/* Desktop View */}
+                <div className="desktop-filters">
+                    {CATEGORIES.map(category => (
+                        <button
+                            key={category}
+                            onClick={() => setActiveCategory(category)}
+                            style={{
+                                padding: '0.5rem 1.25rem',
+                                borderRadius: 'var(--radius-full)',
+                                backgroundColor: activeCategory === category ? 'var(--accent-primary)' : 'var(--bg-secondary)',
+                                color: activeCategory === category ? 'var(--bg-primary)' : 'var(--text-secondary)',
+                                border: `1px solid ${activeCategory === category ? 'var(--accent-primary)' : 'var(--border-color)'}`,
+                                fontSize: '0.875rem',
+                                fontWeight: 'bold',
+                                cursor: 'pointer',
+                                transition: 'all 0.2s ease',
+                                minHeight: 'unset'
+                            }}
+                        >
+                            {category}
+                        </button>
+                    ))}
+                </div>
+
+                {/* Mobile View */}
+                <div className="mobile-filters">
+                    <div style={{ position: 'relative' }}>
+                        <select
+                            value={activeCategory}
+                            onChange={(e) => setActiveCategory(e.target.value)}
+                        >
+                            {CATEGORIES.map(category => (
+                                <option key={category} value={category}>{category}</option>
+                            ))}
+                        </select>
+                        <div style={{ position: 'absolute', right: '1rem', top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none', color: 'var(--text-secondary)' }}>
+                            ▼
+                        </div>
+                    </div>
+                </div>
             </section>
 
             {/* TOOL GRID */}

@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import AnalyticsTracker from "@/components/AnalyticsTracker";
+import ScrollReset from "@/components/ScrollReset";
 
 const serifFont = Playfair_Display({
   subsets: ["latin"],
@@ -63,6 +64,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${serifFont.variable} ${sansFont.variable}`}>
         <div className="site-wrapper">
+          <ScrollReset />
           <AnalyticsTracker />
           <div className="bg-gradient"></div>
           <div className="bg-noise"></div>

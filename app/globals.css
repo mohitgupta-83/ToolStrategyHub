@@ -240,6 +240,7 @@ textarea.input-field {
 /* Custom Sliders for Calculators */
 input[type=range] {
   -webkit-appearance: none;
+  appearance: none;
   width: 100%;
   background: transparent;
   height: 4px;
@@ -333,4 +334,162 @@ input[type=range]::-webkit-slider-runnable-track {
   margin-right: 0.5rem;
   margin-bottom: 0.5rem;
   text-transform: uppercase;
+}
+
+/* ========================================================= */
+/* SYSTEM MOBILE OPTIMIZATION & RESPONSIVE RULES */
+/* ========================================================= */
+@media (max-width: 768px) {
+
+  /* Enforce core readable scale, no horizontal scroll */
+  body {
+    overflow-x: hidden;
+    font-size: 16px;
+  }
+
+  /* 16px minimum side spacing container */
+  .container {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  /* Prevent oversized typography from breaking layout boundaries */
+  h1 {
+    font-size: clamp(2.25rem, 8vw, 2.75rem) !important;
+    line-height: 1.15;
+  }
+
+  h2 {
+    font-size: clamp(1.75rem, 6vw, 2rem) !important;
+    line-height: 1.2;
+  }
+
+  /* Optimize Grid Elements to Stack Vertically securely */
+  .tool-grid,
+  [style*="grid-template-columns"],
+  .category-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+
+  /* 48px Minimum Touch Targets (Apple/Google Accessibility standard) */
+  .btn,
+  button,
+  a.category-card,
+  .input-field {
+    min-height: 48px;
+    align-items: center;
+  }
+
+  /* Expand full-width buttons & align text securely */
+  .btn,
+  .btn-secondary {
+    width: 100% !important;
+    display: flex;
+    justify-content: center;
+  }
+
+  /* Form Inputs Scaled */
+  .input-field {
+    width: 100% !important;
+    font-size: 16px !important;
+    /* Forces iOS not to auto-zoom */
+    padding: 1rem !important;
+  }
+
+  /* Reduced card padding to allow text breathing room on thin screens */
+  .card,
+  .category-card {
+    padding: 1.25rem !important;
+  }
+
+  .stagger-1,
+  .stagger-2,
+  .stagger-3,
+  .stagger-4 {
+    /* Accelerate animation delays on mobile for perceived speed UX */
+    animation-delay: 0.05s !important;
+    animation-duration: 0.5s !important;
+  }
+}
+
+/* ========================================================= */
+/* UX ENHANCEMENTS */
+/* ========================================================= */
+
+.mobile-sticky-cta {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-sticky-cta {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    background-color: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
+    padding: 1rem;
+    z-index: 100;
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+  }
+
+  .mobile-sticky-cta .btn {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  /* Create breathing room for the sticky CTA at the bottom of the page */
+  body {
+    padding-bottom: 80px;
+  }
+}
+
+/* Mobile Friendly Accordion for FAQs */
+details.faq-accordion {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+
+details.faq-accordion summary {
+  padding: 1.25rem 1.5rem;
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 1.125rem;
+  cursor: pointer;
+  list-style: none;
+  /* remove default triangle */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+details.faq-accordion summary::-webkit-details-marker {
+  display: none;
+}
+
+details.faq-accordion summary::after {
+  content: "+";
+  color: var(--accent-primary);
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+details.faq-accordion[open] summary::after {
+  content: "−";
+}
+
+details.faq-accordion p {
+  padding: 0 1.5rem 1.5rem 1.5rem;
+  color: var(--text-secondary);
+  margin: 0;
 }

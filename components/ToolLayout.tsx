@@ -95,12 +95,10 @@ export default function ToolLayout({
                     </h2>
                     <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
                         {faqs.map((faq, index) => (
-                            <div key={index}>
-                                <h3 style={{ fontSize: "1.25rem", marginBottom: "0.5rem" }}>
-                                    {faq.question}
-                                </h3>
-                                <p style={{ color: "var(--text-secondary)" }}>{faq.answer}</p>
-                            </div>
+                            <details key={index} className="faq-accordion">
+                                <summary>{faq.question}</summary>
+                                <p>{faq.answer}</p>
+                            </details>
                         ))}
                     </div>
                 </section>
@@ -169,6 +167,13 @@ export default function ToolLayout({
                     </div>
                 </section>
             )}
+
+            {/* Mobile Sticky CTA */}
+            <div className="mobile-sticky-cta">
+                <Link href="/tools" className="btn">
+                    Explore All Tools
+                </Link>
+            </div>
         </article>
     );
 }
