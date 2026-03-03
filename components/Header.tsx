@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -9,6 +9,17 @@ import Image from 'next/image';
 export default function Header() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const pathname = usePathname();
+
+    useEffect(() => {
+        if (isMobileMenuOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+        return () => {
+            document.body.style.overflow = '';
+        };
+    }, [isMobileMenuOpen]);
 
     return (
         <header style={{
@@ -75,14 +86,31 @@ export default function Header() {
                     {isMobileMenuOpen ? '✕' : '☰'}
                 </button>
 
+                {/* Mobile Backdrop Overlay */}
+                <div
+                    className="mobile-overlay"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    style={{
+                        position: 'fixed',
+                        inset: 0,
+                        backgroundColor: 'rgba(0,0,0,0.5)',
+                        backdropFilter: 'blur(4px)',
+                        zIndex: 99,
+                        opacity: isMobileMenuOpen ? 1 : 0,
+                        pointerEvents: isMobileMenuOpen ? 'auto' : 'none',
+                        transition: 'opacity 0.3s ease',
+                    }}
+                />
+
                 {/* Mobile Navigation Panel */}
                 <div
                     className="mobile-nav-panel"
                     style={{
                         position: 'fixed',
                         top: 0,
-                        right: isMobileMenuOpen ? 0 : '-100%',
-                        width: '100%',
+                        right: 0,
+                        width: '80%',
+                        maxWidth: '320px',
                         height: '100vh',
                         backgroundColor: 'var(--bg-primary)',
                         zIndex: 100,
@@ -90,7 +118,9 @@ export default function Header() {
                         flexDirection: 'column',
                         padding: '6rem 2rem 2rem',
                         gap: '1.5rem',
-                        transition: 'right 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+                        transform: isMobileMenuOpen ? 'translateX(0)' : 'translateX(100%)',
+                        transition: 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+                        boxShadow: isMobileMenuOpen ? '-4px 0 24px rgba(0,0,0,0.5)' : 'none',
                     }}
                 >
                     <Link href="/" onClick={() => setIsMobileMenuOpen(false)} style={{ fontSize: '1.5rem', fontWeight: 500, padding: '1rem 0', borderBottom: '1px solid var(--border-color)', color: pathname === '/' ? 'var(--accent-primary)' : 'var(--text-primary)' }}>Home</Link>
@@ -122,6 +152,9 @@ export default function Header() {
                         display: none !important;
                     }
                     .mobile-nav-panel {
+                        display: none !important;
+                    }
+                    .mobile-overlay {
                         display: none !important;
                     }
                 }
