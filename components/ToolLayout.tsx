@@ -51,12 +51,7 @@ export default function ToolLayout({
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
             />
-            {/* Phase 6: Sticky Engagement */}
-            <div style={{ position: 'sticky', top: '1rem', zIndex: 50, display: 'flex', justifyContent: 'flex-end', pointerEvents: 'none' }}>
-                <a href="#" style={{ pointerEvents: 'auto', padding: '0.75rem 1.5rem', backgroundColor: 'var(--text-primary)', color: 'var(--bg-primary)', borderRadius: 'var(--radius-full)', fontWeight: 'bold', fontSize: '0.875rem', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
-                    ↑ Top
-                </a>
-            </div>
+
             <header style={{ marginBottom: "3rem", maxWidth: "800px" }}>
                 {slug && getToolsList().find(t => t.slug === slug) && (() => {
                     const currentTool = getToolsList().find(t => t.slug === slug);
