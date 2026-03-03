@@ -58,6 +58,17 @@ export default function ToolLayout({
                 </a>
             </div>
             <header style={{ marginBottom: "3rem", maxWidth: "800px" }}>
+                {slug && getToolsList().find(t => t.slug === slug) && (() => {
+                    const currentTool = getToolsList().find(t => t.slug === slug);
+                    const catSlug = currentTool?.category.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+                    return (
+                        <nav style={{ marginBottom: '1.5rem', fontSize: '0.875rem', color: 'var(--text-secondary)' }}>
+                            <Link href="/categories" style={{ color: 'var(--text-secondary)' }}>Categories</Link>
+                            <span style={{ margin: '0 0.5rem' }}>/</span>
+                            <Link href={`/categories/${catSlug}`} style={{ color: 'var(--accent-primary)', textDecoration: 'none' }}>{currentTool?.category}</Link>
+                        </nav>
+                    );
+                })()}
                 <h1 style={{ fontSize: "3rem", marginBottom: "1rem" }}>{title}</h1>
                 <p style={{ fontSize: "1.25rem", color: "var(--text-secondary)" }}>
                     {description}

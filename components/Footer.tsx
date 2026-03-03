@@ -50,14 +50,15 @@ export default function Footer() {
                 <div>
                     <h4 style={{ marginBottom: '1.25rem', color: 'var(--text-primary)', fontSize: '0.875rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Categories</h4>
                     <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                        {categories.slice(0, 5).map(cat => {
-                            let link = "/";
-                            if (cat === "Idea Validation") link = "/tools/idea-validation";
-                            if (cat === "Operations & Productivity") link = "/tools/operations-productivity";
-                            if (cat === "Builders & Creators") link = "/tools/builders-creators";
-                            if (cat === "Research & Discovery") link = "/tools/research-discovery";
-                            return <li key={cat}><Link href={link} style={{ color: 'var(--text-secondary)', fontSize: '0.875rem', transition: 'color 0.2s ease' }}>{cat}</Link></li>;
-                        })}
+                        {[
+                            { name: "Idea Validation", slug: "idea-validation" },
+                            { name: "Money & Pricing", slug: "money-pricing" },
+                            { name: "Strategy", slug: "strategy" },
+                            { name: "Operations", slug: "operations" },
+                            { name: "Research", slug: "research" }
+                        ].map(cat => (
+                            <li key={cat.slug}><Link href={`/categories/${cat.slug}`} style={{ color: 'var(--text-secondary)', fontSize: '0.875rem', transition: 'color 0.2s ease' }}>{cat.name}</Link></li>
+                        ))}
                     </ul>
                 </div>
 

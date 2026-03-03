@@ -51,7 +51,7 @@ export default function Header() {
                 <nav className="desktop-nav" style={{ display: 'none', gap: '2rem', alignItems: 'center' }}>
                     <Link href="/" style={{ fontSize: '0.875rem', fontWeight: 500, color: pathname === '/' ? 'var(--accent-primary)' : 'var(--text-primary)' }}>Home</Link>
                     <Link href="/tools" style={{ fontSize: '0.875rem', fontWeight: 500, color: pathname.includes('/tools') ? 'var(--accent-primary)' : 'var(--text-secondary)' }}>Tools</Link>
-                    <Link href="/tools#categories" style={{ fontSize: '0.875rem', fontWeight: 500, color: 'var(--text-secondary)' }}>Categories</Link>
+                    <Link href="/categories" style={{ fontSize: '0.875rem', fontWeight: 500, color: pathname.startsWith('/categories') ? 'var(--accent-primary)' : 'var(--text-secondary)' }}>Categories</Link>
                     <Link href="/blog" style={{ fontSize: '0.875rem', fontWeight: 500, color: pathname.includes('/blog') ? 'var(--accent-primary)' : 'var(--text-secondary)' }}>Guides</Link>
                     <Link href="/about" style={{ fontSize: '0.875rem', fontWeight: 500, color: pathname === '/about' ? 'var(--accent-primary)' : 'var(--text-secondary)' }}>About</Link>
                     <Link href="/tools" className="btn" style={{ padding: '0.5rem 1rem' }}>Explore All Tools</Link>
@@ -95,7 +95,7 @@ export default function Header() {
                 >
                     <Link href="/" onClick={() => setIsMobileMenuOpen(false)} style={{ fontSize: '1.5rem', fontWeight: 500, padding: '1rem 0', borderBottom: '1px solid var(--border-color)', color: pathname === '/' ? 'var(--accent-primary)' : 'var(--text-primary)' }}>Home</Link>
                     <Link href="/tools" onClick={() => setIsMobileMenuOpen(false)} style={{ fontSize: '1.5rem', fontWeight: 500, padding: '1rem 0', borderBottom: '1px solid var(--border-color)', color: pathname.includes('/tools') ? 'var(--accent-primary)' : 'var(--text-primary)' }}>All Tools</Link>
-                    <Link href="/tools#categories" onClick={() => setIsMobileMenuOpen(false)} style={{ fontSize: '1.5rem', fontWeight: 500, padding: '1rem 0', borderBottom: '1px solid var(--border-color)', color: 'var(--text-primary)' }}>Categories</Link>
+                    <Link href="/categories" onClick={() => setIsMobileMenuOpen(false)} style={{ fontSize: '1.5rem', fontWeight: 500, padding: '1rem 0', borderBottom: '1px solid var(--border-color)', color: pathname.startsWith('/categories') ? 'var(--accent-primary)' : 'var(--text-primary)' }}>Categories</Link>
                     <Link href="/blog" onClick={() => setIsMobileMenuOpen(false)} style={{ fontSize: '1.5rem', fontWeight: 500, padding: '1rem 0', borderBottom: '1px solid var(--border-color)', color: pathname.includes('/blog') ? 'var(--accent-primary)' : 'var(--text-primary)' }}>Guides & Strategy</Link>
                     <Link href="/about" onClick={() => setIsMobileMenuOpen(false)} style={{ fontSize: '1.5rem', fontWeight: 500, padding: '1rem 0', borderBottom: '1px solid var(--border-color)', color: pathname === '/about' ? 'var(--accent-primary)' : 'var(--text-primary)' }}>About Us</Link>
 

@@ -97,16 +97,28 @@ export default function ToolsDirectoryClient() {
                 ) : (
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1.5rem' }}>
                         {filteredTools.map((tool) => (
-                            <Link href={`/tools/${tool.slug}`} key={tool.slug} className="card" style={{ display: 'flex', flexDirection: 'column', padding: '1.5rem', transition: 'transform 0.2s', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-secondary)' }}>
-                                <span className="pill" style={{ alignSelf: 'flex-start', marginBottom: '1rem', fontSize: '0.7rem' }}>{tool.category}</span>
-                                <h3 style={{ fontSize: '1.25rem', marginBottom: '0.75rem' }}>{tool.name}</h3>
-                                <p style={{ color: 'var(--text-secondary)', fontSize: '0.875rem', lineHeight: 1.5, flexGrow: 1 }}>
+                            <div key={tool.slug} className="card" style={{ position: 'relative', display: 'flex', flexDirection: 'column', padding: '1.5rem', transition: 'transform 0.2s', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-secondary)' }}>
+                                <Link
+                                    href={`/categories/${tool.category.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}`}
+                                    className="pill"
+                                    style={{ zIndex: 10, position: 'relative', alignSelf: 'flex-start', marginBottom: '1rem', fontSize: '0.7rem', cursor: 'pointer' }}
+                                    title={`View all ${tool.category} tools`}
+                                >
+                                    {tool.category}
+                                </Link>
+                                <h3 style={{ fontSize: '1.25rem', marginBottom: '0.75rem', position: 'relative', zIndex: 10 }}>
+                                    <Link href={`/tools/${tool.slug}`} style={{ color: 'inherit', textDecoration: 'none' }}>
+                                        {tool.name}
+                                    </Link>
+                                </h3>
+                                <p style={{ color: 'var(--text-secondary)', fontSize: '0.875rem', lineHeight: 1.5, flexGrow: 1, position: 'relative', zIndex: 2 }}>
                                     {tool.description}
                                 </p>
-                                <div style={{ marginTop: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--accent-primary)', fontSize: '0.875rem', fontWeight: 'bold' }}>
+                                <div style={{ marginTop: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--accent-primary)', fontSize: '0.875rem', fontWeight: 'bold', position: 'relative', zIndex: 2 }}>
                                     Launch Tool <span>→</span>
                                 </div>
-                            </Link>
+                                <Link href={`/tools/${tool.slug}`} style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, zIndex: 1 }} aria-label={`Launch ${tool.name}`}></Link>
+                            </div>
                         ))}
                     </div>
                 )}

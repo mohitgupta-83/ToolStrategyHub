@@ -114,54 +114,91 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 4. HOW IT WORKS SECTION */}
-        <section className="stagger-4" style={{ marginBottom: '8rem' }}>
+
+
+        {/* 4. MOST USED CATEGORIES (Hub Links) */}
+        <section className="stagger-1" style={{ marginBottom: '8rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '3rem', borderBottom: '1px solid var(--border-color)', paddingBottom: '1rem' }}>
-            <h2 style={{ fontSize: '2.5rem', margin: 0 }}>How It Works</h2>
+            <h2 style={{ fontSize: '2.5rem', margin: 0 }}>Explore by Strategy Category</h2>
             <div style={{ color: 'var(--accent-primary)', fontFamily: 'var(--font-mono)', fontWeight: 'bold' }}>02</div>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '3rem' }}>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              <div style={{ fontSize: '3rem', fontFamily: 'var(--font-serif)', color: 'var(--accent-primary)', opacity: 0.5 }}>1.</div>
-              <h3 style={{ fontSize: '1.5rem' }}>Define Your Scenario</h3>
-              <p style={{ color: 'var(--text-secondary)' }}>Identify the business challenge you're facing—whether testing a startup idea, calculating required profit margins, or budgeting a large software project.</p>
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              <div style={{ fontSize: '3rem', fontFamily: 'var(--font-serif)', color: 'var(--accent-primary)', opacity: 0.5 }}>2.</div>
-              <h3 style={{ fontSize: '1.5rem' }}>Analyze With Tools</h3>
-              <p style={{ color: 'var(--text-secondary)' }}>Input your variables into our specialized algorithms. All calculations happen instantly on your device, ensuring total privacy and extreme speed.</p>
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              <div style={{ fontSize: '3rem', fontFamily: 'var(--font-serif)', color: 'var(--accent-primary)', opacity: 0.5 }}>3.</div>
-              <h3 style={{ fontSize: '1.5rem' }}>Make Confident Decisions</h3>
-              <p style={{ color: 'var(--text-secondary)' }}>Receive a rigorous, mathematically supported conclusion. Eliminate guesswork, increase your win rates, and confidently execute your strategy.</p>
-            </div>
-          </div>
-        </section>
-
-        {/* 5. MOST USED CATEGORIES (Hub Links) */}
-        <section className="stagger-1" style={{ marginBottom: '8rem' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '3rem', borderBottom: '1px solid var(--border-color)', paddingBottom: '1rem' }}>
-            <h2 style={{ fontSize: '2.5rem', margin: 0 }}>Strategy Categories</h2>
-            <div style={{ color: 'var(--accent-primary)', fontFamily: 'var(--font-mono)', fontWeight: 'bold' }}>03</div>
-          </div>
-
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem' }}>
-            {["Idea Validation", "Financial Planning", "Project Execution", "Research & Discovery"].map((category, idx) => (
-              <Link href="#" key={idx} className="category-card" style={{ padding: '2rem 1.5rem', backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '120px' }}
-              >
-                <h3 style={{ fontSize: '1.25rem', transition: 'color 0.2s' }}>{category}</h3>
+          <div className="category-grid" style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+            gap: '1.5rem'
+          }}>
+            {Object.values(toolsRegistry.reduce((acc, tool) => {
+              if (!acc[tool.category]) {
+                acc[tool.category] = {
+                  name: tool.category,
+                  count: 0,
+                  slug: tool.category.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''),
+                  desc: ''
+                };
+                // Assign short descriptions based on category name
+                if (tool.category === 'Idea Validation') acc[tool.category].desc = 'Scorecards to objectively test startup ideas before writing code.';
+                else if (tool.category === 'Money & Pricing') acc[tool.category].desc = 'Calculators to engineer profitable pricing and manage cash flow.';
+                else if (tool.category === 'Strategy') acc[tool.category].desc = 'Frameworks to make calculated, bias-free business decisions.';
+                else if (tool.category === 'Operations') acc[tool.category].desc = 'Systems to optimize workflow, capacity, and execution speed.';
+                else if (tool.category === 'Creators') acc[tool.category].desc = 'Tools to grow, engage, and monetize a digital audience.';
+                else if (tool.category === 'Research') acc[tool.category].desc = 'Data-driven tools to analyze markets and outsmart competitors.';
+                else acc[tool.category].desc = `Explore ${tool.category} calculation models.`;
+              }
+              acc[tool.category].count++;
+              return acc;
+            }, {} as Record<string, { name: string, count: number, slug: string, desc: string }>)).map((cat, idx) => (
+              <Link href={`/categories/${cat.slug}`} key={idx} className="category-card" style={{
+                padding: '2rem 1.5rem',
+                backgroundColor: 'var(--bg-secondary)',
+                border: '1px solid var(--border-color)',
+                borderRadius: 'var(--radius-sm)',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '0.5rem',
+                transition: 'all 0.3s ease',
+                position: 'relative',
+                overflow: 'hidden'
+              }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 2 }}>
+                  <h3 style={{ fontSize: '1.25rem', margin: 0, color: 'var(--text-primary)' }}>{cat.name}</h3>
+                  <span style={{ fontSize: '0.875rem', color: 'var(--accent-primary)', fontFamily: 'var(--font-mono)', backgroundColor: 'rgba(16, 185, 129, 0.1)', padding: '0.2rem 0.5rem', borderRadius: '4px' }}>
+                    {cat.count} tools
+                  </span>
+                </div>
+                <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.5, zIndex: 2 }}>
+                  {cat.desc}
+                </p>
+                <div className="hover-glow" style={{ position: 'absolute', right: '-20%', bottom: '-50%', width: '150px', height: '150px', background: 'var(--accent-muted)', filter: 'blur(40px)', borderRadius: '50%', zIndex: 1, opacity: 0, transition: 'opacity 0.3s' }}></div>
               </Link>
             ))}
           </div>
+          <style dangerouslySetInnerHTML={{
+            __html: `
+            .category-card:hover {
+                border-color: var(--accent-primary) !important;
+                transform: translateY(-2px);
+            }
+            .category-card:hover .hover-glow {
+                opacity: 0.5 !important;
+            }
+            @media (min-width: 1024px) {
+                .category-grid { grid-template-columns: repeat(4, 1fr) !important; }
+            }
+            @media (min-width: 768px) and (max-width: 1023px) {
+                .category-grid { grid-template-columns: repeat(2, 1fr) !important; }
+            }
+            @media (max-width: 767px) {
+                .category-grid { grid-template-columns: 1fr !important; }
+            }
+          `}} />
         </section>
 
         {/* 7. FAQ SECTION */}
         <section className="stagger-2" style={{ marginBottom: '8rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '3rem', borderBottom: '1px solid var(--border-color)', paddingBottom: '1rem' }}>
             <h2 style={{ fontSize: '2.5rem', margin: 0 }}>Frequently Asked Questions</h2>
-            <div style={{ color: 'var(--accent-primary)', fontFamily: 'var(--font-mono)', fontWeight: 'bold' }}>04</div>
+            <div style={{ color: 'var(--accent-primary)', fontFamily: 'var(--font-mono)', fontWeight: 'bold' }}>03</div>
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '2rem' }}>
