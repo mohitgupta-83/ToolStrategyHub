@@ -4,6 +4,8 @@ import { useState, useEffect, useRef } from "react";
 import ToolLayout from "@/components/ToolLayout";
 import { trackUsage } from "@/lib/tracker";
 import { calculateConstructionEstimate, ConstructionParams, ConstructionResult } from "@/lib/constructionEstimator";
+import CurrencySelector from "@/components/CurrencySelector";
+import { CurrencyCode, CURRENCY_RATES, formatCurrency } from "@/lib/currencyRates";
 
 export default function ConstructionCostEstimator() {
     const [params, setParams] = useState<ConstructionParams>({
@@ -17,6 +19,23 @@ export default function ConstructionCostEstimator() {
     });
 
     const [result, setResult] = useState<ConstructionResult | null>(null);
+
+    const [currency, setCurrency] = useState<CurrencyCode>("USD");
+
+    useEffect(() => {
+        const saved = localStorage.getItem("tool_currency") as CurrencyCode;
+        if (saved && CURRENCY_RATES[saved]) {
+            setCurrency(saved);
+        }
+    }, []);
+
+    const handleCurrencyChange = (c: CurrencyCode) => {
+        setCurrency(c);
+        localStorage.setItem("tool_currency", c);
+    };
+
+    const rate = CURRENCY_RATES[currency].rate;
+    const symbol = CURRENCY_RATES[currency].symbol;
 
     useEffect(() => {
         setResult(calculateConstructionEstimate(params));
@@ -69,9 +88,11 @@ export default function ConstructionCostEstimator() {
                 {/* Controls */}
                 <div className="card stagger-1" style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }} id="calculator-controls">
 
+                    <CurrencySelector currency={currency} onChange={handleCurrencyChange} />
+
                     <div className="input-group">
-                        <label className="input-label">Base Material Cost ($)</label>
-                        <input type="number" className="input-field" value={params.materialCost} onChange={(e) => updateParam("materialCost", parseInt(e.target.value))} />
+                        <label className="input-label">Base Material Cost ({symbol})</label>
+                        <input type="number" className="input-field" value={params.materialCost ? Number((params.materialCost * rate).toFixed(2)) : 0} onChange={(e) => updateParam("materialCost", (Number(e.target.value) || 0) / rate)} />
                     </div>
 
                     <div className="input-group">
@@ -88,14 +109,14 @@ export default function ConstructionCostEstimator() {
                             <input type="number" className="input-field" value={params.laborHours} onChange={(e) => updateParam("laborHours", parseInt(e.target.value))} />
                         </div>
                         <div className="input-group" style={{ flex: 1 }}>
-                            <label className="input-label">Rate / Hour ($)</label>
-                            <input type="number" className="input-field" value={params.laborRate} onChange={(e) => updateParam("laborRate", parseInt(e.target.value))} />
+                            <label className="input-label">Rate / Hour ({symbol})</label>
+                            <input type="number" className="input-field" value={params.laborRate ? Number((params.laborRate * rate).toFixed(2)) : 0} onChange={(e) => updateParam("laborRate", (Number(e.target.value) || 0) / rate)} />
                         </div>
                     </div>
 
                     <div className="input-group">
-                        <label className="input-label">Equipment Rentals / Permits ($)</label>
-                        <input type="number" className="input-field" value={params.equipmentCost} onChange={(e) => updateParam("equipmentCost", parseInt(e.target.value))} />
+                        <label className="input-label">Equipment Rentals / Permits ({symbol})</label>
+                        <input type="number" className="input-field" value={params.equipmentCost ? Number((params.equipmentCost * rate).toFixed(2)) : 0} onChange={(e) => updateParam("equipmentCost", (Number(e.target.value) || 0) / rate)} />
                     </div>
 
                     <div className="input-group">
@@ -131,40 +152,40 @@ export default function ConstructionCostEstimator() {
                             </div>
 
                             <div style={{ fontSize: "4rem", fontFamily: "var(--font-serif)", color: "var(--accent-primary)", lineHeight: 1, marginBottom: "2rem" }}>
-                                ${result.grandTotal.toLocaleString()}
+                                {formatCurrency(result.grandTotal * rate, currency)}
                             </div>
 
                             <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
                                 <div style={{ display: "flex", justifyContent: "space-between", borderBottom: "1px dashed var(--border-color)", paddingBottom: "0.5rem" }}>
                                     <span style={{ color: "var(--text-secondary)" }}>Materials (w/ Waste)</span>
-                                    <span>${result.totalMaterials.toLocaleString()}</span>
+                                    <span>{formatCurrency(result.totalMaterials * rate, currency)}</span>
                                 </div>
                                 <div style={{ display: "flex", justifyContent: "space-between", borderBottom: "1px dashed var(--border-color)", paddingBottom: "0.5rem" }}>
                                     <span style={{ color: "var(--text-secondary)" }}>Labor</span>
-                                    <span>${result.totalLabor.toLocaleString()}</span>
+                                    <span>{formatCurrency(result.totalLabor * rate, currency)}</span>
                                 </div>
                                 <div style={{ display: "flex", justifyContent: "space-between", borderBottom: "1px dashed var(--border-color)", paddingBottom: "0.5rem" }}>
                                     <span style={{ color: "var(--text-secondary)" }}>Equipment / Fees</span>
-                                    <span>${result.totalEquipment.toLocaleString()}</span>
+                                    <span>{formatCurrency(result.totalEquipment * rate, currency)}</span>
                                 </div>
                                 <div style={{ display: "flex", justifyContent: "space-between", borderBottom: "1px solid var(--border-color)", paddingBottom: "0.5rem", marginTop: "0.5rem" }}>
                                     <span style={{ color: "var(--text-primary)", fontWeight: "bold" }}>Hard Costs Subtotal</span>
-                                    <span style={{ fontWeight: "bold" }}>${result.subtotal.toLocaleString()}</span>
+                                    <span style={{ fontWeight: "bold" }}>{formatCurrency(result.subtotal * rate, currency)}</span>
                                 </div>
 
                                 <div style={{ display: "flex", justifyContent: "space-between", color: "var(--border-focus)", marginTop: "1rem" }}>
                                     <span>Overhead & Profit Markup</span>
-                                    <span>+ ${result.markupAmount.toLocaleString()}</span>
+                                    <span>+ {formatCurrency(result.markupAmount * rate, currency)}</span>
                                 </div>
                                 <div style={{ display: "flex", justifyContent: "space-between", color: "var(--border-focus)" }}>
                                     <span>Risk Contingency {params.riskBuffer}%</span>
-                                    <span>+ ${result.riskAmount.toLocaleString()}</span>
+                                    <span>+ {formatCurrency(result.riskAmount * rate, currency)}</span>
                                 </div>
 
                                 <div style={{ padding: "1rem", backgroundColor: "rgba(204, 255, 0, 0.05)", borderRadius: "var(--radius-sm)", border: "1px solid var(--accent-muted)", marginTop: "1.5rem" }}>
                                     <div style={{ fontSize: "0.875rem", color: "var(--text-secondary)", textTransform: "uppercase" }}>Projected Profit Base</div>
                                     <div style={{ fontSize: "1.5rem", color: "var(--accent-primary)", fontFamily: "var(--font-mono)" }}>
-                                        ${result.profitProjection.toLocaleString()}
+                                        {formatCurrency(result.profitProjection * rate, currency)}
                                     </div>
                                     <div style={{ fontSize: "0.875rem", color: "var(--text-secondary)", marginTop: "0.5rem" }}>
                                         Does not include unspent risk buffer.

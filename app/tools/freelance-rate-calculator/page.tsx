@@ -4,6 +4,8 @@ import { useState, useEffect, useRef } from "react";
 import ToolLayout from "@/components/ToolLayout";
 import { trackUsage } from "@/lib/tracker";
 import { calculateFreelanceRate, FreelanceParams, FreelanceResult } from "@/lib/freelanceCalculator";
+import CurrencySelector from "@/components/CurrencySelector";
+import { CurrencyCode, CURRENCY_RATES, formatCurrency } from "@/lib/currencyRates";
 
 export default function FreelanceRateCalculator() {
     const [params, setParams] = useState<FreelanceParams>({
@@ -16,6 +18,22 @@ export default function FreelanceRateCalculator() {
     });
 
     const [result, setResult] = useState<FreelanceResult | null>(null);
+
+    const [currency, setCurrency] = useState<CurrencyCode>("USD");
+
+    useEffect(() => {
+        const saved = localStorage.getItem("tool_currency") as CurrencyCode;
+        if (saved && CURRENCY_RATES[saved]) {
+            setCurrency(saved);
+        }
+    }, []);
+
+    const handleCurrencyChange = (c: CurrencyCode) => {
+        setCurrency(c);
+        localStorage.setItem("tool_currency", c);
+    };
+
+    const rate = CURRENCY_RATES[currency].rate;
 
     useEffect(() => {
         setResult(calculateFreelanceRate(params));
@@ -63,10 +81,12 @@ export default function FreelanceRateCalculator() {
                 {/* Controls */}
                 <div className="card stagger-1" style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
 
+                    <CurrencySelector currency={currency} onChange={handleCurrencyChange} />
+
                     <div className="input-group">
                         <div style={{ display: "flex", justifyContent: "space-between" }}>
                             <label className="input-label">Desired Take-Home Income</label>
-                            <span style={{ color: "var(--accent-primary)", fontFamily: "var(--font-mono)" }}>${params.desiredIncome.toLocaleString()}</span>
+                            <span style={{ color: "var(--accent-primary)", fontFamily: "var(--font-mono)" }}>{formatCurrency(params.desiredIncome * rate, currency)}</span>
                         </div>
                         <input type="range" min="30000" max="300000" step="1000" value={params.desiredIncome} onChange={(e) => updateParam("desiredIncome", parseInt(e.target.value))} />
                     </div>
@@ -74,7 +94,7 @@ export default function FreelanceRateCalculator() {
                     <div className="input-group">
                         <div style={{ display: "flex", justifyContent: "space-between" }}>
                             <label className="input-label">Yearly Expenses</label>
-                            <span style={{ color: "var(--accent-primary)", fontFamily: "var(--font-mono)" }}>${params.expenses.toLocaleString()}</span>
+                            <span style={{ color: "var(--accent-primary)", fontFamily: "var(--font-mono)" }}>{formatCurrency(params.expenses * rate, currency)}</span>
                         </div>
                         <input type="range" min="0" max="100000" step="500" value={params.expenses} onChange={(e) => updateParam("expenses", parseInt(e.target.value))} />
                     </div>
@@ -121,21 +141,21 @@ export default function FreelanceRateCalculator() {
                                 Minimum Hourly Rate
                             </h3>
                             <div style={{ fontSize: "4rem", fontFamily: "var(--font-serif)", color: "var(--accent-primary)", lineHeight: 1, marginBottom: "2rem" }}>
-                                ${result.hourlyRate}
+                                {formatCurrency(result.hourlyRate * rate, currency)}
                             </div>
 
                             <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
                                 <div style={{ display: "flex", justifyContent: "space-between", borderBottom: "1px solid var(--border-color)", paddingBottom: "0.5rem" }}>
                                     <span style={{ color: "var(--text-secondary)" }}>Monthly Retainer (Equiv)</span>
-                                    <span style={{ fontSize: "1.25rem" }}>${result.monthlyRetainer.toLocaleString()}</span>
+                                    <span style={{ fontSize: "1.25rem" }}>{formatCurrency(result.monthlyRetainer * rate, currency)}</span>
                                 </div>
                                 <div style={{ display: "flex", justifyContent: "space-between", borderBottom: "1px solid var(--border-color)", paddingBottom: "0.5rem" }}>
                                     <span style={{ color: "var(--text-secondary)" }}>Standard Project (40h)</span>
-                                    <span style={{ fontSize: "1.25rem" }}>${result.projectRateSuggestion.toLocaleString()}</span>
+                                    <span style={{ fontSize: "1.25rem" }}>{formatCurrency(result.projectRateSuggestion * rate, currency)}</span>
                                 </div>
                                 <div style={{ display: "flex", justifyContent: "space-between" }}>
                                     <span style={{ color: "var(--text-secondary)" }}>Gross Target Revenue</span>
-                                    <span style={{ fontSize: "1.25rem", color: "var(--border-focus)" }}>${result.totalRevenueTarget.toLocaleString()}</span>
+                                    <span style={{ fontSize: "1.25rem", color: "var(--border-focus)" }}>{formatCurrency(result.totalRevenueTarget * rate, currency)}</span>
                                 </div>
                             </div>
                         </div>

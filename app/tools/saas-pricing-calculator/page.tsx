@@ -4,6 +4,8 @@
 import { useState, useEffect, useRef } from "react";
 import ToolLayout from "@/components/ToolLayout";
 import { trackUsage } from "@/lib/tracker";
+import CurrencySelector from "@/components/CurrencySelector";
+import { CurrencyCode, CURRENCY_RATES, formatCurrency } from "@/lib/currencyRates";
 
 interface PricingResult {
     breakevenUsers: number;
@@ -26,6 +28,23 @@ export default function SaaSPricingCalculator() {
 
     const [result, setResult] = useState<PricingResult | null>(null);
     const tracked = useRef(false);
+
+    const [currency, setCurrency] = useState<CurrencyCode>("USD");
+
+    useEffect(() => {
+        const saved = localStorage.getItem("tool_currency") as CurrencyCode;
+        if (saved && CURRENCY_RATES[saved]) {
+            setCurrency(saved);
+        }
+    }, []);
+
+    const handleCurrencyChange = (c: CurrencyCode) => {
+        setCurrency(c);
+        localStorage.setItem("tool_currency", c);
+    };
+
+    const rate = CURRENCY_RATES[currency].rate;
+    const symbol = CURRENCY_RATES[currency].symbol;
 
     useEffect(() => {
         // Calculate the absolute minimum price per user to break even at current scale
@@ -99,14 +118,16 @@ export default function SaaSPricingCalculator() {
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "2rem" }}>
                 <div className="card stagger-1" style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
 
+                    <CurrencySelector currency={currency} onChange={handleCurrencyChange} />
+
                     <div className="input-group">
-                        <label className="input-label">Fixed Monthly Base Costs ($)</label>
-                        <input type="number" step="50" className="input-field" value={fixedMonthlyCosts} onChange={(e) => setFixedMonthlyCosts(Number(e.target.value) || 0)} />
+                        <label className="input-label">Fixed Monthly Base Costs ({symbol})</label>
+                        <input type="number" step="50" className="input-field" value={fixedMonthlyCosts ? Number((fixedMonthlyCosts * rate).toFixed(2)) : 0} onChange={(e) => setFixedMonthlyCosts((Number(e.target.value) || 0) / rate)} />
                     </div>
 
                     <div className="input-group">
-                        <label className="input-label">Variable Cost Per User/Month ($) (Cloud/LLM APIs)</label>
-                        <input type="number" step="0.5" className="input-field" value={variableCostPerUser} onChange={(e) => setVariableCostPerUser(Number(e.target.value) || 0)} />
+                        <label className="input-label">Variable Cost Per User/Month ({symbol}) (Cloud/LLM APIs)</label>
+                        <input type="number" step="0.5" className="input-field" value={variableCostPerUser ? Number((variableCostPerUser * rate).toFixed(2)) : 0} onChange={(e) => setVariableCostPerUser((Number(e.target.value) || 0) / rate)} />
                     </div>
 
                     <div className="input-group">
@@ -132,31 +153,31 @@ export default function SaaSPricingCalculator() {
                             <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginBottom: "2rem", paddingBottom: "2rem", borderBottom: "1px dashed var(--border-color)" }}>
                                 <div style={{ fontSize: "0.875rem", color: "var(--text-secondary)", textTransform: "uppercase" }}>Required Price Per User (Target)</div>
                                 <div style={{ fontSize: "4rem", fontFamily: "var(--font-serif)", color: "var(--accent-primary)", lineHeight: 1, margin: "1rem 0" }}>
-                                    ${Number(result.targetPrice).toFixed(2)}
+                                    {formatCurrency(result.targetPrice * rate, currency)}
                                 </div>
                                 <div className="pill" style={{ backgroundColor: "var(--bg-tertiary)" }}>
-                                    Breakeven Floor: ${Number(result.basePriceFloor).toFixed(2)}
+                                    Breakeven Floor: {formatCurrency(result.basePriceFloor * rate, currency)}
                                 </div>
                             </div>
 
                             <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1rem", textAlign: "center", marginBottom: "2rem", backgroundColor: "var(--bg-tertiary)", padding: "1.5rem", borderRadius: "12px", border: "1px solid var(--border-color)" }}>
                                 <div>
                                     <div style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginBottom: "0.5rem", textTransform: "uppercase", letterSpacing: "1px" }}>Starter</div>
-                                    <div style={{ fontFamily: "var(--font-mono)", fontSize: "1.25rem" }}>${result.pricingTiers.starter}</div>
+                                    <div style={{ fontFamily: "var(--font-mono)", fontSize: "1.25rem" }}>{formatCurrency(result.pricingTiers.starter * rate, currency)}</div>
                                 </div>
                                 <div style={{ borderLeft: "1px solid var(--border-color)", borderRight: "1px solid var(--border-color)" }}>
                                     <div style={{ fontSize: "0.75rem", color: "var(--accent-primary)", marginBottom: "0.5rem", textTransform: "uppercase", letterSpacing: "1px", fontWeight: "bold" }}>Pro (Target)</div>
-                                    <div style={{ fontFamily: "var(--font-mono)", fontSize: "1.5rem", color: "var(--accent-primary)" }}>${result.pricingTiers.pro}</div>
+                                    <div style={{ fontFamily: "var(--font-mono)", fontSize: "1.5rem", color: "var(--accent-primary)" }}>{formatCurrency(result.pricingTiers.pro * rate, currency)}</div>
                                 </div>
                                 <div>
                                     <div style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginBottom: "0.5rem", textTransform: "uppercase", letterSpacing: "1px" }}>Enterprise</div>
-                                    <div style={{ fontFamily: "var(--font-mono)", fontSize: "1.25rem" }}>${result.pricingTiers.enterprise}</div>
+                                    <div style={{ fontFamily: "var(--font-mono)", fontSize: "1.25rem" }}>{formatCurrency(result.pricingTiers.enterprise * rate, currency)}</div>
                                 </div>
                             </div>
 
                             <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "1rem", paddingBottom: "1rem", borderBottom: "1px dashed var(--border-color)" }}>
                                 <span className="input-label">Projected Monthly Revenue</span>
-                                <span style={{ fontFamily: "var(--font-mono)", fontSize: "1.25rem" }}>${Math.round(result.projectedRevenue).toLocaleString()}</span>
+                                <span style={{ fontFamily: "var(--font-mono)", fontSize: "1.25rem" }}>{formatCurrency(result.projectedRevenue * rate, currency)}</span>
                             </div>
 
                             <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "1rem" }}>

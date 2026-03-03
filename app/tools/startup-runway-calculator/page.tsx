@@ -4,12 +4,30 @@ import { useState, useRef, useEffect } from "react";
 import ToolLayout from "@/components/ToolLayout";
 import Link from "next/link";
 import { trackUsage } from "@/lib/tracker";
+import CurrencySelector from "@/components/CurrencySelector";
+import { CurrencyCode, CURRENCY_RATES, formatCurrency } from "@/lib/currencyRates";
 
 export default function StartupRunwayCalculator() {
     const [cash, setCash] = useState<number>(150000);
     const [expenses, setExpenses] = useState<number>(15000);
     const [revenue, setRevenue] = useState<number>(5000);
     const tracked = useRef(false);
+
+    const [currency, setCurrency] = useState<CurrencyCode>("USD");
+
+    useEffect(() => {
+        const saved = localStorage.getItem("tool_currency") as CurrencyCode;
+        if (saved && CURRENCY_RATES[saved]) {
+            setCurrency(saved);
+        }
+    }, []);
+
+    const handleCurrencyChange = (c: CurrencyCode) => {
+        setCurrency(c);
+        localStorage.setItem("tool_currency", c);
+    };
+
+    const rate = CURRENCY_RATES[currency].rate;
 
     useEffect(() => {
         if (!tracked.current) {
@@ -36,8 +54,6 @@ export default function StartupRunwayCalculator() {
             forecastColor = "var(--accent-primary)";
         }
     }
-
-    const formatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
 
     const faqs = [
         { question: "What is net burn rate versus gross burn rate?", answer: "Gross burn rate is your total monthly expenses. Net burn rate is your expenses minus your revenue. Your actual runway is calculated using your net burn rate." },
@@ -85,10 +101,13 @@ export default function StartupRunwayCalculator() {
         <ToolLayout title="Startup Runway Calculator" description="Determine your net burn rate and exact cash runway before you run out of capital." slug="startup-runway-calculator" faqs={faqs} seoContent={seoContent}>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "2rem" }}>
                 <div className="card stagger-1" style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+
+                    <CurrencySelector currency={currency} onChange={handleCurrencyChange} />
+
                     <div className="input-group">
                         <label className="input-label" style={{ display: "flex", justifyContent: "space-between" }}>
                             <span>Current Cash in Bank</span>
-                            <span style={{ color: "var(--accent-primary)", fontFamily: "var(--font-mono)" }}>{formatter.format(cash)}</span>
+                            <span style={{ color: "var(--accent-primary)", fontFamily: "var(--font-mono)" }}>{formatCurrency(cash * rate, currency)}</span>
                         </label>
                         <input type="range" min="0" max="2000000" step="10000" value={cash} onChange={(e) => setCash(Number(e.target.value))} />
                     </div>
@@ -96,7 +115,7 @@ export default function StartupRunwayCalculator() {
                     <div className="input-group">
                         <label className="input-label" style={{ display: "flex", justifyContent: "space-between" }}>
                             <span>Monthly Expenses (Gross Burn)</span>
-                            <span style={{ color: "var(--accent-primary)", fontFamily: "var(--font-mono)" }}>{formatter.format(expenses)}</span>
+                            <span style={{ color: "var(--accent-primary)", fontFamily: "var(--font-mono)" }}>{formatCurrency(expenses * rate, currency)}</span>
                         </label>
                         <input type="range" min="0" max="200000" step="1000" value={expenses} onChange={(e) => setExpenses(Number(e.target.value))} />
                     </div>
@@ -104,7 +123,7 @@ export default function StartupRunwayCalculator() {
                     <div className="input-group">
                         <label className="input-label" style={{ display: "flex", justifyContent: "space-between" }}>
                             <span>Monthly Revenue</span>
-                            <span style={{ color: "var(--accent-primary)", fontFamily: "var(--font-mono)" }}>{formatter.format(revenue)}</span>
+                            <span style={{ color: "var(--accent-primary)", fontFamily: "var(--font-mono)" }}>{formatCurrency(revenue * rate, currency)}</span>
                         </label>
                         <input type="range" min="0" max="200000" step="1000" value={revenue} onChange={(e) => setRevenue(Number(e.target.value))} />
                     </div>
@@ -126,7 +145,7 @@ export default function StartupRunwayCalculator() {
                     <div style={{ display: "flex", flexDirection: "column", gap: "1rem", marginTop: "1rem" }}>
                         <div style={{ display: "flex", justifyContent: "space-between", borderBottom: "1px dashed var(--border-color)", paddingBottom: "0.5rem" }}>
                             <span style={{ color: "var(--text-secondary)" }}>Net Burn Rate</span>
-                            <strong style={{ color: "var(--text-primary)", fontFamily: "var(--font-mono)" }}>{netBurnRate > 0 ? formatter.format(netBurnRate) + "/mo" : "Profitable"}</strong>
+                            <strong style={{ color: "var(--text-primary)", fontFamily: "var(--font-mono)" }}>{netBurnRate > 0 ? formatCurrency(netBurnRate * rate, currency) + "/mo" : "Profitable"}</strong>
                         </div>
                         <div style={{ display: "flex", justifyContent: "space-between", borderBottom: "1px dashed var(--border-color)", paddingBottom: "0.5rem" }}>
                             <span style={{ color: "var(--text-secondary)" }}>Time Until $0</span>

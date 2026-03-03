@@ -4,6 +4,8 @@
 import { useState, useEffect, useRef } from "react";
 import ToolLayout from "@/components/ToolLayout";
 import { trackUsage } from "@/lib/tracker";
+import CurrencySelector from "@/components/CurrencySelector";
+import { CurrencyCode, CURRENCY_RATES, formatCurrency } from "@/lib/currencyRates";
 
 interface WorkflowCostResult {
     monthlyCost: number;
@@ -20,6 +22,23 @@ export default function ManualWorkflowCostCalculator() {
 
     const [result, setResult] = useState<WorkflowCostResult | null>(null);
     const tracked = useRef(false);
+
+    const [currency, setCurrency] = useState<CurrencyCode>("USD");
+
+    useEffect(() => {
+        const saved = localStorage.getItem("tool_currency") as CurrencyCode;
+        if (saved && CURRENCY_RATES[saved]) {
+            setCurrency(saved);
+        }
+    }, []);
+
+    const handleCurrencyChange = (c: CurrencyCode) => {
+        setCurrency(c);
+        localStorage.setItem("tool_currency", c);
+    };
+
+    const rate = CURRENCY_RATES[currency].rate;
+    const symbol = CURRENCY_RATES[currency].symbol;
 
     useEffect(() => {
         const weeklyHours = hoursPerTask * frequencyPerWeek * employees;
@@ -78,6 +97,8 @@ export default function ManualWorkflowCostCalculator() {
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "2rem" }}>
                 <div className="card stagger-1" style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
 
+                    <CurrencySelector currency={currency} onChange={handleCurrencyChange} />
+
                     <div className="input-group">
                         <label className="input-label">Hours Per Single Task execution</label>
                         <input type="number" step="0.5" className="input-field" value={hoursPerTask} onChange={(e) => setHoursPerTask(Number(e.target.value) || 0)} />
@@ -89,8 +110,8 @@ export default function ManualWorkflowCostCalculator() {
                     </div>
 
                     <div className="input-group">
-                        <label className="input-label">Burdened Hourly Cost of Employee ($)</label>
-                        <input type="number" className="input-field" value={hourlyCost} onChange={(e) => setHourlyCost(Number(e.target.value) || 0)} />
+                        <label className="input-label">Burdened Hourly Cost of Employee ({symbol})</label>
+                        <input type="number" className="input-field" value={hourlyCost ? Number((hourlyCost * rate).toFixed(2)) : 0} onChange={(e) => setHourlyCost((Number(e.target.value) || 0) / rate)} />
                     </div>
 
                     <div className="input-group">
@@ -111,10 +132,10 @@ export default function ManualWorkflowCostCalculator() {
                                 </div>
                                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
                                     <div style={{ fontSize: "1.5rem", fontFamily: "var(--font-mono)", color: "var(--text-primary)" }}>
-                                        ${Math.round(result.monthlyCost).toLocaleString()}
+                                        {formatCurrency(result.monthlyCost * rate, currency)}
                                     </div>
                                     <div style={{ fontSize: "3rem", fontFamily: "var(--font-serif)", color: "var(--error-color)", lineHeight: 1 }}>
-                                        ${Math.round(result.yearlyCost).toLocaleString()}
+                                        {formatCurrency(result.yearlyCost * rate, currency)}
                                     </div>
                                 </div>
                             </div>

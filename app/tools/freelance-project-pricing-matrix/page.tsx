@@ -4,6 +4,8 @@ import { useState, useRef, useEffect } from "react";
 import ToolLayout from "@/components/ToolLayout";
 import Link from "next/link";
 import { trackUsage } from "@/lib/tracker";
+import CurrencySelector from "@/components/CurrencySelector";
+import { CurrencyCode, CURRENCY_RATES, formatCurrency } from "@/lib/currencyRates";
 
 export default function FreelanceProjectPricingMatrix() {
     const [timeEstimate, setTimeEstimate] = useState<number>(40);
@@ -11,6 +13,21 @@ export default function FreelanceProjectPricingMatrix() {
     const [riskLevel, setRiskLevel] = useState<number>(1); // 1-3
     const [experience, setExperience] = useState<"junior" | "mid" | "senior" | "expert">("mid");
 
+    const [currency, setCurrency] = useState<CurrencyCode>("USD");
+
+    useEffect(() => {
+        const saved = localStorage.getItem("tool_currency") as CurrencyCode;
+        if (saved && CURRENCY_RATES[saved]) {
+            setCurrency(saved);
+        }
+    }, []);
+
+    const handleCurrencyChange = (c: CurrencyCode) => {
+        setCurrency(c);
+        localStorage.setItem("tool_currency", c);
+    };
+
+    const rate = CURRENCY_RATES[currency].rate;
     const tracked = useRef(false);
 
     useEffect(() => {
@@ -58,8 +75,6 @@ export default function FreelanceProjectPricingMatrix() {
         scoreColor = "var(--accent-primary)";
     }
 
-    const formatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
-
     const faqs = [
         { question: "Why is the final price so much higher than my hourly rate?", answer: "Because clients buy solutions, not your time. If a project is highly complex with vague specifications (high risk), you will incur massive unpaid debugging hours and negotiation friction. The risk multiplier insures your margin." },
         { question: "What is the overhead tax?", answer: "Freelancers often forget they are a business. Your project price must subsidize your unbillable time (invoicing, sales calls) and operational expenses (software subscriptions, taxes). We deduct a flat 20% to calculate realistic net profit." },
@@ -96,6 +111,8 @@ export default function FreelanceProjectPricingMatrix() {
         <ToolLayout title="Freelance Project Pricing Matrix" description="Calculate the perfect fixed-bid project price by injecting risk buffers, complexity multipliers, and overhead metrics into your raw time estimate." slug="freelance-project-pricing-matrix" faqs={faqs} seoContent={seoContent}>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "2rem" }}>
                 <div className="card stagger-1" style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+
+                    <CurrencySelector currency={currency} onChange={handleCurrencyChange} />
 
                     <div className="input-group">
                         <label className="input-label" style={{ display: "flex", justifyContent: "space-between" }}>
@@ -140,7 +157,7 @@ export default function FreelanceProjectPricingMatrix() {
                     <div style={{ padding: "1.5rem", backgroundColor: "var(--bg-tertiary)", borderRadius: "var(--radius-sm)", border: "1px solid var(--accent-primary)", textAlign: "center", position: "relative", overflow: "hidden" }}>
                         <div className="input-label" style={{ color: "var(--text-secondary)", marginBottom: "0.5rem", zIndex: 2, position: "relative" }}>Suggested Fixed-Bid Price</div>
                         <div style={{ fontSize: "3.5rem", color: "var(--text-primary)", fontFamily: "var(--font-mono)", fontWeight: "bold", lineHeight: 1, zIndex: 2, position: "relative" }}>
-                            {formatter.format(suggestedPrice)}
+                            {formatCurrency(suggestedPrice * rate, currency)}
                         </div>
                         <div style={{ position: "absolute", bottom: "-30px", left: "0", right: "0", height: "100px", background: "var(--accent-primary)", opacity: 0.1, filter: "blur(30px)", zIndex: 1 }}></div>
                     </div>
@@ -156,15 +173,15 @@ export default function FreelanceProjectPricingMatrix() {
                     <div style={{ display: "flex", flexDirection: "column", gap: "1rem", marginTop: "1rem" }}>
                         <div style={{ display: "flex", justifyContent: "space-between", borderBottom: "1px dashed var(--border-color)", paddingBottom: "0.5rem" }}>
                             <span style={{ color: "var(--text-secondary)" }}>Base Labor Cost</span>
-                            <span style={{ color: "var(--text-primary)", fontFamily: "var(--font-mono)" }}>{formatter.format(rawCost)}</span>
+                            <span style={{ color: "var(--text-primary)", fontFamily: "var(--font-mono)" }}>{formatCurrency(rawCost * rate, currency)}</span>
                         </div>
                         <div style={{ display: "flex", justifyContent: "space-between", borderBottom: "1px dashed var(--border-color)", paddingBottom: "0.5rem" }}>
                             <span style={{ color: "var(--text-secondary)" }}>Risk & Complexity Buffer</span>
-                            <span style={{ color: "var(--success-color, #22c55e)", fontFamily: "var(--font-mono)" }}>+{formatter.format(suggestedPrice - rawCost)}</span>
+                            <span style={{ color: "var(--success-color, #22c55e)", fontFamily: "var(--font-mono)" }}>+{formatCurrency((suggestedPrice - rawCost) * rate, currency)}</span>
                         </div>
                         <div style={{ display: "flex", justifyContent: "space-between" }}>
                             <span style={{ color: "var(--text-secondary)" }}>Est. Biz Overhead (20%)</span>
-                            <span style={{ color: "var(--error-color, #ef4444)", fontFamily: "var(--font-mono)" }}>-{formatter.format(overhead)}</span>
+                            <span style={{ color: "var(--error-color, #ef4444)", fontFamily: "var(--font-mono)" }}>-{formatCurrency(overhead * rate, currency)}</span>
                         </div>
                     </div>
                 </div>

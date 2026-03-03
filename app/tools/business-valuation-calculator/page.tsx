@@ -4,12 +4,30 @@ import { useState, useRef, useEffect } from "react";
 import ToolLayout from "@/components/ToolLayout";
 import Link from "next/link";
 import { trackUsage } from "@/lib/tracker";
+import CurrencySelector from "@/components/CurrencySelector";
+import { CurrencyCode, CURRENCY_RATES, formatCurrency } from "@/lib/currencyRates";
 
 export default function BusinessValuationCalculator() {
     const [revenue, setRevenue] = useState<number>(1000000);
     const [margin, setMargin] = useState<number>(20);
     const [growth, setGrowth] = useState<number>(30);
     const [industry, setIndustry] = useState<"saas" | "ecommerce" | "agency" | "retail" | "deeptech">("saas");
+
+    const [currency, setCurrency] = useState<CurrencyCode>("USD");
+
+    useEffect(() => {
+        const saved = localStorage.getItem("tool_currency") as CurrencyCode;
+        if (saved && CURRENCY_RATES[saved]) {
+            setCurrency(saved);
+        }
+    }, []);
+
+    const handleCurrencyChange = (c: CurrencyCode) => {
+        setCurrency(c);
+        localStorage.setItem("tool_currency", c);
+    };
+
+    const rate = CURRENCY_RATES[currency].rate;
 
     const tracked = useRef(false);
 
@@ -75,8 +93,6 @@ export default function BusinessValuationCalculator() {
         insightColor = "#eab308";
     }
 
-    const formatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
-
     const faqs = [
         { question: "Why is SaaS valued on Revenue while Agencies are valued on Profit (EBITDA)?", answer: "Software margins approach 90% at scale, so investors care about acquiring top-line market share. Agencies require proportional human labor to scale, meaning gross revenue does not guarantee net scalability. Investors want to buy the net profit (EBITDA), not a heavy payroll." },
         { question: "What is a growth premium?", answer: "Multipliers adjust based on trajectory. A company doubling year-over-year commands a massive premium multiplier compared to an identical company growing at 2%. Momentum demands a higher entry price." },
@@ -114,10 +130,12 @@ export default function BusinessValuationCalculator() {
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "2rem" }}>
                 <div className="card stagger-1" style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
 
+                    <CurrencySelector currency={currency} onChange={handleCurrencyChange} />
+
                     <div className="input-group">
                         <label className="input-label" style={{ display: "flex", justifyContent: "space-between" }}>
                             <span>Annual Revenue (Trailing 12M)</span>
-                            <span style={{ color: "var(--accent-primary)", fontFamily: "var(--font-mono)" }}>{formatter.format(revenue)}</span>
+                            <span style={{ color: "var(--accent-primary)", fontFamily: "var(--font-mono)" }}>{formatCurrency(revenue * rate, currency)}</span>
                         </label>
                         <input type="range" min="100000" max="25000000" step="50000" value={revenue} onChange={(e) => setRevenue(Number(e.target.value))} />
                     </div>
@@ -155,10 +173,10 @@ export default function BusinessValuationCalculator() {
                     <div style={{ padding: "1.5rem", backgroundColor: "var(--bg-tertiary)", borderRadius: "var(--radius-sm)", border: "1px solid var(--accent-primary)", textAlign: "center" }}>
                         <div className="input-label" style={{ color: "var(--text-secondary)", marginBottom: "0.5rem" }}>Estimated Enterprise Value</div>
                         <div style={{ fontSize: "3rem", color: "var(--text-primary)", fontFamily: "var(--font-mono)", fontWeight: "bold", lineHeight: 1 }}>
-                            {formatter.format(valuation)}
+                            {formatCurrency(valuation * rate, currency)}
                         </div>
                         <div style={{ fontSize: "1rem", color: "var(--accent-primary)", marginTop: "1rem" }}>
-                            Expected Range: {formatter.format(lowRange)} – {formatter.format(highRange)}
+                            Expected Range: {formatCurrency(lowRange * rate, currency)} – {formatCurrency(highRange * rate, currency)}
                         </div>
                     </div>
 
@@ -170,7 +188,7 @@ export default function BusinessValuationCalculator() {
                     <div style={{ display: "flex", flexDirection: "column", gap: "1rem", marginTop: "1rem" }}>
                         <div style={{ display: "flex", justifyContent: "space-between", borderBottom: "1px dashed var(--border-color)", paddingBottom: "0.5rem" }}>
                             <span style={{ color: "var(--text-secondary)" }}>EBITDA (Profit)</span>
-                            <strong style={{ color: "var(--text-primary)", fontFamily: "var(--font-mono)" }}>{formatter.format(ebitda)}</strong>
+                            <strong style={{ color: "var(--text-primary)", fontFamily: "var(--font-mono)" }}>{formatCurrency(ebitda * rate, currency)}</strong>
                         </div>
                         <div style={{ display: "flex", justifyContent: "space-between", borderBottom: "1px dashed var(--border-color)", paddingBottom: "0.5rem" }}>
                             <span style={{ color: "var(--text-secondary)" }}>Base Multiplier</span>
