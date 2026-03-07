@@ -201,6 +201,28 @@ export default function BusinessValuationCalculator() {
                     </div>
                 </div>
             </div>
+
+            <div className="stagger-3" style={{ marginTop: "4rem", paddingTop: "3rem", borderTop: "1px solid var(--border-color)" }}>
+                <h2 style={{ fontSize: "2rem", marginBottom: "2rem", color: "var(--text-primary)", textAlign: "center" }}>Learn More About Business Valuation</h2>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "1.5rem" }}>
+                    <Link href="/guides/how-to-value-a-business" style={{ padding: "1.5rem", backgroundColor: "var(--bg-secondary)", borderRadius: "var(--radius-md)", border: "1px solid var(--border-color)", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+                        <div style={{ fontWeight: "bold", color: "var(--text-primary)", lineHeight: 1.4 }}>How to Value a Business (Step-by-Step Guide)</div>
+                        <div style={{ fontSize: "0.875rem", color: "var(--accent-primary)", marginTop: "auto", paddingTop: "0.5rem" }}>Read Guide →</div>
+                    </Link>
+                    <Link href="/guides/startup-valuation-methods" style={{ padding: "1.5rem", backgroundColor: "var(--bg-secondary)", borderRadius: "var(--radius-md)", border: "1px solid var(--border-color)", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+                        <div style={{ fontWeight: "bold", color: "var(--text-primary)", lineHeight: 1.4 }}>Startup Valuation Methods Explained</div>
+                        <div style={{ fontSize: "0.875rem", color: "var(--accent-primary)", marginTop: "auto", paddingTop: "0.5rem" }}>Read Guide →</div>
+                    </Link>
+                    <Link href="/guides/how-investors-value-startups" style={{ padding: "1.5rem", backgroundColor: "var(--bg-secondary)", borderRadius: "var(--radius-md)", border: "1px solid var(--border-color)", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+                        <div style={{ fontWeight: "bold", color: "var(--text-primary)", lineHeight: 1.4 }}>How Investors Value Startups</div>
+                        <div style={{ fontSize: "0.875rem", color: "var(--accent-primary)", marginTop: "auto", paddingTop: "0.5rem" }}>Read Guide →</div>
+                    </Link>
+                    <Link href="/guides/business-valuation-multiples" style={{ padding: "1.5rem", backgroundColor: "var(--bg-secondary)", borderRadius: "var(--radius-md)", border: "1px solid var(--border-color)", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+                        <div style={{ fontWeight: "bold", color: "var(--text-primary)", lineHeight: 1.4 }}>Business Valuation Multiples Explained</div>
+                        <div style={{ fontSize: "0.875rem", color: "var(--accent-primary)", marginTop: "auto", paddingTop: "0.5rem" }}>Read Guide →</div>
+                    </Link>
+                </div>
+            </div>
         </ToolLayout>
     );
 }

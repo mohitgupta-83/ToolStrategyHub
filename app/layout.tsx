@@ -20,9 +20,7 @@ export const metadata: Metadata = {
   title: "ToolStrategyHub | Strategic Decision Tools for Builders & Founders",
   description: "Data-driven tools to validate, calculate, and execute smarter business decisions. The premier ToolStrategyHub decision platform.",
   metadataBase: new URL("https://toolstrategyhub.com"),
-  alternates: {
-    canonical: "/",
-  },
+  robots: "index, follow",
   icons: {
     icon: "/brand/favicon-circle.png",
     shortcut: "/brand/favicon-circle.png",
