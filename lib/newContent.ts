@@ -98,6 +98,12 @@ export const NEW_TOOLS: ToolMetadata[] = [
         slug: "freelance-project-pricing-matrix",
         description: "Stop underpricing your work. Calculate fixed-rate project pricing using risk buffers, complexity multipliers, and true overhead costs.",
         primaryKeyword: "freelance project pricing matrix",
+    },
+    {
+        name: "Email Outreach Revenue Calculator",
+        slug: "email-outreach-calculator",
+        description: "Estimate revenue from cold email outreach campaigns. Calculate reply rates, meetings, and closed deals instantly.",
+        primaryKeyword: "cold email revenue calculator",
     }
 ];
 
