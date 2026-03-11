@@ -104,6 +104,66 @@ export const NEW_TOOLS: ToolMetadata[] = [
         slug: "email-outreach-calculator",
         description: "Estimate revenue from cold email outreach campaigns. Calculate reply rates, meetings, and closed deals instantly.",
         primaryKeyword: "cold email revenue calculator",
+    },
+    {
+        name: "CAC Payback Period Calculator",
+        slug: "cac-payback-calculator",
+        description: "Calculate your CAC payback period and assess the capital efficiency of your business.",
+        primaryKeyword: "cac payback calculator saas",
+    },
+    {
+        name: "Customer Lifetime Value Calculator",
+        slug: "customer-lifetime-value-calculator",
+        description: "Calculate Customer Lifetime Value (LTV) and LTV/CAC ratio to evaluate your unit economics.",
+        primaryKeyword: "ltv to cac ratio calculator",
+    },
+    {
+        name: "Startup Burn Rate Calculator",
+        slug: "startup-burn-rate-calculator",
+        description: "Calculate your monthly burn rate and runway.",
+        primaryKeyword: "startup burn rate calculator",
+    },
+    {
+        name: "Marketing ROI Calculator",
+        slug: "marketing-roi-calculator",
+        description: "Calculate Marketing ROI and profit generated from campaigns.",
+        primaryKeyword: "marketing roi calculator",
+    },
+    {
+        name: "Conversion Rate Calculator",
+        slug: "conversion-rate-calculator",
+        description: "Calculate conversion rate based on visitors and goals achieved.",
+        primaryKeyword: "conversion rate calculator",
+    },
+    {
+        name: "Content ROI Calculator",
+        slug: "content-roi-calculator",
+        description: "Calculate Content ROI, estimated revenue and lead generation from content marketing.",
+        primaryKeyword: "content roi calculator",
+    },
+    {
+        name: "Market Opportunity Calculator",
+        slug: "market-opportunity-calculator",
+        description: "Calculate your TAM, SAM, and SOM to estimate true market opportunity.",
+        primaryKeyword: "tam sam som calculator",
+    },
+    {
+        name: "Product Pricing Simulator",
+        slug: "product-pricing-simulator",
+        description: "Calculate suggested product price to hit target gross margin.",
+        primaryKeyword: "product pricing calculator margin",
+    },
+    {
+        name: "Break-Even Calculator",
+        slug: "break-even-calculator",
+        description: "Calculate the exact number of units and revenue required to hit break-even.",
+        primaryKeyword: "break even point calculator",
+    },
+    {
+        name: "Lead Generation ROI Calculator",
+        slug: "lead-generation-roi-calculator",
+        description: "Calculate Lead Generation ROI and forecast pipeline revenue.",
+        primaryKeyword: "lead generation roi calculator",
     }
 ];
 
