@@ -1,0 +1,68 @@
+﻿
+> toolkit-app@0.1.0 build
+> next build
+
+  Γû▓ Next.js 14.2.14
+  - Environments: .env.local
+
+   Creating an optimized production build ...
+node.exe : Failed to compile.
+At line:1 char:1
++ & "C:\Program 
+Files\nodejs/node.exe" 
+"C:\Program 
+Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~
+    + CategoryInfo          : 
+    NotSpecified: (Failed to  
+   compile.:String) [], Rem   
+ oteException
+    + FullyQualifiedErrorId : 
+    NativeCommandError
+ 
+
+./app/compare/ltv-vs-cac/page.
+tsx
+Error: 
+  [31mx[0m Unexpected token 
+`div`. Expected jsx identifier
+    ,-[[36;1;4mD:\Coding 
+Projects\Tool Website\app\comp
+are\ltv-vs-cac\page.tsx[0m:54
+:1]
+ [2m54[0m |     };
+ [2m55[0m | 
+ [2m56[0m |     return (
+ [2m57[0m |         <div 
+className="container" 
+style={{ padding: '6rem 
+2rem', maxWidth: '1000px', 
+margin: '0 auto' }}>
+    : [31;1m         ^^^[0m
+ [2m58[0m |             
+<script 
+type="application/ld+json" 
+dangerouslySetInnerHTML={{ 
+__html: 
+JSON.stringify(jsonLd) }} />
+ [2m59[0m | 
+ [2m60[0m |             
+<nav style={{ marginBottom: 
+'2rem', fontSize: '0.875rem', 
+color: 
+'var(--text-secondary)' }}>
+    `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested 
+module:
+./app/compare/ltv-vs-cac/page.
+tsx
+
+
+> Build failed because of 
+webpack errors
