@@ -3,6 +3,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import ToolLayout from "@/components/ToolLayout";
+import Link from "next/link";
 import { trackUsage } from "@/lib/tracker";
 import CurrencySelector from "@/components/CurrencySelector";
 import { CurrencyCode, CURRENCY_RATES, formatCurrency } from "@/lib/currencyRates";
@@ -104,6 +105,11 @@ export default function SaaSPricingCalculator() {
             <p>If you arbitrarily choose $9/month because &apos;Spotify costs ten dollars,&apos; but you have to pay $2 in LLM token usage per user query, scaling your business will bankrupt you. Software unit economics demand rigorous analysis.</p>
             <h3>Pricing for Expansion</h3>
             <p>Your subscription price must mathematically absorb your fixed server costs while leaving enough gross margin to weather churn and pay for customer acquisition (CAC). You cannot scale a B2B SaaS tool operating below a 70% gross software margin.</p>
+            <h3>Related Tools & Resources</h3>
+            <ul>
+                <li><Link href="/ai-tools">AI Developer Ecosystem</Link></li>
+                <li><Link href="/ai-tools/llm-apis">Free LLM APIs Directory</Link></li>
+            </ul>
         </>
     );
 

@@ -63,6 +63,17 @@ export default function Footer() {
                 </div>
 
                 <div>
+                    <h4 style={{ marginBottom: '1.25rem', color: 'var(--text-primary)', fontSize: '0.875rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>AI Ecosystem</h4>
+                    <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                        <li><Link href="/ai-tools" style={{ color: 'var(--text-secondary)', fontSize: '0.875rem', transition: 'color 0.2s ease' }}>AI Tools Hub</Link></li>
+                        <li><Link href="/ai-tools/llm-apis" style={{ color: 'var(--text-secondary)', fontSize: '0.875rem', transition: 'color 0.2s ease' }}>Free LLM APIs</Link></li>
+                        <li><Link href="/ai-tools/agent-skills" style={{ color: 'var(--text-secondary)', fontSize: '0.875rem', transition: 'color 0.2s ease' }}>Agent Skills</Link></li>
+                        <li><Link href="/ai-tools/free-apis" style={{ color: 'var(--text-secondary)', fontSize: '0.875rem', transition: 'color 0.2s ease' }}>Free Developer APIs</Link></li>
+                        <li><Link href="/ai-tools/resources" style={{ color: 'var(--text-secondary)', fontSize: '0.875rem', transition: 'color 0.2s ease' }}>AI Resources</Link></li>
+                    </ul>
+                </div>
+
+                <div>
                     <h4 style={{ marginBottom: '1.25rem', color: 'var(--text-primary)', fontSize: '0.875rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Resources</h4>
                     <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                         <li><Link href="/blog" style={{ color: 'var(--text-secondary)', fontSize: '0.875rem', transition: 'color 0.2s ease' }}>Guides & Strategy</Link></li>

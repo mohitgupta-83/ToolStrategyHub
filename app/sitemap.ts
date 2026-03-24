@@ -22,7 +22,6 @@ const PILLAR_GUIDES = [
 
 const COMPARISON_TOPICS = ['spreadsheet', 'manual-method', 'alternative'];
 
-// Folders found inside app/compare/
 const HARDCODED_COMPARES = [
     'fixed-pricing-vs-usage-pricing',
     'ltv-vs-cac',
@@ -35,120 +34,19 @@ const HARDCODED_COMPARES = [
     'decision-matrix-builder-vs-gut-feeling'
 ];
 
-export function generateSitemaps() {
-    return [
-        { id: 'index' },
-        { id: 'tools' },
-        { id: 'guides' },
-        { id: 'compare' },
-        { id: 'categories' }
-    ];
-}
-
-export default function sitemap({ id }: { id: string }): MetadataRoute.Sitemap {
+export default function sitemap(): MetadataRoute.Sitemap {
     const now = new Date();
 
-    if (id === 'tools') {
-        const tools = getToolsList();
-        return toolsRegistry.map((tool) => ({
-            url: `${BASE_URL}/tools/${tool.slug}`,
-            lastModified: now,
-            changeFrequency: 'weekly',
-            priority: tool.featured ? 0.8 : 0.7,
-        }));
-    }
-
-    if (id === 'guides') {
-        const engineArticleSlugs = getAllArticleSlugs();
-        const legacyArticles = getAllArticles();
-
-        const routes: MetadataRoute.Sitemap = [
-            ...PILLAR_GUIDES.map(slug => ({
-                url: `${BASE_URL}/guides/${slug}`,
-                lastModified: now,
-                changeFrequency: 'weekly' as const,
-                priority: 0.6,
-            })),
-            ...engineArticleSlugs.map(slug => ({
-                url: `${BASE_URL}/guides/${slug}`,
-                lastModified: now,
-                changeFrequency: 'weekly' as const,
-                priority: 0.6,
-            })),
-            ...legacyArticles.map(article => ({
-                url: `${BASE_URL}/tools/${article.toolSlug}/${article.slug}`,
-                lastModified: new Date(article.lastUpdated),
-                changeFrequency: 'weekly' as const,
-                priority: 0.6,
-            })),
-        ];
-
-        // Deduplicate
-        const uniqueRoutes = new Map<string, MetadataRoute.Sitemap[0]>();
-        for (const route of routes) {
-            uniqueRoutes.set(route.url, route);
-        }
-        return Array.from(uniqueRoutes.values());
-    }
-
-    if (id === 'compare') {
-        const routes: MetadataRoute.Sitemap = [
-            ...HARDCODED_COMPARES.map(slug => ({
-                url: `${BASE_URL}/compare/${slug}`,
-                lastModified: now,
-                changeFrequency: 'monthly' as const,
-                priority: 0.5,
-            })),
-            ...toolsRegistry.flatMap(tool =>
-                COMPARISON_TOPICS.map(topic => ({
-                    url: `${BASE_URL}/compare/${tool.slug}-vs-${topic}`,
-                    lastModified: now,
-                    changeFrequency: 'monthly' as const,
-                    priority: 0.5,
-                }))
-            )
-        ];
-
-        const uniqueRoutes = new Map<string, MetadataRoute.Sitemap[0]>();
-        for (const route of routes) {
-            uniqueRoutes.set(route.url, route);
-        }
-        return Array.from(uniqueRoutes.values());
-    }
-
-    if (id === 'categories') {
-        const dynamicCategories = Array.from(new Set(
-            toolsRegistry.map(t => t.category.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''))
-        ));
-
-        return dynamicCategories.map(slug => ({
-            url: `${BASE_URL}/categories/${slug}`,
-            lastModified: now,
-            changeFrequency: 'weekly',
-            priority: 0.9,
-        }));
-    }
-
-    // Default: id === 'index' (or anything else)
-    return [
-        {
-            url: `${BASE_URL}/`,
-            lastModified: now,
-            changeFrequency: 'daily',
-            priority: 1.0,
-        },
-        {
-            url: `${BASE_URL}/tools`,
-            lastModified: now,
-            changeFrequency: 'weekly',
-            priority: 0.9,
-        },
-        {
-            url: `${BASE_URL}/categories`,
-            lastModified: now,
-            changeFrequency: 'weekly',
-            priority: 0.9,
-        },
+    // 1. Static Core Pages
+    const staticPages: MetadataRoute.Sitemap = [
+        { url: `${BASE_URL}/`, lastModified: now, changeFrequency: 'daily', priority: 1.0 },
+        { url: `${BASE_URL}/tools`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
+        { url: `${BASE_URL}/categories`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
+        { url: `${BASE_URL}/ai-tools`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
+        { url: `${BASE_URL}/ai-tools/llm-apis`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
+        { url: `${BASE_URL}/ai-tools/agent-skills`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
+        { url: `${BASE_URL}/ai-tools/free-apis`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
+        { url: `${BASE_URL}/ai-tools/resources`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
         ...HUB_SLUGS.map(slug => ({
             url: `${BASE_URL}/${slug}`,
             lastModified: now,
@@ -156,4 +54,83 @@ export default function sitemap({ id }: { id: string }): MetadataRoute.Sitemap {
             priority: 0.9,
         }))
     ];
+
+    // 2. Tools Pages
+    const toolPages: MetadataRoute.Sitemap = toolsRegistry.map((tool) => ({
+        url: `${BASE_URL}/tools/${tool.slug}`,
+        lastModified: now,
+        changeFrequency: 'weekly',
+        priority: tool.featured ? 0.8 : 0.7,
+    }));
+
+    // 3. Category Pages
+    const dynamicCategories = Array.from(new Set(
+        toolsRegistry.map(t => t.category.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''))
+    ));
+    const categoryPages: MetadataRoute.Sitemap = dynamicCategories.map(slug => ({
+        url: `${BASE_URL}/categories/${slug}`,
+        lastModified: now,
+        changeFrequency: 'weekly',
+        priority: 0.9,
+    }));
+
+    // 4. Comparison Pages
+    const comparisonPages: MetadataRoute.Sitemap = [
+        ...HARDCODED_COMPARES.map(slug => ({
+            url: `${BASE_URL}/compare/${slug}`,
+            lastModified: now,
+            changeFrequency: 'monthly' as const,
+            priority: 0.5,
+        })),
+        ...toolsRegistry.flatMap(tool =>
+            COMPARISON_TOPICS.map(topic => ({
+                url: `${BASE_URL}/compare/${tool.slug}-vs-${topic}`,
+                lastModified: now,
+                changeFrequency: 'monthly' as const,
+                priority: 0.5,
+            }))
+        )
+    ];
+
+    // 5. Guides & Articles
+    const engineArticleSlugs = getAllArticleSlugs();
+    const legacyArticles = getAllArticles();
+
+    const guidePages: MetadataRoute.Sitemap = [
+        ...PILLAR_GUIDES.map(slug => ({
+            url: `${BASE_URL}/guides/${slug}`,
+            lastModified: now,
+            changeFrequency: 'weekly' as const,
+            priority: 0.6,
+        })),
+        ...engineArticleSlugs.map(slug => ({
+            url: `${BASE_URL}/guides/${slug}`,
+            lastModified: now,
+            changeFrequency: 'weekly' as const,
+            priority: 0.6,
+        })),
+        ...legacyArticles.map(article => ({
+            url: `${BASE_URL}/tools/${article.toolSlug}/${article.slug}`,
+            lastModified: new Date(article.lastUpdated),
+            changeFrequency: 'weekly' as const,
+            priority: 0.6,
+        })),
+    ];
+
+    // Combined unique routes
+    const allRoutes = [
+        ...staticPages,
+        ...toolPages,
+        ...categoryPages,
+        ...comparisonPages,
+        ...guidePages
+    ];
+
+    // Final deduplication by URL
+    const uniqueRoutesMap = new Map<string, MetadataRoute.Sitemap[0]>();
+    for (const route of allRoutes) {
+        uniqueRoutesMap.set(route.url, route);
+    }
+
+    return Array.from(uniqueRoutesMap.values());
 }

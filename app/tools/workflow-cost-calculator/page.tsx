@@ -3,6 +3,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import ToolLayout from "@/components/ToolLayout";
+import Link from "next/link";
 import { trackUsage } from "@/lib/tracker";
 import CurrencySelector from "@/components/CurrencySelector";
 import { CurrencyCode, CURRENCY_RATES, formatCurrency } from "@/lib/currencyRates";
@@ -83,6 +84,12 @@ export default function ManualWorkflowCostCalculator() {
             <p>Businesses bleed cash through &apos;data friction&apos;. When humans manually move files between systems, re-enter customer data, or generate manual PDF reports, the company loses twice: once in payroll, and again in opportunity cost.</p>
             <h3>Opportunity Cost is the Real Killer</h3>
             <p>If an employee spends 10 hours a week on manual data entry, that is 10 hours they are not spending closing sales or speaking to customers. If a script can do the task in 2 seconds, the ROI is mathematically undeniable.</p>
+            <h3>Internal Links</h3>
+            <ul>
+                <li><Link href="/tools/automation-roi-tool">Automation ROI Tool</Link></li>
+                <li><Link href="/ai-tools">AI Developer Ecosystem</Link></li>
+                <li><Link href="/ai-tools/resources">AI Automation Frameworks</Link></li>
+            </ul>
         </>
     );
 

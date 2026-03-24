@@ -64,6 +64,7 @@ export default function Header() {
                     <Link href="/tools" style={{ fontSize: '0.875rem', fontWeight: 500, color: pathname.includes('/tools') ? 'var(--accent-primary)' : 'var(--text-secondary)' }}>Tools</Link>
                     <Link href="/categories" style={{ fontSize: '0.875rem', fontWeight: 500, color: pathname.startsWith('/categories') ? 'var(--accent-primary)' : 'var(--text-secondary)' }}>Categories</Link>
                     <Link href="/blog" style={{ fontSize: '0.875rem', fontWeight: 500, color: pathname.includes('/blog') ? 'var(--accent-primary)' : 'var(--text-secondary)' }}>Guides</Link>
+                    <Link href="/ai-tools" style={{ fontSize: '0.875rem', fontWeight: 500, color: pathname.includes('/ai-tools') ? 'var(--accent-primary)' : 'var(--text-secondary)' }}>AI Tools</Link>
                     <Link href="/about" style={{ fontSize: '0.875rem', fontWeight: 500, color: pathname === '/about' ? 'var(--accent-primary)' : 'var(--text-secondary)' }}>About</Link>
                     <Link href="/tools" className="btn" style={{ padding: '0.5rem 1rem' }}>Explore All Tools</Link>
                 </nav>
@@ -127,6 +128,7 @@ export default function Header() {
                     <Link href="/tools" onClick={() => setIsMobileMenuOpen(false)} style={{ fontSize: '1.5rem', fontWeight: 500, padding: '1rem 0', borderBottom: '1px solid var(--border-color)', color: pathname.includes('/tools') ? 'var(--accent-primary)' : 'var(--text-primary)' }}>All Tools</Link>
                     <Link href="/categories" onClick={() => setIsMobileMenuOpen(false)} style={{ fontSize: '1.5rem', fontWeight: 500, padding: '1rem 0', borderBottom: '1px solid var(--border-color)', color: pathname.startsWith('/categories') ? 'var(--accent-primary)' : 'var(--text-primary)' }}>Categories</Link>
                     <Link href="/blog" onClick={() => setIsMobileMenuOpen(false)} style={{ fontSize: '1.5rem', fontWeight: 500, padding: '1rem 0', borderBottom: '1px solid var(--border-color)', color: pathname.includes('/blog') ? 'var(--accent-primary)' : 'var(--text-primary)' }}>Guides & Strategy</Link>
+                    <Link href="/ai-tools" onClick={() => setIsMobileMenuOpen(false)} style={{ fontSize: '1.5rem', fontWeight: 500, padding: '1rem 0', borderBottom: '1px solid var(--border-color)', color: pathname.includes('/ai-tools') ? 'var(--accent-primary)' : 'var(--text-primary)' }}>AI Tools</Link>
                     <Link href="/about" onClick={() => setIsMobileMenuOpen(false)} style={{ fontSize: '1.5rem', fontWeight: 500, padding: '1rem 0', borderBottom: '1px solid var(--border-color)', color: pathname === '/about' ? 'var(--accent-primary)' : 'var(--text-primary)' }}>About Us</Link>
 
                     <Link href="/tools" onClick={() => setIsMobileMenuOpen(false)} className="btn" style={{ marginTop: 'auto', padding: '1.25rem', fontSize: '1.125rem' }}>Explore All Tools</Link>

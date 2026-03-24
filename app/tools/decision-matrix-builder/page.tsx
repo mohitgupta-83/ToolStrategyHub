@@ -3,6 +3,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import ToolLayout from "@/components/ToolLayout";
+import Link from "next/link";
 import { trackUsage } from "@/lib/tracker";
 
 interface Criterion {
@@ -103,6 +104,11 @@ export default function DecisionMatrixBuilder() {
             <p>Humans are notoriously bad at making complex decisions. We typically choose based on emotion, sunk cost, or whoever spoke loudest in the meeting, and then reverse-engineer logic to justify the choice.</p>
             <h3>Forcing Objectivity</h3>
             <p>A multi-criteria decision matrix forces you to rank the importance of your &apos;needs&apos; completely independent of the available &apos;solutions&apos;. By assigning numerical weights (Multiplier) and strict scores (1-10), the winning path reveals itself purely through data.</p>
+            <h3>Related Tools & Resources</h3>
+            <ul>
+                <li><Link href="/ai-tools">AI Developer Ecosystem</Link></li>
+                <li><Link href="/ai-tools/llm-apis">LLM APIs Directory</Link></li>
+            </ul>
         </>
     );
 

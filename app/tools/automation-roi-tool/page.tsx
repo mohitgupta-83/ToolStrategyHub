@@ -43,6 +43,8 @@ export default function AutomationROITool() {
                 <li><Link href="/tools/workflow-cost-calculator">Workflow Cost Calculator</Link></li>
                 <li><Link href="/tools/project-risk-predictor">Project Risk Predictor</Link></li>
                 <li><Link href="/tools/task-complexity-estimator">Task Complexity Estimator</Link></li>
+                <li><Link href="/ai-tools">AI Developer Ecosystem</Link></li>
+                <li><Link href="/ai-tools/agent-skills">AI Agent Skills Directory</Link></li>
             </ul>
         </>
     );
