@@ -3,71 +3,157 @@ import { getToolsList, getAllArticles } from '@/lib/contentRegistry';
 import { toolsRegistry } from '@/lib/toolsRegistry';
 import { getAllArticleSlugs } from '@/lib/articleEngine';
 
-const HUB_SLUGS = ['startup-tools', 'pricing-tools', 'operations-tools', 'creator-tools', 'research-tools'];
-const GUIDE_SLUGS = ['startup-validation', 'pricing-strategy', 'creator-monetization', 'business-decision-making'];
-const CATEGORY_SLUGS = ['startup-tools-india', 'free-business-tools', 'best-decision-tools', 'tools-for-founders', 'tools-for-freelancers'];
-const CATEGORY_USE_CASES: Record<string, string[]> = {
-    'Idea Validation': ['for-bootstrappers', 'non-technical-founders', 'b2b-saas'],
-    'Money & Pricing': ['for-agencies', 'for-freelancers', 'b2b-operations'],
-    'Operations': ['for-agencies', 'remote-teams', 'b2b-saas'],
-    'Creators': ['for-youtubers', 'for-indie-hackers', 'content-monetization'],
-    'Research': ['niche-validation', 'market-analysis', 'pain-point-discovery'],
-    'Productivity': ['for-solopreneurs', 'for-agencies', 'b2b-saas'],
-    'Strategy': ['seed-stage', 'bootstrapped-founders', 'for-agencies'],
-};
+const BASE_URL = 'https://toolstrategyhub.com';
+
+const HUB_SLUGS = [
+    'startup-tools',
+    'pricing-tools',
+    'operations-tools',
+    'creator-tools',
+    'research-tools'
+];
+
+const PILLAR_GUIDES = [
+    'startup-validation',
+    'pricing-strategy',
+    'creator-monetization',
+    'business-decision-making'
+];
+
 const COMPARISON_TOPICS = ['spreadsheet', 'manual-method', 'alternative'];
 
-export default function sitemap(): MetadataRoute.Sitemap {
-    const baseUrl = 'https://toolstrategyhub.com';
-    const tools = getToolsList();
-    const articles = getAllArticles();
-    const engineArticleSlugs = getAllArticleSlugs(); // 700 auto-generated
+// Folders found inside app/compare/
+const HARDCODED_COMPARES = [
+    'fixed-pricing-vs-usage-pricing',
+    'ltv-vs-cac',
+    'market-sizing-top-down-vs-bottom-up',
+    'saas-pricing-vs-freemium',
+    'saas-pricing-vs-one-time-pricing',
+    'startup-burn-rate-vs-runway',
+    'startup-runway-calculator-vs-spreadsheet',
+    'saas-pricing-calculator-vs-excel',
+    'decision-matrix-builder-vs-gut-feeling'
+];
 
+export function generateSitemaps() {
+    return [
+        { id: 'index' },
+        { id: 'tools' },
+        { id: 'guides' },
+        { id: 'compare' },
+        { id: 'categories' }
+    ];
+}
+
+export default function sitemap({ id }: { id: string }): MetadataRoute.Sitemap {
     const now = new Date();
 
+    if (id === 'tools') {
+        const tools = getToolsList();
+        return toolsRegistry.map((tool) => ({
+            url: `${BASE_URL}/tools/${tool.slug}`,
+            lastModified: now,
+            changeFrequency: 'weekly',
+            priority: tool.featured ? 0.8 : 0.7,
+        }));
+    }
+
+    if (id === 'guides') {
+        const engineArticleSlugs = getAllArticleSlugs();
+        const legacyArticles = getAllArticles();
+
+        const routes: MetadataRoute.Sitemap = [
+            ...PILLAR_GUIDES.map(slug => ({
+                url: `${BASE_URL}/guides/${slug}`,
+                lastModified: now,
+                changeFrequency: 'weekly' as const,
+                priority: 0.6,
+            })),
+            ...engineArticleSlugs.map(slug => ({
+                url: `${BASE_URL}/guides/${slug}`,
+                lastModified: now,
+                changeFrequency: 'weekly' as const,
+                priority: 0.6,
+            })),
+            ...legacyArticles.map(article => ({
+                url: `${BASE_URL}/tools/${article.toolSlug}/${article.slug}`,
+                lastModified: new Date(article.lastUpdated),
+                changeFrequency: 'weekly' as const,
+                priority: 0.6,
+            })),
+        ];
+
+        // Deduplicate
+        const uniqueRoutes = new Map<string, MetadataRoute.Sitemap[0]>();
+        for (const route of routes) {
+            uniqueRoutes.set(route.url, route);
+        }
+        return Array.from(uniqueRoutes.values());
+    }
+
+    if (id === 'compare') {
+        const routes: MetadataRoute.Sitemap = [
+            ...HARDCODED_COMPARES.map(slug => ({
+                url: `${BASE_URL}/compare/${slug}`,
+                lastModified: now,
+                changeFrequency: 'monthly' as const,
+                priority: 0.5,
+            })),
+            ...toolsRegistry.flatMap(tool =>
+                COMPARISON_TOPICS.map(topic => ({
+                    url: `${BASE_URL}/compare/${tool.slug}-vs-${topic}`,
+                    lastModified: now,
+                    changeFrequency: 'monthly' as const,
+                    priority: 0.5,
+                }))
+            )
+        ];
+
+        const uniqueRoutes = new Map<string, MetadataRoute.Sitemap[0]>();
+        for (const route of routes) {
+            uniqueRoutes.set(route.url, route);
+        }
+        return Array.from(uniqueRoutes.values());
+    }
+
+    if (id === 'categories') {
+        const dynamicCategories = Array.from(new Set(
+            toolsRegistry.map(t => t.category.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''))
+        ));
+
+        return dynamicCategories.map(slug => ({
+            url: `${BASE_URL}/categories/${slug}`,
+            lastModified: now,
+            changeFrequency: 'weekly',
+            priority: 0.9,
+        }));
+    }
+
+    // Default: id === 'index' (or anything else)
     return [
-        // ── Core Pages ──────────────────────────────────────────────────
-        { url: baseUrl, lastModified: now, changeFrequency: 'weekly', priority: 1.0 },
-        { url: `${baseUrl}/tools`, lastModified: now, changeFrequency: 'daily', priority: 0.96 },
-        { url: `${baseUrl}/blog`, lastModified: now, changeFrequency: 'weekly', priority: 0.85 },
-        { url: `${baseUrl}/about`, lastModified: now, changeFrequency: 'monthly', priority: 0.5 },
-        { url: `${baseUrl}/contact`, lastModified: now, changeFrequency: 'monthly', priority: 0.4 },
-        { url: `${baseUrl}/privacy-policy`, lastModified: now, changeFrequency: 'monthly', priority: 0.3 },
-        { url: `${baseUrl}/terms-of-service`, lastModified: now, changeFrequency: 'monthly', priority: 0.3 },
-
-        // ── Authority Hubs ───────────────────────────────────────────────
-        ...HUB_SLUGS.map(slug => ({ url: `${baseUrl}/${slug}`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.95 })),
-
-        // ── Pillar Guides ────────────────────────────────────────────────
-        ...GUIDE_SLUGS.map(slug => ({ url: `${baseUrl}/guides/${slug}`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.9 })),
-
-        // ── 700 Auto-Generated Articles ───────────────────────────────────
-        ...engineArticleSlugs.map(slug => ({ url: `${baseUrl}/guides/${slug}`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.85 })),
-
-        // ── Category Landing Pages ───────────────────────────────────────
-        ...CATEGORY_SLUGS.map(slug => ({ url: `${baseUrl}/category/${slug}`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.85 })),
-
-        // ── Core Tool Pages ──────────────────────────────────────────────
-        ...tools.map(tool => ({ url: `${baseUrl}/tools/${tool.slug}`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.9 })),
-
-        // ── Long-Tail Use-Case Pages ─────────────────────────────────────
-        ...toolsRegistry.flatMap(tool => {
-            const useCases = CATEGORY_USE_CASES[tool.category] || CATEGORY_USE_CASES['Strategy'];
-            return useCases.map(uc => ({ url: `${baseUrl}/tools/${tool.slug}/${uc}`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.8 }));
-        }),
-
-        // ── Comparison Pages ─────────────────────────────────────────────
-        ...toolsRegistry.flatMap(tool =>
-            COMPARISON_TOPICS.map(topic => ({ url: `${baseUrl}/compare/${tool.slug}-vs-${topic}`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.75 }))
-        ),
-
-        // ── How-To Problem Pages ─────────────────────────────────────────
-        ...toolsRegistry.map(tool => {
-            const prefix = tool.category === 'Money & Pricing' ? 'price-' : 'calculate-';
-            return { url: `${baseUrl}/how-to/${prefix}${tool.slug.replace(/-calculator$/, '').replace(/-builder$/, '').replace(/-tool$/, '')}`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.8 };
-        }),
-
-        // ── Legacy Content Articles ──────────────────────────────────────
-        ...articles.map(article => ({ url: `${baseUrl}/tools/${article.toolSlug}/${article.slug}`, lastModified: new Date(article.lastUpdated), changeFrequency: 'monthly' as const, priority: 0.7 })),
+        {
+            url: `${BASE_URL}/`,
+            lastModified: now,
+            changeFrequency: 'daily',
+            priority: 1.0,
+        },
+        {
+            url: `${BASE_URL}/tools`,
+            lastModified: now,
+            changeFrequency: 'weekly',
+            priority: 0.9,
+        },
+        {
+            url: `${BASE_URL}/categories`,
+            lastModified: now,
+            changeFrequency: 'weekly',
+            priority: 0.9,
+        },
+        ...HUB_SLUGS.map(slug => ({
+            url: `${BASE_URL}/${slug}`,
+            lastModified: now,
+            changeFrequency: 'weekly' as const,
+            priority: 0.9,
+        }))
     ];
 }
