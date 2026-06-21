@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import { generatePageMetadata } from '@/lib/seo';
 import { toolsRegistry } from '@/lib/toolsRegistry';
 import { resolveArticle } from '@/lib/articleEngine';
+import { resolveAiArticle } from '@/lib/aiSeoRegistry';
 import Link from 'next/link';
 
 // ─────────────────────────────────────────────────────────────────
@@ -65,6 +66,16 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
         });
     }
 
+    const aiArticle = resolveAiArticle(params.slug);
+    if (aiArticle) {
+        return generatePageMetadata({
+            title: `${aiArticle.title} | ToolStrategyHub`,
+            description: aiArticle.metaDescription,
+            path: `/guides/${params.slug}`,
+            keywords: [aiArticle.pill.toLowerCase(), `${aiArticle.pill.toLowerCase()} guide`, 'ai tools'],
+        });
+    }
+
     const article = resolveArticle(params.slug);
     if (article) {
         return generatePageMetadata({
@@ -86,6 +97,12 @@ export default function GuidePage({ params }: { params: { slug: string } }) {
     const pillar = PILLAR_GUIDES[params.slug];
     if (pillar) {
         return <PillarGuidePage slug={params.slug} guide={pillar} />;
+    }
+
+    // ── Try AI Cluster Guide ─────────────────────────────────────────
+    const aiArticle = resolveAiArticle(params.slug);
+    if (aiArticle) {
+        return <AiArticlePage article={aiArticle} />;
     }
 
     // ── Try auto-generated article ───────────────────────────────────
@@ -443,5 +460,134 @@ function PillarSidebar({ currentSlug, relatedToolSlug, relatedToolName }: {
                 </ul>
             </div>
         </aside>
+    );
+}
+
+// ─────────────────────────────────────────────────────────────────
+// AI ARTICLE RENDERER
+// ─────────────────────────────────────────────────────────────────
+function AiArticlePage({ article }: { article: any }) {
+    const jsonLd = {
+        '@context': 'https://schema.org',
+        '@graph': [
+            {
+                '@type': 'Article',
+                headline: article.h1,
+                description: article.metaDescription,
+                author: { '@type': 'Organization', name: 'ToolStrategyHub Expert Team' },
+                publisher: {
+                    '@type': 'Organization',
+                    name: 'ToolStrategyHub',
+                    logo: { '@type': 'ImageObject', url: 'https://toolstrategyhub.com/brand/logo-main.png' }
+                },
+                datePublished: '2026-06-21',
+                dateModified: '2026-06-21',
+                mainEntityOfPage: { '@type': 'WebPage', '@id': `https://toolstrategyhub.com/guides/${article.slug}` }
+            },
+            {
+                '@type': 'FAQPage',
+                mainEntity: article.faqs.map((faq: any) => ({
+                    '@type': 'Question',
+                    name: faq.q,
+                    acceptedAnswer: { '@type': 'Answer', text: faq.a }
+                }))
+            },
+            {
+                '@type': 'BreadcrumbList',
+                itemListElement: [
+                    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://toolstrategyhub.com/' },
+                    { '@type': 'ListItem', position: 2, name: 'Guides', item: 'https://toolstrategyhub.com/blog' },
+                    { '@type': 'ListItem', position: 3, name: article.h1, item: `https://toolstrategyhub.com/guides/${article.slug}` }
+                ]
+            }
+        ]
+    };
+
+    return (
+        <div className="container" style={{ padding: '6rem 2rem', maxWidth: '1000px', margin: '0 auto' }}>
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+
+            <nav style={{ marginBottom: '2rem', fontSize: '0.875rem', color: 'var(--text-secondary)' }}>
+                <Link href="/" style={{ color: 'var(--accent-primary)' }}>Home</Link>
+                <span style={{ margin: '0 0.5rem' }}>/</span>
+                <Link href="/blog" style={{ color: 'var(--accent-primary)' }}>Guides</Link>
+                <span style={{ margin: '0 0.5rem' }}>/</span>
+                <span style={{ color: 'var(--text-primary)' }}>{article.h1.slice(0, 30)}...</span>
+            </nav>
+
+            <header className="stagger-1" style={{ marginBottom: '4rem' }}>
+                <div className="pill" style={{ marginBottom: '1.5rem', display: 'inline-block', backgroundColor: 'var(--accent-muted)', color: 'var(--accent-primary)', borderColor: 'var(--accent-primary)' }}>
+                    {article.pill}
+                </div>
+                <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', marginBottom: '1.5rem', lineHeight: 1.1, letterSpacing: '-0.03em', color: 'var(--text-primary)' }}>
+                    {article.h1}
+                </h1>
+                <p style={{ fontSize: '1.25rem', color: 'var(--text-secondary)', lineHeight: 1.6, maxWidth: '800px' }}>
+                    {article.intro}
+                </p>
+            </header>
+
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 280px', gap: '4rem', alignItems: 'start' }}>
+                <article className="stagger-2" style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem', fontSize: '1.125rem', color: 'var(--text-secondary)', lineHeight: 1.8 }}>
+                    
+                    {/* Launch Tool CTA */}
+                    <div style={{ padding: '2rem', backgroundColor: 'var(--bg-secondary)', borderLeft: '4px solid var(--accent-primary)', borderRadius: 'var(--radius-sm)', marginBottom: '1rem' }}>
+                        <h3 style={{ fontSize: '1.25rem', marginBottom: '0.5rem', color: 'var(--text-primary)' }}>Interactive {article.targetToolName}</h3>
+                        <p style={{ marginBottom: '1.25rem', fontSize: '1rem', color: 'var(--text-secondary)' }}>Want to calculate your exact parameters and operational expenses? Run the calculations locally inside your browser.</p>
+                        <Link href={`/ai-tools/${article.targetToolSlug}`} className="btn" style={{ display: 'inline-block', padding: '0.75rem 1.5rem', fontSize: '1rem' }}>
+                            Launch {article.targetToolName}
+                        </Link>
+                    </div>
+
+                    {article.sections.map((section: any, idx: number) => (
+                        <section key={idx}>
+                            <h2 style={{ fontSize: '1.75rem', color: 'var(--text-primary)', marginBottom: '1rem' }}>{section.heading}</h2>
+                            <p style={{ whiteSpace: 'pre-wrap', color: 'var(--text-secondary)' }}>{section.body}</p>
+                        </section>
+                    ))}
+
+                    {/* FAQ Section */}
+                    <section id="faqs" style={{ marginTop: '3rem', paddingTop: '2rem', borderTop: '1px solid var(--border-color)' }}>
+                        <h2 style={{ fontSize: '2rem', marginBottom: '2rem', color: 'var(--text-primary)' }}>Frequently Asked Questions</h2>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                            {article.faqs.map((faq: any, idx: number) => (
+                                <details key={idx} style={{ padding: '1.5rem', backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-md)' }}>
+                                    <summary style={{ fontSize: '1.1rem', fontWeight: 'bold', color: 'var(--text-primary)', cursor: 'pointer', outline: 'none' }}>
+                                        {faq.q}
+                                    </summary>
+                                    <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: 1.6 }}>
+                                        {faq.a}
+                                    </p>
+                                </details>
+                            ))}
+                        </div>
+                    </section>
+                </article>
+
+                {/* Sidebar */}
+                <aside style={{ position: 'sticky', top: '2rem', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+                    <div style={{ padding: '2rem', backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-md)' }}>
+                        <h3 style={{ fontSize: '1.1rem', marginBottom: '1rem', color: 'var(--text-primary)' }}>Execute This Strategy</h3>
+                        <Link href={`/ai-tools/${article.targetToolSlug}`} className="btn" style={{ padding: '0.75rem', width: '100%', textAlign: 'center', display: 'block' }}>
+                            Launch {article.targetToolName}
+                        </Link>
+                    </div>
+                    {article.relatedSlugs && article.relatedSlugs.length > 0 && (
+                        <div style={{ padding: '1.5rem', backgroundColor: 'var(--bg-tertiary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-md)' }}>
+                            <h4 style={{ fontSize: '0.875rem', textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--text-primary)', marginBottom: '1rem' }}>Related Cluster Guides</h4>
+                            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                                {article.relatedSlugs.map((slug: string) => (
+                                    <li key={slug}>
+                                        <Link href={`/guides/${slug}`} style={{ color: 'var(--accent-primary)', fontSize: '0.875rem', textDecoration: 'underline' }}>
+                                            {slug.replace(/-/g, ' ')}
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
+                </aside>
+            </div>
+        </div>
     );
 }

@@ -1,12 +1,23 @@
 import { toolsRegistry } from '@/lib/toolsRegistry';
 import { notFound } from 'next/navigation';
 import { generatePageMetadata } from '@/lib/seo';
+import { resolveAiCompare } from '@/lib/aiSeoRegistry';
 import Link from 'next/link';
 
 export function generateMetadata({ params }: { params: { slug: string } }) {
+    const aiCompare = resolveAiCompare(params.slug);
+    if (aiCompare) {
+        return generatePageMetadata({
+            title: `${aiCompare.title} | ToolStrategyHub`,
+            description: aiCompare.metaDescription,
+            path: `/compare/${params.slug}`,
+            keywords: [aiCompare.pill.toLowerCase(), `${aiCompare.pill.toLowerCase()} comparison`, 'ai tools comparison'],
+        });
+    }
+
     if (!params.slug.includes('-vs-')) return {};
     const [toolSlug, topic] = params.slug.split('-vs-');
-
+ 
     const tool = toolsRegistry.find(t => t.slug === toolSlug);
     if (!tool) return {};
 
@@ -21,6 +32,11 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
 }
 
 export default function ComparePage({ params }: { params: { slug: string } }) {
+    const aiCompare = resolveAiCompare(params.slug);
+    if (aiCompare) {
+        return <AiComparePage compare={aiCompare} />;
+    }
+
     if (!params.slug.includes('-vs-')) {
         notFound();
     }
@@ -147,6 +163,87 @@ export default function ComparePage({ params }: { params: { slug: string } }) {
                 <h2 style={{ fontSize: '2rem', marginBottom: '2rem' }}>Frequently Asked Questions</h2>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                     {faqs.map((faq, idx) => (
+                        <details key={idx} style={{ padding: '1.5rem', backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-md)' }}>
+                            <summary style={{ fontSize: '1.25rem', fontWeight: 'bold', color: 'var(--text-primary)', cursor: 'pointer', outline: 'none' }}>
+                                {faq.q}
+                            </summary>
+                            <p style={{ marginTop: '1rem', color: 'var(--text-secondary)', lineHeight: 1.6 }}>
+                                {faq.a}
+                            </p>
+                        </details>
+                    ))}
+                </div>
+            </section>
+        </div>
+    );
+}
+
+// ─────────────────────────────────────────────────────────────────
+// AI COMPARE RENDERER
+// ─────────────────────────────────────────────────────────────────
+function AiComparePage({ compare }: { compare: any }) {
+    const jsonLd = {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "Article",
+                "headline": compare.h1,
+                "description": compare.metaDescription,
+            },
+            {
+                "@type": "FAQPage",
+                "mainEntity": compare.faqs.map((faq: any) => ({
+                    "@type": "Question",
+                    "name": faq.q,
+                    "acceptedAnswer": { "@type": "Answer", "text": faq.a }
+                }))
+            }
+        ]
+    };
+
+    return (
+        <div className="container" style={{ padding: '6rem 2rem', maxWidth: '1000px', margin: '0 auto' }}>
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+
+            <nav style={{ marginBottom: '2rem', fontSize: '0.875rem', color: 'var(--text-secondary)' }}>
+                <Link href="/" style={{ color: 'var(--accent-primary)' }}>Home</Link>
+                <span style={{ margin: '0 0.5rem' }}>/</span>
+                <Link href="/blog" style={{ color: 'var(--accent-primary)' }}>Guides</Link>
+                <span style={{ margin: '0 0.5rem' }}>/</span>
+                <span style={{ color: 'var(--text-primary)' }}>Compare</span>
+            </nav>
+
+            <header className="stagger-1" style={{ marginBottom: '4rem', textAlign: 'center' }}>
+                <div className="pill" style={{ marginBottom: '1.5rem', display: 'inline-block', backgroundColor: 'var(--accent-muted)', color: 'var(--accent-primary)', borderColor: 'var(--accent-primary)' }}>{compare.pill}</div>
+                <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', marginBottom: '1.5rem', lineHeight: 1.1, letterSpacing: '-0.03em', color: 'var(--text-primary)' }}>
+                    {compare.h1}
+                </h1>
+                <p style={{ fontSize: '1.25rem', color: 'var(--text-secondary)', lineHeight: 1.6, maxWidth: '800px', margin: '0 auto' }}>
+                    {compare.intro}
+                </p>
+            </header>
+
+            <div className="stagger-2" style={{ padding: '2.5rem', backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-md)', marginBottom: '4rem', textAlign: 'center' }}>
+                <h2 style={{ fontSize: '1.5rem', marginBottom: '1rem', color: 'var(--text-primary)' }}>Run the Calculations Locally</h2>
+                <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem', fontSize: '1rem' }}>Test your operational cost parameters on the interactive dashboard.</p>
+                <Link href={`/ai-tools/${compare.targetToolSlug}`} className="btn" style={{ padding: '1rem 3rem', fontSize: '1.125rem' }}>
+                    Launch the {compare.targetToolName}
+                </Link>
+            </div>
+
+            <article className="stagger-3" style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem', fontSize: '1.125rem', color: 'var(--text-secondary)', lineHeight: 1.8 }}>
+                {compare.sections.map((section: any, idx: number) => (
+                    <section key={idx}>
+                        <h2 style={{ fontSize: '1.75rem', color: 'var(--text-primary)', marginBottom: '1rem' }}>{section.heading}</h2>
+                        <p style={{ whiteSpace: 'pre-wrap', color: 'var(--text-secondary)' }}>{section.body}</p>
+                    </section>
+                ))}
+            </article>
+
+            <section className="stagger-4" style={{ marginTop: '5rem', paddingTop: '3rem', borderTop: '1px solid var(--border-color)' }}>
+                <h2 style={{ fontSize: '2rem', marginBottom: '2rem', color: 'var(--text-primary)' }}>Frequently Asked Questions</h2>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                    {compare.faqs.map((faq: any, idx: number) => (
                         <details key={idx} style={{ padding: '1.5rem', backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-md)' }}>
                             <summary style={{ fontSize: '1.25rem', fontWeight: 'bold', color: 'var(--text-primary)', cursor: 'pointer', outline: 'none' }}>
                                 {faq.q}

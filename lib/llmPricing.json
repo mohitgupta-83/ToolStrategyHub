@@ -1,0 +1,90 @@
+[
+  {
+    "provider": "OpenAI",
+    "name": "GPT-4o",
+    "slug": "gpt-4o",
+    "contextWindow": 128000,
+    "inputCostPerM": 2.50,
+    "outputCostPerM": 10.00
+  },
+  {
+    "provider": "OpenAI",
+    "name": "GPT-4o mini",
+    "slug": "gpt-4o-mini",
+    "contextWindow": 128000,
+    "inputCostPerM": 0.15,
+    "outputCostPerM": 0.60
+  },
+  {
+    "provider": "Anthropic",
+    "name": "Claude 3.5 Sonnet",
+    "slug": "claude-3-5-sonnet",
+    "contextWindow": 200000,
+    "inputCostPerM": 3.00,
+    "outputCostPerM": 15.00
+  },
+  {
+    "provider": "Anthropic",
+    "name": "Claude 3.5 Haiku",
+    "slug": "claude-3-5-haiku",
+    "contextWindow": 200000,
+    "inputCostPerM": 0.80,
+    "outputCostPerM": 4.00
+  },
+  {
+    "provider": "Google",
+    "name": "Gemini 1.5 Pro",
+    "slug": "gemini-1-5-pro",
+    "contextWindow": 2000000,
+    "inputCostPerM": 1.25,
+    "outputCostPerM": 5.00
+  },
+  {
+    "provider": "Google",
+    "name": "Gemini 1.5 Flash",
+    "slug": "gemini-1-5-flash",
+    "contextWindow": 1000000,
+    "inputCostPerM": 0.075,
+    "outputCostPerM": 0.30
+  },
+  {
+    "provider": "Meta",
+    "name": "Llama 3.3 70B",
+    "slug": "llama-3-3-70b",
+    "contextWindow": 128000,
+    "inputCostPerM": 0.35,
+    "outputCostPerM": 0.40
+  },
+  {
+    "provider": "DeepSeek",
+    "name": "DeepSeek V3",
+    "slug": "deepseek-v3",
+    "contextWindow": 64000,
+    "inputCostPerM": 0.14,
+    "outputCostPerM": 0.28
+  },
+  {
+    "provider": "DeepSeek",
+    "name": "DeepSeek R1",
+    "slug": "deepseek-r1",
+    "contextWindow": 64000,
+    "inputCostPerM": 0.55,
+    "outputCostPerM": 2.19
+  },
+  {
+    "provider": "Mistral",
+    "name": "Mistral Large 2",
+    "slug": "mistral-large-2",
+    "contextWindow": 128000,
+    "inputCostPerM": 2.00,
+    "outputCostPerM": 6.00
+  },
+  {
+    "provider": "Mistral",
+    "name": "Mistral Codestral",
+    "slug": "mistral-codestral",
+    "contextWindow": 32000,
+    "inputCostPerM": 0.20,
+    "outputCostPerM": 0.60
+  }
+]

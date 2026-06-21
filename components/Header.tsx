@@ -45,13 +45,19 @@ export default function Header() {
                     zIndex: 101,
                     textDecoration: 'none'
                 }}>
-                    <div className="logo-icon-wrapper" style={{ display: 'flex', alignItems: 'center', transition: 'filter 0.3s ease' }}>
+                    <div className="logo-icon-wrapper" style={{ 
+                        display: 'flex', 
+                        alignItems: 'center', 
+                        justifyContent: 'center',
+                        overflow: 'hidden',
+                        transition: 'filter 0.3s ease' 
+                    }}>
                         <Image
                             src="/brand/logo-main.png"
                             alt="ToolStrategyHub Icon"
                             width={32}
                             height={32}
-                            style={{ width: 'auto' }}
+                            style={{ width: '100%', height: '100%', objectFit: 'contain' }}
                             className="logo-icon"
                         />
                     </div>
@@ -139,13 +145,26 @@ export default function Header() {
                 .brand-logo:hover .logo-icon-wrapper {
                     filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.6));
                 }
-                .logo-icon {
+                .logo-icon-wrapper {
+                    width: 28px;
                     height: 28px;
-                    width: auto;
+                    min-width: 28px;
+                    min-height: 28px;
+                }
+                .logo-icon {
+                    width: 100%;
+                    height: 100%;
                 }
                 @media (min-width: 768px) {
-                    .logo-icon {
+                    .logo-icon-wrapper {
+                        width: 32px;
                         height: 32px;
+                        min-width: 32px;
+                        min-height: 32px;
+                    }
+                    .logo-icon {
+                        width: 100%;
+                        height: 100%;
                     }
                     .desktop-nav {
                         display: flex !important;

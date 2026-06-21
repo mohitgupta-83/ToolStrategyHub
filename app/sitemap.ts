@@ -2,6 +2,7 @@ import { MetadataRoute } from 'next';
 import { getToolsList, getAllArticles } from '@/lib/contentRegistry';
 import { toolsRegistry } from '@/lib/toolsRegistry';
 import { getAllArticleSlugs } from '@/lib/articleEngine';
+import { getAllAiArticleSlugs, getAllAiCompareSlugs, getAllAiResourceSlugs } from '@/lib/aiSeoRegistry';
 
 const BASE_URL = 'https://toolstrategyhub.com';
 
@@ -47,6 +48,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
         { url: `${BASE_URL}/ai-tools/agent-skills`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
         { url: `${BASE_URL}/ai-tools/free-apis`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
         { url: `${BASE_URL}/ai-tools/resources`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
+        { url: `${BASE_URL}/ai-tools/token-calculator`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
+        { url: `${BASE_URL}/ai-tools/llm-cost-calculator`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
+        { url: `${BASE_URL}/ai-tools/ai-agent-cost-calculator`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
+        { url: `${BASE_URL}/ai-tools/context-window-calculator`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
+        { url: `${BASE_URL}/ai-tools/llm-ram-calculator`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
+        { url: `${BASE_URL}/guides/what-are-ai-tokens`, lastModified: now, changeFrequency: 'weekly', priority: 0.7 },
+        { url: `${BASE_URL}/guides/how-llm-pricing-works`, lastModified: now, changeFrequency: 'weekly', priority: 0.7 },
+        { url: `${BASE_URL}/guides/how-to-reduce-token-costs`, lastModified: now, changeFrequency: 'weekly', priority: 0.7 },
+        { url: `${BASE_URL}/guides/what-is-context-window`, lastModified: now, changeFrequency: 'weekly', priority: 0.7 },
+        { url: `${BASE_URL}/guides/how-much-ram-for-local-llms`, lastModified: now, changeFrequency: 'weekly', priority: 0.7 },
         ...HUB_SLUGS.map(slug => ({
             url: `${BASE_URL}/${slug}`,
             lastModified: now,
@@ -82,6 +93,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
             changeFrequency: 'monthly' as const,
             priority: 0.5,
         })),
+        ...getAllAiCompareSlugs().map(slug => ({
+            url: `${BASE_URL}/compare/${slug}`,
+            lastModified: now,
+            changeFrequency: 'monthly' as const,
+            priority: 0.6,
+        })),
         ...toolsRegistry.flatMap(tool =>
             COMPARISON_TOPICS.map(topic => ({
                 url: `${BASE_URL}/compare/${tool.slug}-vs-${topic}`,
@@ -109,6 +126,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
             changeFrequency: 'weekly' as const,
             priority: 0.6,
         })),
+        ...getAllAiArticleSlugs().map(slug => ({
+            url: `${BASE_URL}/guides/${slug}`,
+            lastModified: now,
+            changeFrequency: 'weekly' as const,
+            priority: 0.7,
+        })),
         ...legacyArticles.map(article => ({
             url: `${BASE_URL}/tools/${article.toolSlug}/${article.slug}`,
             lastModified: new Date(article.lastUpdated),
@@ -117,13 +140,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
         })),
     ];
 
+    // 6. Resources Pages
+    const resourcePages: MetadataRoute.Sitemap = getAllAiResourceSlugs().map(slug => ({
+        url: `${BASE_URL}/resources/${slug}`,
+        lastModified: now,
+        changeFrequency: 'monthly' as const,
+        priority: 0.7,
+    }));
+
     // Combined unique routes
     const allRoutes = [
         ...staticPages,
         ...toolPages,
         ...categoryPages,
         ...comparisonPages,
-        ...guidePages
+        ...guidePages,
+        ...resourcePages
     ];
 
     // Final deduplication by URL
