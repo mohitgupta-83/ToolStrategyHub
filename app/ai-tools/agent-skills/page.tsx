@@ -130,6 +130,23 @@ export default function AgentSkillsPage() {
             </article>
 
             <section className="stagger-4" style={{ marginTop: '5rem', paddingTop: '4rem', borderTop: '1px solid var(--border-color)', maxWidth: '800px', margin: '5rem auto 0' }}>
+                <h2 style={{ fontSize: '2rem', marginBottom: '2rem', color: 'var(--text-primary)' }}>Essential Tools for Agent Development</h2>
+                <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem', lineHeight: 1.6 }}>
+                    Before deploying autonomous agents at scale, accurately forecast your token consumption and operational costs. We built these calculators specifically for AI engineers and startup founders:
+                </p>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '2rem' }}>
+                    <Link href="/ai-tools/ai-agent-cost-calculator" className="card" style={{ padding: '1.5rem', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-md)', backgroundColor: 'var(--bg-secondary)', textDecoration: 'none' }}>
+                        <h3 style={{ fontSize: '1.25rem', marginBottom: '0.5rem', color: 'var(--text-primary)' }}>🤖 AI Agent Cost Calculator</h3>
+                        <p style={{ color: 'var(--text-secondary)', fontSize: '0.875rem' }}>Estimate the total API cost of multi-step autonomous agent workflows.</p>
+                    </Link>
+                    <Link href="/ai-tools/llm-cost-calculator" className="card" style={{ padding: '1.5rem', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-md)', backgroundColor: 'var(--bg-secondary)', textDecoration: 'none' }}>
+                        <h3 style={{ fontSize: '1.25rem', marginBottom: '0.5rem', color: 'var(--text-primary)' }}>💰 LLM API Cost Calculator</h3>
+                        <p style={{ color: 'var(--text-secondary)', fontSize: '0.875rem' }}>Compare exact token pricing across GPT-4, Claude 3, and open-source models.</p>
+                    </Link>
+                </div>
+            </section>
+
+            <section className="stagger-4" style={{ marginTop: '5rem', paddingTop: '4rem', borderTop: '1px solid var(--border-color)', maxWidth: '800px', margin: '5rem auto 0' }}>
                 <h2 style={{ fontSize: '2rem', marginBottom: '2rem', textAlign: 'center' }}>Frequently Asked Questions</h2>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                     {(jsonLd["@graph"][1] as any).mainEntity.map((faq: any, idx: number) => (

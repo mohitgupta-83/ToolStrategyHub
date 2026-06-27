@@ -110,6 +110,25 @@ export default function DynamicCategoryPage({ params }: { params: { slug: string
                 </div>
             </section>
 
+            {/* Essential Guides */}
+            <section className="stagger-4" style={{ marginBottom: '6rem', backgroundColor: 'var(--bg-tertiary)', padding: '3rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
+                <h2 style={{ fontSize: '2rem', marginBottom: '1.5rem', color: 'var(--text-primary)' }}>Essential {categoryName} Guides</h2>
+                <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem', lineHeight: 1.6 }}>
+                    Master the theoretical frameworks behind these tools by reading our foundational guides and use cases.
+                </p>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: '1.5rem' }}>
+                    <Link href={`/guides/best-strategy-for-${params.slug}`} className="btn btn-secondary" style={{ textAlign: 'left', display: 'block', textDecoration: 'none' }}>
+                        Best Strategy for {categoryName} ↗
+                    </Link>
+                    <Link href={`/guides/common-mistakes-in-${params.slug}`} className="btn btn-secondary" style={{ textAlign: 'left', display: 'block', textDecoration: 'none' }}>
+                        Common Mistakes in {categoryName} ↗
+                    </Link>
+                    <Link href={`/guides/how-to-validate-${params.slug}`} className="btn btn-secondary" style={{ textAlign: 'left', display: 'block', textDecoration: 'none' }}>
+                        How to Validate {categoryName} Models ↗
+                    </Link>
+                </div>
+            </section>
+
             {/* FAQ Section */}
             <section className="stagger-4" style={{ marginBottom: '6rem', backgroundColor: 'var(--bg-secondary)', padding: '3rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
                 <h2 style={{ fontSize: '2.5rem', marginBottom: '2rem' }}>Frequently Asked Questions</h2>
