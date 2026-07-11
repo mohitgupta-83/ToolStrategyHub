@@ -503,3 +503,42 @@ details.faq-accordion p {
   color: var(--text-secondary);
   margin: 0;
 }
+
+/* Header Styling Migrated from styled-jsx */
+.brand-logo:hover .logo-icon-wrapper {
+  filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.6));
+}
+.logo-icon-wrapper {
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  min-height: 28px;
+}
+.logo-icon {
+  width: 100%;
+  height: 100%;
+}
+@media (min-width: 768px) {
+  .logo-icon-wrapper {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    min-height: 32px;
+  }
+  .logo-icon {
+    width: 100%;
+    height: 100%;
+  }
+  .desktop-nav {
+    display: flex !important;
+  }
+  .mobile-menu-toggle {
+    display: none !important;
+  }
+  .mobile-nav-panel {
+    display: none !important;
+  }
+  .mobile-overlay {
+    display: none !important;
+  }
+}

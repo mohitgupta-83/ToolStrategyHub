@@ -472,5 +472,77 @@ export const toolsRegistry: ToolRegistryItem[] = [
     "description": "Validate your YouTube niche economics before committing to production.",
     "featured": false,
     "popularityScore": 81
+  },
+  {
+    "name": "Shopify Profit Calculator",
+    "slug": "shopify-profit-calculator",
+    "category": "Money & Pricing",
+    "description": "Calculate true Shopify store profit by factoring in COGS, transaction fees, ad spend, and returns to find your real margin.",
+    "featured": true,
+    "popularityScore": 96
+  },
+  {
+    "name": "Meeting ROI Calculator",
+    "slug": "meeting-roi-calculator",
+    "category": "Operations",
+    "description": "Calculate the true hourly cost of every meeting based on attendee salaries and opportunity cost to eliminate low-ROI calendar debt.",
+    "featured": false,
+    "popularityScore": 88
+  },
+  {
+    "name": "Hourly To Salary Calculator",
+    "slug": "hourly-to-salary-calculator",
+    "category": "Money & Pricing",
+    "description": "Convert any hourly rate to annual salary equivalent — and vice versa — accounting for taxes, benefits, and actual working hours.",
+    "featured": false,
+    "popularityScore": 91
+  },
+  {
+    "name": "Revenue Projection Calculator",
+    "slug": "revenue-projection-calculator",
+    "category": "Money & Pricing",
+    "description": "Build data-driven 12-month revenue projections using growth rates, churn, and unit economics for investor decks and internal planning.",
+    "featured": true,
+    "popularityScore": 95
+  },
+  {
+    "name": "Agency Profit Calculator",
+    "slug": "agency-profit-calculator",
+    "category": "Money & Pricing",
+    "description": "Calculate agency gross margin, utilization rates, and per-client profitability to identify which engagements actually make you money.",
+    "featured": false,
+    "popularityScore": 90
+  },
+  {
+    "name": "Cold Email Revenue Calculator",
+    "slug": "cold-email-revenue-calculator",
+    "category": "Money & Pricing",
+    "description": "Estimate total revenue from cold email campaigns by modeling open rates, reply rates, meetings booked, and close rates.",
+    "featured": false,
+    "popularityScore": 87
+  },
+  {
+    "name": "Freelancer Hour Planner",
+    "slug": "freelancer-hour-planner",
+    "category": "Money & Pricing",
+    "description": "Plan your freelance workweek by mapping billable capacity against unbillable tasks to maximize productive hours and revenue.",
+    "featured": false,
+    "popularityScore": 83
+  },
+  {
+    "name": "SaaS Validation Tool",
+    "slug": "saas-validation-tool",
+    "category": "Idea Validation",
+    "description": "Score your SaaS idea across 8 critical dimensions — market urgency, competition, willingness to pay, and distribution — before writing code.",
+    "featured": true,
+    "popularityScore": 97
+  },
+  {
+    "name": "Outreach Funnel Calculator",
+    "slug": "outreach-funnel-calculator",
+    "category": "Money & Pricing",
+    "description": "Calculate the exact outreach volume needed to hit your revenue target by working backwards through your funnel conversion rates.",
+    "featured": false,
+    "popularityScore": 85
   }
 ];

@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import Image from 'next/image';
 
 export default function Header() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -50,16 +49,23 @@ export default function Header() {
                         alignItems: 'center', 
                         justifyContent: 'center',
                         overflow: 'hidden',
-                        transition: 'filter 0.3s ease' 
+                        transition: 'filter 0.3s ease',
+                        width: '32px',
+                        height: '32px'
                     }}>
-                        <Image
-                            src="/brand/logo-main.png"
-                            alt="ToolStrategyHub Icon"
-                            width={32}
-                            height={32}
-                            style={{ width: '100%', height: '100%', objectFit: 'contain' }}
-                            className="logo-icon"
-                        />
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="var(--accent-primary)"
+                            strokeWidth="2.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            style={{ width: '24px', height: '24px' }}
+                        >
+                            <polygon points="12 2 2 7 12 12 22 7 12 2" />
+                            <polyline points="2 17 12 22 22 17" />
+                            <polyline points="2 12 12 17 22 12" />
+                        </svg>
                     </div>
                     <span>ToolStrategy<span style={{ color: 'var(--accent-primary)' }}>Hub</span></span>
                 </Link>
@@ -140,46 +146,6 @@ export default function Header() {
                     <Link href="/tools" onClick={() => setIsMobileMenuOpen(false)} className="btn" style={{ marginTop: 'auto', padding: '1.25rem', fontSize: '1.125rem' }}>Explore All Tools</Link>
                 </div>
             </div>
-
-            <style jsx>{`
-                .brand-logo:hover .logo-icon-wrapper {
-                    filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.6));
-                }
-                .logo-icon-wrapper {
-                    width: 28px;
-                    height: 28px;
-                    min-width: 28px;
-                    min-height: 28px;
-                }
-                .logo-icon {
-                    width: 100%;
-                    height: 100%;
-                }
-                @media (min-width: 768px) {
-                    .logo-icon-wrapper {
-                        width: 32px;
-                        height: 32px;
-                        min-width: 32px;
-                        min-height: 32px;
-                    }
-                    .logo-icon {
-                        width: 100%;
-                        height: 100%;
-                    }
-                    .desktop-nav {
-                        display: flex !important;
-                    }
-                    .mobile-menu-toggle {
-                        display: none !important;
-                    }
-                    .mobile-nav-panel {
-                        display: none !important;
-                    }
-                    .mobile-overlay {
-                        display: none !important;
-                    }
-                }
-            `}</style>
         </header>
     );
 }
