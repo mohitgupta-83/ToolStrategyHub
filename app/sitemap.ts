@@ -48,6 +48,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         { url: `${BASE_URL}/ai-tools/agent-skills`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
         { url: `${BASE_URL}/ai-tools/free-apis`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
         { url: `${BASE_URL}/ai-tools/resources`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
+        { url: `${BASE_URL}/ai-tools/ai-model-explorer`, lastModified: now, changeFrequency: 'daily', priority: 0.9 },
         { url: `${BASE_URL}/ai-tools/token-calculator`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
         { url: `${BASE_URL}/ai-tools/llm-cost-calculator`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
         { url: `${BASE_URL}/ai-tools/ai-agent-cost-calculator`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },

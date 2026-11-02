@@ -19,6 +19,11 @@ interface AIToolLayoutProps {
 
 const AI_CALCULATORS = [
     {
+        name: "AI Model Explorer",
+        slug: "ai-model-explorer",
+        description: "Browse, filter, and compare 55+ AI models with real-time pricing, context limits, and free tiers."
+    },
+    {
         name: "Token Calculator",
         slug: "token-calculator",
         description: "Estimate LLM tokens from text and compare costs across providers."

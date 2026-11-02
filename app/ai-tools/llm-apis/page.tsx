@@ -4,10 +4,10 @@ import { Metadata } from 'next';
 import { LLM_PROVIDERS } from '@/lib/aiToolsRegistry';
 
 export const metadata: Metadata = generatePageMetadata({
-    title: "Free LLM APIs & Provider Directory",
-    description: "Compare free and freemium LLM APIs from Google, Mistral, Groq, and OpenRouter for building AI agents and extracting data.",
+    title: "LLM API Provider Directory: Free, Freemium & Paid (2026)",
+    description: "Browse all major LLM API providers — free tiers, freemium, and paid. Compare rate limits, models, OpenAI compatibility, and context windows across Google, Groq, Mistral, OpenRouter, and more.",
     path: "/ai-tools/llm-apis",
-    keywords: ["free LLM APIs", "free AI API providers", "compare LLM inference", "open source LLM APIs"]
+    keywords: ["LLM API providers directory", "compare LLM inference providers", "LLM API comparison 2026", "free and paid LLM APIs"]
 });
 
 export default function LLMAPIHubPage() {
@@ -68,12 +68,12 @@ export default function LLMAPIHubPage() {
             </nav>
 
             <header className="stagger-1" style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center', marginBottom: '4rem' }}>
-                <div className="pill" style={{ marginBottom: '1.5rem', display: 'inline-block' }}>Developer APIs</div>
+                <div className="pill" style={{ marginBottom: '1.5rem', display: 'inline-block' }}>LLM Provider Directory</div>
                 <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', marginBottom: '1.5rem', lineHeight: 1.1, letterSpacing: '-0.03em' }}>
-                    Free LLM APIs & <br /><span style={{ color: 'var(--accent-primary)' }}>Inference Directory</span>
+                    LLM API Providers — <br /><span style={{ color: 'var(--accent-primary)' }}>Free, Freemium & Paid</span>
                 </h1>
                 <p style={{ fontSize: '1.25rem', color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto', lineHeight: 1.6 }}>
-                    Compare free, freemium, and trial-based inference providers for powering complex AI agent architecture. Scale your prototyping without excessive token costs.
+                    A comprehensive directory of all major LLM inference providers. Compare free tiers, freemium plans, and paid APIs — including rate limits, models available, OpenAI compatibility, and context window sizes.
                 </p>
             </header>
 
@@ -121,7 +121,7 @@ export default function LLMAPIHubPage() {
             </section>
 
             <article className="stagger-3 seo-content" style={{ maxWidth: '800px', margin: '0 auto', fontSize: '1.125rem', lineHeight: 1.8 }}>
-                <h2 style={{ fontSize: '2.5rem', color: 'var(--text-primary)', marginBottom: '1.5rem' }}>How to Choose a Free LLM API</h2>
+                <h2 style={{ fontSize: '2.5rem', color: 'var(--text-primary)', marginBottom: '1.5rem' }}>How to Choose an LLM API Provider</h2>
                 <p>
                     When prototyping intelligent applications or autonomous agents, optimizing your inference expenses is critical. The ecosystem contains essentially four tiers of <strong>LLM API providers</strong>: direct first-party providers (Google, OpenAI), massive serverless aggregators (Hugging Face, OpenRouter), local hardware cloud operators (Groq, Cerebras), and enterprise infrastructure providers (Cohere, Mistral).
                 </p>
@@ -157,6 +157,17 @@ export default function LLMAPIHubPage() {
                     ))}
                 </div>
             </section>
+
+            {/* Cross-links */}
+            <div style={{ marginTop: '4rem', padding: '1.5rem 2rem', backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)', maxWidth: '800px', margin: '4rem auto 0' }}>
+                <p style={{ margin: '0 0 0.75rem', color: 'var(--text-primary)', fontWeight: 'bold' }}>Related resources:</p>
+                <ul style={{ margin: 0, paddingLeft: '1.5rem', color: 'var(--text-secondary)', fontSize: '0.95rem', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+                    <li><Link href="/ai-tools/ai-model-explorer" style={{ color: 'var(--accent-primary)', fontWeight: 'bold' }}>AI Model Explorer & LLM Comparison Tool</Link> — interactive directory of 55+ models with live filter, search & side-by-side comparison</li>
+                    <li><Link href="/guides/best-free-llm-apis" style={{ color: 'var(--accent-primary)' }}>Best Free LLM APIs for Developers</Link> — editorial picks with rate limit comparisons</li>
+                    <li><Link href="/guides/cheapest-llm-api" style={{ color: 'var(--accent-primary)' }}>Cheapest LLM APIs</Link> — cost-per-token comparison for paid tiers</li>
+                    <li><Link href="/ai-tools/free-apis" style={{ color: 'var(--accent-primary)' }}>Free Public REST APIs</Link> — public data APIs for AI agent workflows</li>
+                </ul>
+            </div>
         </div>
     );
 }

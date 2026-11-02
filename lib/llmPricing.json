@@ -16,6 +16,94 @@
     "outputCostPerM": 0.60
   },
   {
+    "provider": "OpenAI",
+    "name": "o3-mini",
+    "slug": "o3-mini",
+    "contextWindow": 200000,
+    "inputCostPerM": 1.10,
+    "outputCostPerM": 4.40
+  },
+  {
+    "provider": "OpenAI",
+    "name": "o1",
+    "slug": "o1",
+    "contextWindow": 200000,
+    "inputCostPerM": 15.00,
+    "outputCostPerM": 60.00
+  },
+  {
+    "provider": "OpenAI",
+    "name": "GPT Astra (Omni Agent)",
+    "slug": "gpt-astra",
+    "contextWindow": 256000,
+    "inputCostPerM": 3.00,
+    "outputCostPerM": 12.00
+  },
+  {
+    "provider": "OpenAI",
+    "name": "GPT-4.5 Orion",
+    "slug": "gpt-4-5-orion",
+    "contextWindow": 128000,
+    "inputCostPerM": 5.00,
+    "outputCostPerM": 20.00
+  },
+  {
+    "provider": "Moonshot AI",
+    "name": "Kimi k1.5 (Reasoning)",
+    "slug": "kimi-k1-5",
+    "contextWindow": 128000,
+    "inputCostPerM": 0.35,
+    "outputCostPerM": 1.40
+  },
+  {
+    "provider": "Moonshot AI",
+    "name": "Kimi Moonshot v1 (2M Context)",
+    "slug": "kimi-moonshot-v1",
+    "contextWindow": 2000000,
+    "inputCostPerM": 0.80,
+    "outputCostPerM": 3.20
+  },
+  {
+    "provider": "Google",
+    "name": "Gemini 2.0 Flash",
+    "slug": "gemini-2-0-flash",
+    "contextWindow": 1048576,
+    "inputCostPerM": 0.10,
+    "outputCostPerM": 0.40
+  },
+  {
+    "provider": "Google",
+    "name": "Gemini 2.0 Flash-Lite",
+    "slug": "gemini-2-0-flash-lite",
+    "contextWindow": 1048576,
+    "inputCostPerM": 0.075,
+    "outputCostPerM": 0.30
+  },
+  {
+    "provider": "Google",
+    "name": "Gemini 2.5 Pro",
+    "slug": "gemini-2-5-pro",
+    "contextWindow": 1048576,
+    "inputCostPerM": 1.25,
+    "outputCostPerM": 10.00
+  },
+  {
+    "provider": "Google",
+    "name": "Gemini 1.5 Pro",
+    "slug": "gemini-1-5-pro",
+    "contextWindow": 2097152,
+    "inputCostPerM": 1.25,
+    "outputCostPerM": 5.00
+  },
+  {
+    "provider": "Anthropic",
+    "name": "Claude 3.7 Sonnet (Thinking)",
+    "slug": "claude-3-7-sonnet",
+    "contextWindow": 200000,
+    "inputCostPerM": 3.00,
+    "outputCostPerM": 15.00
+  },
+  {
     "provider": "Anthropic",
     "name": "Claude 3.5 Sonnet",
     "slug": "claude-3-5-sonnet",
@@ -32,20 +120,20 @@
     "outputCostPerM": 4.00
   },
   {
-    "provider": "Google",
-    "name": "Gemini 1.5 Pro",
-    "slug": "gemini-1-5-pro",
-    "contextWindow": 2000000,
-    "inputCostPerM": 1.25,
-    "outputCostPerM": 5.00
+    "provider": "DeepSeek",
+    "name": "DeepSeek V3",
+    "slug": "deepseek-v3",
+    "contextWindow": 65536,
+    "inputCostPerM": 0.14,
+    "outputCostPerM": 0.28
   },
   {
-    "provider": "Google",
-    "name": "Gemini 1.5 Flash",
-    "slug": "gemini-1-5-flash",
-    "contextWindow": 1000000,
-    "inputCostPerM": 0.075,
-    "outputCostPerM": 0.30
+    "provider": "DeepSeek",
+    "name": "DeepSeek R1",
+    "slug": "deepseek-r1",
+    "contextWindow": 65536,
+    "inputCostPerM": 0.55,
+    "outputCostPerM": 2.19
   },
   {
     "provider": "Meta",
@@ -56,20 +144,44 @@
     "outputCostPerM": 0.40
   },
   {
-    "provider": "DeepSeek",
-    "name": "DeepSeek V3",
-    "slug": "deepseek-v3",
-    "contextWindow": 64000,
-    "inputCostPerM": 0.14,
-    "outputCostPerM": 0.28
+    "provider": "Meta",
+    "name": "Llama 3.1 405B",
+    "slug": "llama-3-1-405b",
+    "contextWindow": 128000,
+    "inputCostPerM": 2.00,
+    "outputCostPerM": 2.00
   },
   {
-    "provider": "DeepSeek",
-    "name": "DeepSeek R1",
-    "slug": "deepseek-r1",
-    "contextWindow": 64000,
-    "inputCostPerM": 0.55,
-    "outputCostPerM": 2.19
+    "provider": "Qwen / Alibaba",
+    "name": "Qwen 2.5 Max",
+    "slug": "qwen-2-5-max",
+    "contextWindow": 131072,
+    "inputCostPerM": 1.60,
+    "outputCostPerM": 6.40
+  },
+  {
+    "provider": "Qwen / Alibaba",
+    "name": "Qwen 2.5 Coder 32B",
+    "slug": "qwen-2-5-coder-32b",
+    "contextWindow": 131072,
+    "inputCostPerM": 0.20,
+    "outputCostPerM": 0.60
+  },
+  {
+    "provider": "xAI",
+    "name": "Grok 2",
+    "slug": "grok-2",
+    "contextWindow": 131072,
+    "inputCostPerM": 2.00,
+    "outputCostPerM": 10.00
+  },
+  {
+    "provider": "xAI",
+    "name": "Grok 3 (Preview)",
+    "slug": "grok-3",
+    "contextWindow": 256000,
+    "inputCostPerM": 3.00,
+    "outputCostPerM": 15.00
   },
   {
     "provider": "Mistral",

@@ -4,10 +4,10 @@ import { Metadata } from 'next';
 import { FREE_APIS } from '@/lib/aiToolsRegistry';
 
 export const metadata: Metadata = generatePageMetadata({
-    title: "Free Public APIs for Developers",
-    description: "A categorized directory of free, open-source, and public APIs perfect for developers to test AI agents or prototype applications.",
+    title: "Free Public APIs for AI Agents & Developers (2026 Directory)",
+    description: "A filterable directory of free public REST APIs for developers building AI agents. Browse APIs by category: weather, finance, sports, dev tools — no LLM required.",
     path: "/ai-tools/free-apis",
-    keywords: ["free public APIs for developers", "free API directory", "open source apis", "testing apis"]
+    keywords: ["free public APIs for AI agents", "public REST APIs directory", "free API directory for developers", "no-auth APIs for testing"]
 });
 
 export default function FreeAPIPage() {
@@ -70,12 +70,12 @@ export default function FreeAPIPage() {
             </nav>
 
             <header className="stagger-1" style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center', marginBottom: '4rem' }}>
-                <div className="pill" style={{ marginBottom: '1.5rem', display: 'inline-block' }}>Testing Infrastructure</div>
+                <div className="pill" style={{ marginBottom: '1.5rem', display: 'inline-block' }}>Public Data APIs</div>
                 <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', marginBottom: '1.5rem', lineHeight: 1.1, letterSpacing: '-0.03em' }}>
-                    Free Developer & <br /><span style={{ color: 'var(--accent-primary)' }}>Public API Directory</span>
+                    Free Public APIs <br /><span style={{ color: 'var(--accent-primary)' }}>for AI Agents & Developers</span>
                 </h1>
                 <p style={{ fontSize: '1.25rem', color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto', lineHeight: 1.6 }}>
-                    A robust collection of curated public APIs across finance, weather, and dev tools—perfect for supplying reliable data feeds to your AI workflows or MVP applications.
+                    A curated directory of free public REST APIs — weather, finance, sports, and dev tools — to supply real-world data to your AI agents and applications. No LLM provider accounts needed.
                 </p>
             </header>
 
@@ -120,7 +120,7 @@ export default function FreeAPIPage() {
             </section>
 
             <article className="stagger-3 seo-content" style={{ maxWidth: '800px', margin: '0 auto', fontSize: '1.125rem', lineHeight: 1.8 }}>
-                <h2 style={{ fontSize: '2.5rem', color: 'var(--text-primary)', marginBottom: '1.5rem' }}>Why Developers Need Public APIs</h2>
+                <h2 style={{ fontSize: '2.5rem', color: 'var(--text-primary)', marginBottom: '1.5rem' }}>Why AI Agents Need Public Data APIs</h2>
                 <p>
                     Regardless of whether you are hand-coding a React dashboard or prompting an autonomous Claude agent to deploy an infrastructure workflow, your software requires realistic contextual data. Testing algorithms via mocked interior variables forces blind spots into your application lifecycle. Utilizing <strong>free public APIs</strong> allows developers to safely hit third-party servers, fetch volatile REST payloads, and design error-handling protocols robustly without fear of exceeding expensive production quotas.
                 </p>
@@ -148,6 +148,14 @@ export default function FreeAPIPage() {
                     ))}
                 </div>
             </section>
+
+            {/* Differentiation notice */}
+            <div style={{ marginTop: '4rem', padding: '1.5rem 2rem', backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)', maxWidth: '800px', margin: '4rem auto 0' }}>
+                <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.95rem' }}>
+                    <strong style={{ color: 'var(--text-primary)' }}>Looking for free LLM APIs?</strong> This directory covers public data APIs (weather, finance, etc.) for use inside agent workflows. For free AI inference providers like Groq, OpenRouter, and Google AI Studio, see our{' '}
+                    <Link href="/guides/best-free-llm-apis" style={{ color: 'var(--accent-primary)' }}>Free LLM APIs Guide</Link>.
+                </p>
+            </div>
         </div>
     );
 }

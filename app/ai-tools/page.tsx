@@ -54,6 +54,12 @@ export default function AIToolsHubPage() {
 
     const CALCULATORS = [
         {
+            name: "AI Model Explorer",
+            slug: "ai-model-explorer",
+            desc: "Search, filter, and compare 55+ AI models and LLM APIs with real-time token pricing, context limits, and speed benchmarks.",
+            badge: "Interactive Tool"
+        },
+        {
             name: "Token Calculator",
             slug: "token-calculator",
             desc: "Estimate tokens from text in real-time, view breakdowns by language type, and evaluate dynamic token costs across major LLMs.",

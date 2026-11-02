@@ -9,6 +9,11 @@ const nextConfig = {
     async redirects() {
         return [
             {
+                source: '/ai-tools/llm-api-finder',
+                destination: '/ai-tools/ai-model-explorer',
+                permanent: true,
+            },
+            {
                 source: '/:path*',
                 has: [
                     {

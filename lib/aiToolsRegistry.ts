@@ -48,8 +48,8 @@ export const LLM_PROVIDERS: LLMProvider[] = [
         name: "Google AI Studio",
         description: "Direct API access to Google's Gemini models with a very generous free tier for developers.",
         url: "https://aistudio.google.com/",
-        models: ["Gemini 1.5 Pro", "Gemini 1.5 Flash", "Gemini 1.0 Pro"],
-        limits: "15 req/min, 1 million tokens/min",
+        models: ["Gemini 2.0 Flash", "Gemini 2.0 Flash-Lite", "Gemini 1.5 Pro"],
+        limits: "15 req/min, 1,500 req/day",
         cost: "Freemium",
         capabilities: ["Text", "Vision", "Code", "Audio"]
     },
@@ -57,7 +57,7 @@ export const LLM_PROVIDERS: LLMProvider[] = [
         name: "Groq",
         description: "LPU-powered inference engine offering incredibly fast generation speeds for open-source models.",
         url: "https://console.groq.com/",
-        models: ["Llama 3 70B", "Mixtral 8x7B", "Gemma 7B"],
+        models: ["Llama 3.3 70B", "Gemma 2 9B", "DeepSeek R1 Distill"],
         limits: "30 req/min, 14,400/day",
         cost: "Freemium",
         capabilities: ["Text", "Code"]
@@ -88,6 +88,15 @@ export const LLM_PROVIDERS: LLMProvider[] = [
         limits: "1 req/sec, 500k tokens/min",
         cost: "Freemium",
         capabilities: ["Text", "Code"]
+    },
+    {
+        name: "Moonshot AI (Kimi)",
+        description: "Frontier Chinese AI laboratory behind Kimi k1.5 and ultra-long-context models with generous developer developer tiers.",
+        url: "https://platform.moonshot.cn/",
+        models: ["Kimi k1.5 (Reasoning)", "Moonshot v1 2M", "Kimi Chat"],
+        limits: "$5 free starter balance, 30 req/min",
+        cost: "Trial Credits",
+        capabilities: ["Text", "Code", "Vision"]
     },
     {
         name: "GitHub Models",
