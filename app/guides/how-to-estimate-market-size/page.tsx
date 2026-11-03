@@ -91,7 +91,17 @@ export default function HowToEstimateMarketSize() {
                     
                     <section>
                         <h2 style={{ fontSize: '2rem', color: 'var(--text-primary)', marginBottom: '1rem' }}>Top-down vs bottom-up market sizing</h2>
-                        <p><strong>Top-down analysis:</strong> You look at a massive Gartner report declaring "The Global HR Software Market is $25 Billion." Then, you estimate your niche is 2% of that market, and you can capture 10% of that niche. This is incredibly inaccurate and highly frowned upon by investors.<br/><br/><strong>Bottom-up analysis:</strong> You identify the exact number of potential customers (e.g., 50,000 independent US cafes), and multiply it by their Annual Contract Value (ACV) for your software (e.g., $1,000 a year). 50,000 x $1,000 = A $50M TAM. This proves you understand the unit economics of your specific business engine.</p>
+                        <p><strong>Top-down analysis:</strong> You look at a massive Gartner report declaring "The Global HR Software Market is $25 Billion." Then, you estimate your niche is 2% of that market, and you can capture 10% of that niche. This is useful for macro industry perspective but lacks operational proof.<br/><br/><strong>Bottom-up analysis:</strong> You identify the exact number of potential customers (e.g., 50,000 independent US cafes), and multiply it by their Annual Contract Value (ACV) for your software (e.g., $1,000 a year). 50,000 x $1,000 = A $50M TAM. This proves you understand the unit economics of your specific business engine.</p>
+                        
+                        <div style={{ marginTop: '1.5rem', padding: '1.5rem', backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)' }}>
+                            <div style={{ fontWeight: 'bold', color: 'var(--text-primary)', marginBottom: '0.75rem', fontSize: '1rem' }}>Explore Detailed Market Sizing Guides:</div>
+                            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem', fontSize: '0.95rem' }}>
+                                <li>→ <Link href="/compare/market-sizing-top-down-vs-bottom-up" style={{ color: 'var(--accent-primary)', textDecoration: 'underline' }}>Top-Down vs Bottom-Up Market Sizing: Formulas &amp; Examples</Link></li>
+                                <li>→ <Link href="/compare/bottom-up-market-sizing-example" style={{ color: 'var(--accent-primary)', textDecoration: 'underline' }}>Bottom-Up Market Sizing Example for a SaaS Startup</Link></li>
+                                <li>→ <Link href="/compare/how-to-calculate-tam-sam-som" style={{ color: 'var(--accent-primary)', textDecoration: 'underline' }}>How to Calculate TAM, SAM and SOM (With Formulas)</Link></li>
+                                <li>→ <Link href="/compare/market-sizing-formula-explained" style={{ color: 'var(--accent-primary)', textDecoration: 'underline' }}>Market Sizing Formula Explained: Definitions &amp; Math</Link></li>
+                            </ul>
+                        </div>
                     </section>
 
                     <section>

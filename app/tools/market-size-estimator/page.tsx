@@ -33,7 +33,15 @@ export default function MarketSizeEstimator() {
         <>
             <h2>Calculating TAM Properly</h2>
             <p>TAM is often inflated in pitch decks. Calculating realistic SAM and SOM is vital for accurate financial forecasting.</p>
-            <h3>Internal Links</h3>
+            <h3>In-Depth Market Sizing Guides</h3>
+            <ul>
+                <li><Link href="/compare/market-sizing-top-down-vs-bottom-up">Top-Down vs Bottom-Up Market Sizing: Formulas &amp; Examples</Link></li>
+                <li><Link href="/compare/bottom-up-market-sizing-example">Bottom-Up Market Sizing Example for a SaaS Startup</Link></li>
+                <li><Link href="/compare/how-to-calculate-tam-sam-som">How to Calculate TAM, SAM and SOM</Link></li>
+                <li><Link href="/compare/market-sizing-formula-explained">Market Sizing Formula Explained</Link></li>
+                <li><Link href="/guides/how-to-estimate-market-size">Comprehensive Guide to Estimating Market Size</Link></li>
+            </ul>
+            <h3>Related Startup Tools</h3>
             <ul>
                 <li><Link href="/tools/idea-validation">Idea & Validation Cluster Hub</Link></li>
                 <li><Link href="/tools/startup-idea-validator">Startup Idea Validator</Link></li>
