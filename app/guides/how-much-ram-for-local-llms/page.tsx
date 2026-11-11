@@ -190,6 +190,44 @@ export default function HowMuchRAMForLocalLLMsGuide() {
                         </Link>
                     </div>
 
+                    {/* Related Hardware Resources & Comparisons */}
+                    <section style={{ marginTop: '3rem', padding: '2rem', backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-md)' }}>
+                        <h3 style={{ fontSize: '1.5rem', color: 'var(--text-primary)', marginBottom: '1rem' }}>Related Local AI Hardware Guides & Tools</h3>
+                        <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem', fontSize: '1rem' }}>Explore related GPU specs, bandwidth guides, and workstation builders:</p>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1rem' }}>
+                            <Link href="/compare/ram-vs-vram-for-ai" style={{ padding: '1.25rem', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)', textDecoration: 'none', transition: 'border-color 0.2s' }}>
+                                <div style={{ fontSize: '0.8rem', color: 'var(--accent-primary)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', fontWeight: 600 }}>Compare Hardware</div>
+                                <div style={{ color: 'var(--text-primary)', fontWeight: 600, marginBottom: '0.5rem' }}>RAM vs VRAM for AI Models</div>
+                                <div style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>Bandwidth bottlenecks, tokens/sec benchmarks, and DDR5 vs GDDR7 vs unified memory.</div>
+                            </Link>
+                            <Link href="/resources/model-hardware-requirements" style={{ padding: '1.25rem', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)', textDecoration: 'none', transition: 'border-color 0.2s' }}>
+                                <div style={{ fontSize: '0.8rem', color: 'var(--accent-primary)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', fontWeight: 600 }}>Spec Sheet</div>
+                                <div style={{ color: 'var(--text-primary)', fontWeight: 600, marginBottom: '0.5rem' }}>Model Hardware Requirements (2026)</div>
+                                <div style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>VRAM allocations and workstation tiers for 8B, 32B, 70B, and 405B models.</div>
+                            </Link>
+                            <Link href="/resources/llm-gpu-comparison-table" style={{ padding: '1.25rem', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)', textDecoration: 'none', transition: 'border-color 0.2s' }}>
+                                <div style={{ fontSize: '0.8rem', color: 'var(--accent-primary)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', fontWeight: 600 }}>GPU Leaderboard</div>
+                                <div style={{ color: 'var(--text-primary)', fontWeight: 600, marginBottom: '0.5rem' }}>AI GPU Comparison Table</div>
+                                <div style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>RTX 5090, 4090, dual 3090, and Apple M4 Ultra evaluated by VRAM bandwidth and price.</div>
+                            </Link>
+                            <Link href="/compare/7b-vs-13b-vs-70b-models" style={{ padding: '1.25rem', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)', textDecoration: 'none', transition: 'border-color 0.2s' }}>
+                                <div style={{ fontSize: '0.8rem', color: 'var(--accent-primary)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', fontWeight: 600 }}>Architecture Breakdown</div>
+                                <div style={{ color: 'var(--text-primary)', fontWeight: 600, marginBottom: '0.5rem' }}>7B vs 13B vs 70B Parameter Models</div>
+                                <div style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>Quality scaling, parameter density, and hardware trade-offs for local deployment.</div>
+                            </Link>
+                            <Link href="/ai-tools/ai-model-explorer" style={{ padding: '1.25rem', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)', textDecoration: 'none', transition: 'border-color 0.2s' }}>
+                                <div style={{ fontSize: '0.8rem', color: 'var(--accent-primary)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', fontWeight: 600 }}>Model Database</div>
+                                <div style={{ color: 'var(--text-primary)', fontWeight: 600, marginBottom: '0.5rem' }}>AI Model Explorer</div>
+                                <div style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>Filter open-weights vs API models, context sizes, and active parameter counts.</div>
+                            </Link>
+                            <Link href="/ai-tools/llm-ram-calculator" style={{ padding: '1.25rem', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)', textDecoration: 'none', transition: 'border-color 0.2s' }}>
+                                <div style={{ fontSize: '0.8rem', color: 'var(--accent-primary)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', fontWeight: 600 }}>Interactive Tool</div>
+                                <div style={{ color: 'var(--text-primary)', fontWeight: 600, marginBottom: '0.5rem' }}>LLM RAM Calculator</div>
+                                <div style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>Calculate exact VRAM requirements by parameter count, precision (Q4-FP16), and context.</div>
+                            </Link>
+                        </div>
+                    </section>
+
                     {/* FAQ Section */}
                     <section id="faqs" style={{ marginTop: '4rem', paddingTop: '3rem', borderTop: '1px solid var(--border-color)' }}>
                         <h2 style={{ fontSize: '2rem', marginBottom: '2rem', color: 'var(--text-primary)' }}>Frequently Asked Questions</h2>

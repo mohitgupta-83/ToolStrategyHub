@@ -525,12 +525,16 @@ export default function BestFreeLLMAPIsPage() {
 
                     {/* Related guides */}
                     <div style={{ padding: '1.5rem', backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
-                        <h4 style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--text-primary)', marginBottom: '1rem' }}>Related guides</h4>
+                        <h4 style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--text-primary)', marginBottom: '1rem' }}>Related Guides & Comparisons</h4>
                         <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+                            <li><Link href="/compare/gpt-vs-claude-token-costs" style={{ fontSize: '0.875rem', color: 'var(--accent-primary)', textDecoration: 'underline' }}>GPT vs Claude Token Costs (2026)</Link></li>
+                            <li><Link href="/compare/gemini-vs-gpt-context-limits" style={{ fontSize: '0.875rem', color: 'var(--accent-primary)', textDecoration: 'underline' }}>Gemini vs GPT Context Limits</Link></li>
+                            <li><Link href="/compare/gpt-vs-claude-full-comparison" style={{ fontSize: '0.875rem', color: 'var(--accent-primary)', textDecoration: 'underline' }}>GPT vs Claude Full Comparison</Link></li>
+                            <li><Link href="/guides/how-to-calculate-llm-api-token-costs" style={{ fontSize: '0.875rem', color: 'var(--accent-primary)', textDecoration: 'underline' }}>How to Calculate LLM API Costs</Link></li>
                             <li><Link href="/guides/cheapest-llm-api" style={{ fontSize: '0.875rem', color: 'var(--accent-primary)', textDecoration: 'underline' }}>Cheapest LLM API (paid tiers)</Link></li>
                             <li><Link href="/guides/how-llm-pricing-works" style={{ fontSize: '0.875rem', color: 'var(--accent-primary)', textDecoration: 'underline' }}>How LLM pricing works</Link></li>
+                            <li><Link href="/ai-tools/ai-model-explorer" style={{ fontSize: '0.875rem', color: 'var(--accent-primary)', textDecoration: 'underline' }}>AI Model Explorer (60+ models)</Link></li>
                             <li><Link href="/ai-tools/llm-apis" style={{ fontSize: '0.875rem', color: 'var(--accent-primary)', textDecoration: 'underline' }}>LLM provider directory</Link></li>
-                            <li><Link href="/guides/llm-cost-optimization" style={{ fontSize: '0.875rem', color: 'var(--accent-primary)', textDecoration: 'underline' }}>LLM cost optimization</Link></li>
                         </ul>
                     </div>
                 </aside>

@@ -197,6 +197,44 @@ export default function HowToReduceTokenCostsGuide() {
                         </Link>
                     </div>
 
+                    {/* Related Cost Optimization Resources & Comparisons */}
+                    <section style={{ marginTop: '3rem', padding: '2rem', backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-md)' }}>
+                        <h3 style={{ fontSize: '1.5rem', color: 'var(--text-primary)', marginBottom: '1rem' }}>Related Cost Optimization Guides & Tools</h3>
+                        <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem', fontSize: '1rem' }}>Explore related pricing breakdowns, token calculators, and cost-reduction playbooks:</p>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1rem' }}>
+                            <Link href="/guides/how-to-calculate-llm-api-token-costs" style={{ padding: '1.25rem', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)', textDecoration: 'none', transition: 'border-color 0.2s' }}>
+                                <div style={{ fontSize: '0.8rem', color: 'var(--accent-primary)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', fontWeight: 600 }}>Formulas & Math</div>
+                                <div style={{ color: 'var(--text-primary)', fontWeight: 600, marginBottom: '0.5rem' }}>How to Calculate LLM API Costs</div>
+                                <div style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>Exact mathematical formulas for prefill, decode, prompt caching, and batch processing.</div>
+                            </Link>
+                            <Link href="/compare/gpt-vs-claude-token-costs" style={{ padding: '1.25rem', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)', textDecoration: 'none', transition: 'border-color 0.2s' }}>
+                                <div style={{ fontSize: '0.8rem', color: 'var(--accent-primary)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', fontWeight: 600 }}>Compare Costs</div>
+                                <div style={{ color: 'var(--text-primary)', fontWeight: 600, marginBottom: '0.5rem' }}>GPT vs Claude Token Costs</div>
+                                <div style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>Unit cost comparison across GPT-5.5, GPT-4o-mini, Claude Opus 4.6, and Haiku 3.5.</div>
+                            </Link>
+                            <Link href="/guides/how-llm-pricing-works" style={{ padding: '1.25rem', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)', textDecoration: 'none', transition: 'border-color 0.2s' }}>
+                                <div style={{ fontSize: '0.8rem', color: 'var(--accent-primary)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', fontWeight: 600 }}>Core Guide</div>
+                                <div style={{ color: 'var(--text-primary)', fontWeight: 600, marginBottom: '0.5rem' }}>How LLM Pricing Works</div>
+                                <div style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>Prefill vs decode economics, GPU memory bandwidth constraints, and billing tiers.</div>
+                            </Link>
+                            <Link href="/guides/best-free-llm-apis" style={{ padding: '1.25rem', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)', textDecoration: 'none', transition: 'border-color 0.2s' }}>
+                                <div style={{ fontSize: '0.8rem', color: 'var(--accent-primary)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', fontWeight: 600 }}>Free Tiers</div>
+                                <div style={{ color: 'var(--text-primary)', fontWeight: 600, marginBottom: '0.5rem' }}>Best Free LLM APIs for Developers</div>
+                                <div style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>Zero-cost inference endpoints, no-credit-card setups, and development quotas.</div>
+                            </Link>
+                            <Link href="/ai-tools/token-calculator" style={{ padding: '1.25rem', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)', textDecoration: 'none', transition: 'border-color 0.2s' }}>
+                                <div style={{ fontSize: '0.8rem', color: 'var(--accent-primary)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', fontWeight: 600 }}>Interactive Tool</div>
+                                <div style={{ color: 'var(--text-primary)', fontWeight: 600, marginBottom: '0.5rem' }}>AI Token Calculator</div>
+                                <div style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>Paste prompts to count tokens and calculate exact costs before calling APIs.</div>
+                            </Link>
+                            <Link href="/ai-tools/llm-cost-calculator" style={{ padding: '1.25rem', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)', textDecoration: 'none', transition: 'border-color 0.2s' }}>
+                                <div style={{ fontSize: '0.8rem', color: 'var(--accent-primary)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', fontWeight: 600 }}>Interactive Tool</div>
+                                <div style={{ color: 'var(--text-primary)', fontWeight: 600, marginBottom: '0.5rem' }}>LLM Cost Calculator</div>
+                                <div style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>Model operational savings from prompt caching, model routing, and batching.</div>
+                            </Link>
+                        </div>
+                    </section>
+
                     {/* FAQ Section */}
                     <section id="faqs" style={{ marginTop: '4rem', paddingTop: '3rem', borderTop: '1px solid var(--border-color)' }}>
                         <h2 style={{ fontSize: '2rem', marginBottom: '2rem', color: 'var(--text-primary)' }}>Frequently Asked Questions</h2>

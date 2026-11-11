@@ -202,6 +202,44 @@ export default function WhatIsContextWindowGuide() {
                         </Link>
                     </div>
 
+                    {/* Related Context Window Resources & Comparisons */}
+                    <section style={{ marginTop: '3rem', padding: '2rem', backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-md)' }}>
+                        <h3 style={{ fontSize: '1.5rem', color: 'var(--text-primary)', marginBottom: '1rem' }}>Related Context Window Guides & Tools</h3>
+                        <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem', fontSize: '1rem' }}>Explore related technical guides, model head-to-heads, and memory allocation planners:</p>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1rem' }}>
+                            <Link href="/compare/gemini-vs-gpt-context-limits" style={{ padding: '1.25rem', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)', textDecoration: 'none', transition: 'border-color 0.2s' }}>
+                                <div style={{ fontSize: '0.8rem', color: 'var(--accent-primary)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', fontWeight: 600 }}>Compare Specs</div>
+                                <div style={{ color: 'var(--text-primary)', fontWeight: 600, marginBottom: '0.5rem' }}>Gemini vs GPT Context Limits</div>
+                                <div style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>10M vs 256K token context windows compared across recall, TTFT latency, and pricing.</div>
+                            </Link>
+                            <Link href="/compare/gpt-vs-claude-context-window" style={{ padding: '1.25rem', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)', textDecoration: 'none', transition: 'border-color 0.2s' }}>
+                                <div style={{ fontSize: '0.8rem', color: 'var(--accent-primary)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', fontWeight: 600 }}>Compare Specs</div>
+                                <div style={{ color: 'var(--text-primary)', fontWeight: 600, marginBottom: '0.5rem' }}>GPT vs Claude Context Window</div>
+                                <div style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>Size, output token ceilings, and needle-in-a-haystack recall across 2026 models.</div>
+                            </Link>
+                            <Link href="/resources/context-limit-chart" style={{ padding: '1.25rem', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)', textDecoration: 'none', transition: 'border-color 0.2s' }}>
+                                <div style={{ fontSize: '0.8rem', color: 'var(--accent-primary)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', fontWeight: 600 }}>Visual Planner</div>
+                                <div style={{ color: 'var(--text-primary)', fontWeight: 600, marginBottom: '0.5rem' }}>AI Model Context Limit Chart</div>
+                                <div style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>Visual reference comparing 128k, 256k, 1M, and 10M token context capacities.</div>
+                            </Link>
+                            <Link href="/guides/llm-context-window-explained" style={{ padding: '1.25rem', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)', textDecoration: 'none', transition: 'border-color 0.2s' }}>
+                                <div style={{ fontSize: '0.8rem', color: 'var(--accent-primary)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', fontWeight: 600 }}>Complete Guide</div>
+                                <div style={{ color: 'var(--text-primary)', fontWeight: 600, marginBottom: '0.5rem' }}>LLM Context Window Explained</div>
+                                <div style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>Practical examples, prompt memory management, and avoiding lost-in-the-middle degradation.</div>
+                            </Link>
+                            <Link href="/compare/long-context-models" style={{ padding: '1.25rem', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)', textDecoration: 'none', transition: 'border-color 0.2s' }}>
+                                <div style={{ fontSize: '0.8rem', color: 'var(--accent-primary)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', fontWeight: 600 }}>Leaderboard</div>
+                                <div style={{ color: 'var(--text-primary)', fontWeight: 600, marginBottom: '0.5rem' }}>Long-Context Models Compared</div>
+                                <div style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>Gemini, Claude, GPT, and Llama compared on context size, VRAM, and serverless cost.</div>
+                            </Link>
+                            <Link href="/ai-tools/context-window-calculator" style={{ padding: '1.25rem', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)', textDecoration: 'none', transition: 'border-color 0.2s' }}>
+                                <div style={{ fontSize: '0.8rem', color: 'var(--accent-primary)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', fontWeight: 600 }}>Interactive Tool</div>
+                                <div style={{ color: 'var(--text-primary)', fontWeight: 600, marginBottom: '0.5rem' }}>Context Window Calculator</div>
+                                <div style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>Simulate system prompts, chat history, and document payloads before API dispatch.</div>
+                            </Link>
+                        </div>
+                    </section>
+
                     {/* FAQ Section */}
                     <section id="faqs" style={{ marginTop: '4rem', paddingTop: '3rem', borderTop: '1px solid var(--border-color)' }}>
                         <h2 style={{ fontSize: '2rem', marginBottom: '2rem', color: 'var(--text-primary)' }}>Frequently Asked Questions</h2>

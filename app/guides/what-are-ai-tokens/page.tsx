@@ -224,6 +224,44 @@ export default function WhatAreAITokensGuide() {
                         </Link>
                     </div>
 
+                    {/* Related Resources & Comparisons */}
+                    <section style={{ marginTop: '3rem', padding: '2rem', backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-md)' }}>
+                        <h3 style={{ fontSize: '1.5rem', color: 'var(--text-primary)', marginBottom: '1rem' }}>Related AI Guides & Comparisons</h3>
+                        <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem', fontSize: '1rem' }}>Explore related technical references, unit cost comparisons, and token calculators:</p>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1rem' }}>
+                            <Link href="/compare/gpt-vs-claude-token-costs" style={{ padding: '1.25rem', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)', textDecoration: 'none', transition: 'border-color 0.2s' }}>
+                                <div style={{ fontSize: '0.8rem', color: 'var(--accent-primary)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', fontWeight: 600 }}>Compare Costs</div>
+                                <div style={{ color: 'var(--text-primary)', fontWeight: 600, marginBottom: '0.5rem' }}>GPT vs Claude Token Costs</div>
+                                <div style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>Full 2026 API pricing comparison across GPT-5.5, GPT-4o, and Claude Opus 4.6.</div>
+                            </Link>
+                            <Link href="/resources/token-conversion-chart" style={{ padding: '1.25rem', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)', textDecoration: 'none', transition: 'border-color 0.2s' }}>
+                                <div style={{ fontSize: '0.8rem', color: 'var(--accent-primary)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', fontWeight: 600 }}>Interactive Resource</div>
+                                <div style={{ color: 'var(--text-primary)', fontWeight: 600, marginBottom: '0.5rem' }}>Tokens-to-Words Conversion Chart</div>
+                                <div style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>Convert words, characters, and tokens across prose, code, and multilingual text.</div>
+                            </Link>
+                            <Link href="/guides/how-many-tokens-in-1000-words" style={{ padding: '1.25rem', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)', textDecoration: 'none', transition: 'border-color 0.2s' }}>
+                                <div style={{ fontSize: '0.8rem', color: 'var(--accent-primary)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', fontWeight: 600 }}>Deep-Dive Guide</div>
+                                <div style={{ color: 'var(--text-primary)', fontWeight: 600, marginBottom: '0.5rem' }}>How Many Tokens in 1,000 Words?</div>
+                                <div style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>Exact tokenizer conversions for Tiktoken, SentencePiece, and multilingual models.</div>
+                            </Link>
+                            <Link href="/guides/how-to-reduce-token-costs" style={{ padding: '1.25rem', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)', textDecoration: 'none', transition: 'border-color 0.2s' }}>
+                                <div style={{ fontSize: '0.8rem', color: 'var(--accent-primary)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', fontWeight: 600 }}>Optimization Guide</div>
+                                <div style={{ color: 'var(--text-primary)', fontWeight: 600, marginBottom: '0.5rem' }}>How to Reduce AI Token Costs</div>
+                                <div style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>Prompt caching, semantic compression, and model routing architectures.</div>
+                            </Link>
+                            <Link href="/compare/gpt-vs-claude-full-comparison" style={{ padding: '1.25rem', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)', textDecoration: 'none', transition: 'border-color 0.2s' }}>
+                                <div style={{ fontSize: '0.8rem', color: 'var(--accent-primary)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', fontWeight: 600 }}>Full Comparison</div>
+                                <div style={{ color: 'var(--text-primary)', fontWeight: 600, marginBottom: '0.5rem' }}>GPT vs Claude Full 2026 Breakdown</div>
+                                <div style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>Compare coding benchmarks, pricing, context windows, and agent capabilities.</div>
+                            </Link>
+                            <Link href="/ai-tools/llm-cost-calculator" style={{ padding: '1.25rem', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)', textDecoration: 'none', transition: 'border-color 0.2s' }}>
+                                <div style={{ fontSize: '0.8rem', color: 'var(--accent-primary)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', fontWeight: 600 }}>Interactive Tool</div>
+                                <div style={{ color: 'var(--text-primary)', fontWeight: 600, marginBottom: '0.5rem' }}>LLM Cost Calculator</div>
+                                <div style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>Model monthly operational costs with prompt caching and batch discounts.</div>
+                            </Link>
+                        </div>
+                    </section>
+
                     {/* FAQ Section */}
                     <section id="faqs" style={{ marginTop: '4rem', paddingTop: '3rem', borderTop: '1px solid var(--border-color)' }}>
                         <h2 style={{ fontSize: '2rem', marginBottom: '2rem', color: 'var(--text-primary)' }}>Frequently Asked Questions</h2>
