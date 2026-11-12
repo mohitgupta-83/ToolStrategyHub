@@ -141,9 +141,10 @@ export default function HowLLMPricingWorksGuide() {
                             Cache hits are rewarded with substantial discounts:
                         </p>
                         <ul>
-                            <li><strong>Anthropic Claude:</strong> Cache-write costs a 25% premium, but cache-read is discounted by 90%.</li>
-                            <li><strong>Google Gemini:</strong> Offers a 50% discount on inputs that hit the cache (active for contexts over 32k tokens).</li>
-                            <li><strong>DeepSeek V3:</strong> Cache-hit inputs are priced at $0.014 / MTok — a 90% discount from the baseline $0.14 rate.</li>
+                            <li><strong>Anthropic Claude:</strong> Claude 5.5 / Sonnet 5.5 slashes cache reads down to $0.10 / MTok ($0.20 on Fable 5.2 and Opus 5.5), yielding up to 95% savings on repeated context.</li>
+                            <li><strong>OpenAI GPT-6:</strong> Cached inputs are discounted down to $0.10 / MTok for GPT-6.1 Sol and an ultra-low $0.01 / MTok for GPT-6 Luna.</li>
+                            <li><strong>Google Gemini:</strong> Gemini 4 Carbon supports implicit caching starting at 4,096 tokens with cache-read rates at $0.10 / MTok.</li>
+                            <li><strong>DeepSeek:</strong> DeepSeek V4.1 Flash features cache-hit inputs at just $0.003 / MTok ($0.022 on V4 Pro), a 99% reduction from standard rates.</li>
                         </ul>
                     </section>
 
@@ -175,8 +176,8 @@ export default function HowLLMPricingWorksGuide() {
                             <code>50 tok/sec × 3600 sec × 24 hrs × 30 days = 129.6 million tokens / month</code>.
                         </p>
                         <p>
-                            If routing the same volume through a Claude 3.5 Sonnet API (blended rate $5.40 / MTok), the bill would be:<br />
-                            <code>129.6 MTok × $5.40 = $700 / month</code>.
+                            If routing the same volume through a Claude Sonnet 5.5 API (or GPT-6.1 Sol, with a blended rate around $3.60 / MTok), the bill would be:<br />
+                            <code>129.6 MTok × $3.60 = $466 / month</code> (or ~$700/month on historical Claude 3.5 Sonnet at $5.40 blended).
                         </p>
                         <p>
                             In this scenario, API hosting is still cheaper than leasing dedicated hardware because the GPU is not running at 100% continuous utilization. Only when your query density utilizes the GPU capacity fully does self-hosting yield margin gains.

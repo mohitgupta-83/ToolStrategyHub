@@ -7,6 +7,7 @@ import {
   ContextLimitChartWidget, 
   GpuSpecRecommenderWidget 
 } from '@/components/ResourceWidgets';
+import FormattedContent from '@/components/FormattedContent';
 import Link from 'next/link';
 
 // ─────────────────────────────────────────────────────────────────
@@ -109,7 +110,7 @@ export default function ResourcePage({ params }: { params: { slug: string } }) {
           {resource.sections.map((section, idx) => (
             <section key={idx}>
               <h2 style={{ fontSize: '1.75rem', color: 'var(--text-primary)', marginBottom: '1rem' }}>{section.heading}</h2>
-              <p style={{ whiteSpace: 'pre-wrap', color: 'var(--text-secondary)' }}>{section.body}</p>
+              <FormattedContent content={section.body} />
             </section>
           ))}
 

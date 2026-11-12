@@ -1,7 +1,151 @@
 [
   {
     "provider": "OpenAI",
-    "name": "GPT-4o",
+    "name": "GPT-6 Astra (Flagship)",
+    "slug": "gpt-6-astra",
+    "contextWindow": 1050000,
+    "inputCostPerM": 10.00,
+    "outputCostPerM": 50.00
+  },
+  {
+    "provider": "OpenAI",
+    "name": "GPT-6.1 Sol (Workhorse)",
+    "slug": "gpt-6-1-sol",
+    "contextWindow": 1050000,
+    "inputCostPerM": 2.00,
+    "outputCostPerM": 10.00
+  },
+  {
+    "provider": "OpenAI",
+    "name": "GPT-6 Luna (High-Volume)",
+    "slug": "gpt-6-luna",
+    "contextWindow": 1050000,
+    "inputCostPerM": 0.10,
+    "outputCostPerM": 0.50
+  },
+  {
+    "provider": "Anthropic",
+    "name": "Claude Fable 5.2 (Flagship Thinking)",
+    "slug": "claude-fable-5-2",
+    "contextWindow": 1000000,
+    "inputCostPerM": 8.00,
+    "outputCostPerM": 40.00
+  },
+  {
+    "provider": "Anthropic",
+    "name": "Claude Opus 5.5 (Heavy Reasoning)",
+    "slug": "claude-opus-5-5",
+    "contextWindow": 1000000,
+    "inputCostPerM": 4.00,
+    "outputCostPerM": 20.00
+  },
+  {
+    "provider": "Anthropic",
+    "name": "Claude Sonnet 5.5 (Coding Workhorse)",
+    "slug": "claude-sonnet-5-5",
+    "contextWindow": 1000000,
+    "inputCostPerM": 2.00,
+    "outputCostPerM": 10.00
+  },
+  {
+    "provider": "Anthropic",
+    "name": "Claude Haiku 5.5 (High Speed)",
+    "slug": "claude-haiku-5-5",
+    "contextWindow": 1000000,
+    "inputCostPerM": 0.10,
+    "outputCostPerM": 0.50
+  },
+  {
+    "provider": "Google",
+    "name": "Gemini 4 Carbon (Agentic Frontier)",
+    "slug": "gemini-4-carbon",
+    "contextWindow": 1048576,
+    "inputCostPerM": 2.00,
+    "outputCostPerM": 10.00
+  },
+  {
+    "provider": "Google",
+    "name": "Gemini 3.8 Flash (Multimodal)",
+    "slug": "gemini-3-8-flash",
+    "contextWindow": 1048576,
+    "inputCostPerM": 0.75,
+    "outputCostPerM": 3.75
+  },
+  {
+    "provider": "Google",
+    "name": "Gemini Omni 1.2 Flash (Video/Audio)",
+    "slug": "gemini-omni-1-2-flash",
+    "contextWindow": 131072,
+    "inputCostPerM": 1.50,
+    "outputCostPerM": 9.00
+  },
+  {
+    "provider": "Moonshot AI",
+    "name": "Kimi K3.1 Pro (2.8T MoE)",
+    "slug": "kimi-k3-1-pro",
+    "contextWindow": 1048576,
+    "inputCostPerM": 2.00,
+    "outputCostPerM": 10.00
+  },
+  {
+    "provider": "Alibaba Cloud",
+    "name": "Qwen 4 Max Preview (1M Context)",
+    "slug": "qwen-4-max-preview",
+    "contextWindow": 1000000,
+    "inputCostPerM": 1.60,
+    "outputCostPerM": 6.40
+  },
+  {
+    "provider": "DeepSeek",
+    "name": "DeepSeek V4 Pro",
+    "slug": "deepseek-v4-pro",
+    "contextWindow": 131072,
+    "inputCostPerM": 1.32,
+    "outputCostPerM": 3.96
+  },
+  {
+    "provider": "DeepSeek",
+    "name": "DeepSeek V4.1 Flash",
+    "slug": "deepseek-v4-1-flash",
+    "contextWindow": 131072,
+    "inputCostPerM": 0.30,
+    "outputCostPerM": 1.20
+  },
+  {
+    "provider": "Mistral",
+    "name": "Mistral Large 4",
+    "slug": "mistral-large-4",
+    "contextWindow": 1000000,
+    "inputCostPerM": 0.70,
+    "outputCostPerM": 2.10
+  },
+  {
+    "provider": "Mistral",
+    "name": "Mistral Small 4",
+    "slug": "mistral-small-4",
+    "contextWindow": 128000,
+    "inputCostPerM": 0.10,
+    "outputCostPerM": 0.30
+  },
+  {
+    "provider": "Meta",
+    "name": "Llama 4 Scout (10M Context)",
+    "slug": "llama-4-scout",
+    "contextWindow": 10000000,
+    "inputCostPerM": 0.08,
+    "outputCostPerM": 0.24
+  },
+  {
+    "provider": "Meta",
+    "name": "Llama 4 Maverick (1M Context)",
+    "slug": "llama-4-maverick",
+    "contextWindow": 1000000,
+    "inputCostPerM": 0.20,
+    "outputCostPerM": 0.80
+  },
+  {
+    "provider": "OpenAI",
+    "name": "GPT-4o (Previous Gen)",
     "slug": "gpt-4o",
     "contextWindow": 128000,
     "inputCostPerM": 2.50,

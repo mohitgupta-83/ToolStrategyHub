@@ -464,7 +464,7 @@ export default function AIModelExplorer() {
     const faqs = [
         {
             question: "How do I choose the best free LLM API for my project?",
-            answer: "If you prioritize generation speed and OpenAI SDK drop-in compatibility, Groq Cloud (Llama 3.3 70B at 250+ tokens/sec) is the best starting choice. If you require large context windows and multimodal inputs (PDFs, video, audio), Google AI Studio (Gemini 2.0 Flash with 1M context and 1,500 free daily requests) is the top recommendation. If you want to experiment across dozens of models without changing client code, OpenRouter's free routes provide the highest flexibility."
+            answer: "If you prioritize generation speed and OpenAI SDK drop-in compatibility, Groq Cloud (Llama 4 Scout and Llama 3.3 70B at 250+ tokens/sec) is the best starting choice. If you require large context windows and multimodal inputs (PDFs, video, audio), Google AI Studio (Gemini 3.8 Flash with 1M context and 1,500 free daily requests) is the top recommendation. If you want to experiment across dozens of models without changing client code, OpenRouter's free routes (`openrouter/free`) and NVIDIA NIM free developer endpoints provide the highest flexibility."
         },
         {
             question: "What does OpenAI-compatible API mean?",
@@ -476,7 +476,7 @@ export default function AIModelExplorer() {
         },
         {
             question: "What is the difference between Open Weights and Closed Source models?",
-            answer: "Open Weights models (like Meta's Llama 3.3, Mistral 7B, and DeepSeek R1) release their mathematical weights publicly, meaning you can self-host them locally on your own GPUs (e.g. using Ollama or vLLM) or use hosted inference providers. Closed Source models (like OpenAI's GPT-4o and Anthropic's Claude 3.5 Sonnet) can only be accessed via the creator's proprietary cloud endpoints."
+            answer: "Open Weights models (like Meta's Llama 4 Scout, Mistral Large 4, and DeepSeek V4) release their mathematical weights publicly, meaning you can self-host them locally on your own GPUs (e.g. using Ollama or vLLM) or use hosted inference providers. Closed Source models (like OpenAI's GPT-6 Astra and Anthropic's Claude Fable 5.2) can only be accessed via the creator's proprietary cloud endpoints."
         },
         {
             question: "How frequently is the pricing and rate limit data updated?",
@@ -489,7 +489,7 @@ export default function AIModelExplorer() {
         <div style={{ display: "flex", flexDirection: "column", gap: "1.75rem" }}>
             <h2>Architecture Guide: Evaluating LLM APIs for Modern AI Applications</h2>
             <p>
-                In 2026, developers no longer rely on a single model provider. Production AI architectures leverage <strong>dynamic model routing</strong>: sending low-complexity tasks (classification, entity extraction, intent detection) to ultra-fast, free or penny-tier models like <strong>Gemini 2.0 Flash-Lite</strong> or <strong>Groq Llama 3.1 8B</strong>, while reserving heavy reasoning and agent loops for frontier models like <strong>Claude 3.5 Sonnet</strong> or <strong>DeepSeek R1</strong>.
+                In 2026, developers no longer rely on a single model provider. Production AI architectures leverage <strong>dynamic model routing</strong>: sending low-complexity tasks (classification, entity extraction, intent detection) to ultra-fast, free or penny-tier models like <strong>Gemini 3.8 Flash</strong>, <strong>GPT-6 Luna</strong>, or <strong>Groq Llama 4 Scout</strong>, while reserving heavy reasoning and agent loops for frontier models like <strong>Claude Sonnet 5.5</strong>, <strong>GPT-6 Astra</strong>, or <strong>DeepSeek V4 Pro</strong> (alongside historical benchmarks from Claude 3.5 Sonnet and GPT-4o).
             </p>
 
             <h3>The Three Tiers of LLM API Access</h3>
@@ -497,19 +497,19 @@ export default function AIModelExplorer() {
                 <div style={{ padding: "1.25rem", backgroundColor: "var(--bg-secondary)", borderRadius: "var(--radius-sm)", border: "1px solid var(--border-color)" }}>
                     <h4 style={{ color: "var(--accent-primary)", marginBottom: "0.5rem" }}>1. Permanent Free Tiers</h4>
                     <p style={{ fontSize: "0.85rem", color: "var(--text-secondary)", margin: 0 }}>
-                        Providers like Google AI Studio (1,500 req/day) and Groq Cloud (14,400 req/day) maintain permanent free quotas without requiring credit cards.
+                        Providers like Google AI Studio (Gemini 3.8 Flash, 1,500 req/day), Groq Cloud (14,400 req/day), NVIDIA NIM, and Cloudflare Workers AI maintain permanent free quotas without requiring credit cards.
                     </p>
                 </div>
                 <div style={{ padding: "1.25rem", backgroundColor: "var(--bg-secondary)", borderRadius: "var(--radius-sm)", border: "1px solid var(--border-color)" }}>
                     <h4 style={{ color: "#3B82F6", marginBottom: "0.5rem" }}>2. Prototyping Sandboxes</h4>
                     <p style={{ fontSize: "0.85rem", color: "var(--text-secondary)", margin: 0 }}>
-                        GitHub Models allows developers to test GPT-4o, Claude 3.5 Sonnet, and o3-mini within VS Code and Codespaces for free during development.
+                        GitHub Models allows developers to test GPT-4.1, Claude Sonnet 5.5, Llama 4, and historical GPT-4o / Claude 3.5 Sonnet within VS Code and Codespaces for free during development.
                     </p>
                 </div>
                 <div style={{ padding: "1.25rem", backgroundColor: "var(--bg-secondary)", borderRadius: "var(--radius-sm)", border: "1px solid var(--border-color)" }}>
                     <h4 style={{ color: "#FBBF24", marginBottom: "0.5rem" }}>3. Low-Cost Pay-As-You-Go</h4>
                     <p style={{ fontSize: "0.85rem", color: "var(--text-secondary)", margin: 0 }}>
-                        When graduating from free limits, providers like DeepSeek ($0.14/1M) and OpenAI mini models ($0.15/1M) offer enterprise stability at negligible cost.
+                        When graduating from free limits, models like GPT-6 Luna ($0.10/1M), Claude Haiku 5.5 ($0.10/1M), and DeepSeek V4.1 Flash ($0.15/1M off-peak) offer enterprise stability at negligible cost.
                     </p>
                 </div>
             </div>

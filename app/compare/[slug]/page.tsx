@@ -2,6 +2,7 @@ import { toolsRegistry } from '@/lib/toolsRegistry';
 import { notFound } from 'next/navigation';
 import { generatePageMetadata } from '@/lib/seo';
 import { resolveAiCompare } from '@/lib/aiSeoRegistry';
+import FormattedContent from '@/components/FormattedContent';
 import Link from 'next/link';
 
 export function generateMetadata({ params }: { params: { slug: string } }) {
@@ -235,7 +236,7 @@ function AiComparePage({ compare }: { compare: any }) {
                 {compare.sections.map((section: any, idx: number) => (
                     <section key={idx}>
                         <h2 style={{ fontSize: '1.75rem', color: 'var(--text-primary)', marginBottom: '1rem' }}>{section.heading}</h2>
-                        <p style={{ whiteSpace: 'pre-wrap', color: 'var(--text-secondary)' }}>{section.body}</p>
+                        <FormattedContent content={section.body} />
                     </section>
                 ))}
             </article>

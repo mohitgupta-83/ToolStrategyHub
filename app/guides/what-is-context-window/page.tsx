@@ -114,7 +114,7 @@ export default function WhatIsContextWindowGuide() {
                     <section>
                         <h2 style={{ fontSize: '2rem', color: 'var(--text-primary)', marginBottom: '1rem' }}>2. The Lost in the Middle Phenomenon</h2>
                         <p>
-                            Having a large context window (e.g. 200,000 tokens for Claude 3.5 Sonnet) does not mean the model reads all tokens with equal clarity. Research has highlighted a systemic vulnerability in transformer attention matrices: **Lost in the Middle (LITM)**.
+                            Having a large context window (e.g. 1,000,000+ tokens for GPT-6 Astra and Claude Sonnet 5.5, or 10,000,000 tokens for Llama 4 Scout) does not mean the model reads all tokens with equal clarity. Research has highlighted a systemic vulnerability in transformer attention matrices: <strong>Lost in the Middle (LITM)</strong>.
                         </p>
                         <p>
                             When tested on "Needle in a Haystack" benchmarks (where a single arbitrary fact is buried inside a massive block of irrelevant documents), models exhibit a U-shaped recall curve:
@@ -147,25 +147,49 @@ export default function WhatIsContextWindowGuide() {
                                 </thead>
                                 <tbody>
                                     <tr style={{ borderBottom: '1px solid var(--border-color)' }}>
-                                        <td style={{ padding: '0.75rem 1rem' }}>GPT-4o</td>
+                                        <td style={{ padding: '0.75rem 1rem' }}><strong>Llama 4 Scout (Latest 2026)</strong></td>
+                                        <td style={{ padding: '0.75rem 1rem', fontFamily: 'var(--font-mono)' }}>10,000,000</td>
+                                        <td style={{ padding: '0.75rem 1rem', fontFamily: 'var(--font-mono)' }}>65,536</td>
+                                        <td style={{ padding: '0.75rem 1rem' }}>World-record context, MoE serverless retrieval</td>
+                                    </tr>
+                                    <tr style={{ borderBottom: '1px solid var(--border-color)' }}>
+                                        <td style={{ padding: '0.75rem 1rem' }}><strong>OpenAI GPT-6 Astra (Latest 2026)</strong></td>
+                                        <td style={{ padding: '0.75rem 1rem', fontFamily: 'var(--font-mono)' }}>1,050,000</td>
+                                        <td style={{ padding: '0.75rem 1rem', fontFamily: 'var(--font-mono)' }}>128,000</td>
+                                        <td style={{ padding: '0.75rem 1rem' }}>99.7% needle-in-haystack across 1M+ tokens</td>
+                                    </tr>
+                                    <tr style={{ borderBottom: '1px solid var(--border-color)' }}>
+                                        <td style={{ padding: '0.75rem 1rem' }}><strong>Claude Sonnet 5.5 (Latest 2026)</strong></td>
+                                        <td style={{ padding: '0.75rem 1rem', fontFamily: 'var(--font-mono)' }}>1,000,000</td>
+                                        <td style={{ padding: '0.75rem 1rem', fontFamily: 'var(--font-mono)' }}>128,000</td>
+                                        <td style={{ padding: '0.75rem 1rem' }}>99.8% precision, adaptive extended thinking</td>
+                                    </tr>
+                                    <tr style={{ borderBottom: '1px solid var(--border-color)' }}>
+                                        <td style={{ padding: '0.75rem 1rem' }}><strong>Gemini 4 Carbon (Latest 2026)</strong></td>
+                                        <td style={{ padding: '0.75rem 1rem', fontFamily: 'var(--font-mono)' }}>1,048,576</td>
+                                        <td style={{ padding: '0.75rem 1rem', fontFamily: 'var(--font-mono)' }}>65,536</td>
+                                        <td style={{ padding: '0.75rem 1rem' }}>Unified multimodal: 1hr video, 11hr audio</td>
+                                    </tr>
+                                    <tr style={{ borderBottom: '1px solid var(--border-color)' }}>
+                                        <td style={{ padding: '0.75rem 1rem' }}>GPT-4o (Historical)</td>
                                         <td style={{ padding: '0.75rem 1rem', fontFamily: 'var(--font-mono)' }}>128,000</td>
                                         <td style={{ padding: '0.75rem 1rem', fontFamily: 'var(--font-mono)' }}>4,096</td>
                                         <td style={{ padding: '0.75rem 1rem' }}>High up to 64k, minor drop at limits</td>
                                     </tr>
                                     <tr style={{ borderBottom: '1px solid var(--border-color)' }}>
-                                        <td style={{ padding: '0.75rem 1rem' }}>Claude 3.5 Sonnet</td>
+                                        <td style={{ padding: '0.75rem 1rem' }}>Claude 3.5 Sonnet (Historical)</td>
                                         <td style={{ padding: '0.75rem 1rem', fontFamily: 'var(--font-mono)' }}>200,000</td>
                                         <td style={{ padding: '0.75rem 1rem', fontFamily: 'var(--font-mono)' }}>8,192</td>
                                         <td style={{ padding: '0.75rem 1rem' }}>Excellent up to 150k, very high recall</td>
                                     </tr>
                                     <tr style={{ borderBottom: '1px solid var(--border-color)' }}>
-                                        <td style={{ padding: '0.75rem 1rem' }}>Gemini 1.5 Pro</td>
+                                        <td style={{ padding: '0.75rem 1rem' }}>Gemini 1.5 Pro (Historical)</td>
                                         <td style={{ padding: '0.75rem 1rem', fontFamily: 'var(--font-mono)' }}>2,000,000</td>
                                         <td style={{ padding: '0.75rem 1rem', fontFamily: 'var(--font-mono)' }}>8,192</td>
                                         <td style={{ padding: '0.75rem 1rem' }}>Strong up to 1M, minor loss in center layers</td>
                                     </tr>
                                     <tr style={{ borderBottom: '1px solid var(--border-color)' }}>
-                                        <td style={{ padding: '0.75rem 1rem' }}>Llama 3.3 70B</td>
+                                        <td style={{ padding: '0.75rem 1rem' }}>Llama 3.3 70B (Historical)</td>
                                         <td style={{ padding: '0.75rem 1rem', fontFamily: 'var(--font-mono)' }}>128,000</td>
                                         <td style={{ padding: '0.75rem 1rem', fontFamily: 'var(--font-mono)' }}>4,096</td>
                                         <td style={{ padding: '0.75rem 1rem' }}>High up to 64k, requires GQA adjustments</td>

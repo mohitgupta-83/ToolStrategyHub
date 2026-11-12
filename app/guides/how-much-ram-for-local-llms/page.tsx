@@ -104,7 +104,7 @@ export default function HowMuchRAMForLocalLLMsGuide() {
                     <section>
                         <h2 style={{ fontSize: '2rem', color: 'var(--text-primary)', marginBottom: '1rem' }}>1. The Hardware Bottleneck: VRAM vs. System RAM</h2>
                         <p>
-                            When self-hosting open-weight models (like Llama 3 or Mistral), output speed is dictated by **memory bandwidth**. During inference, the GPU must fetch billions of parameters from memory to process each word. Dedicated graphics memory (VRAM) operates at massive bandwidths: an Nvidia RTX 4090 moves data at 1,008 GB/sec. Standard system RAM, however, operates at only 50 to 90 GB/sec.
+                            When self-hosting open-weight models (like Llama 4, Llama 3, or Mistral), output speed is dictated by <strong>memory bandwidth</strong>. During inference, the GPU must fetch billions of parameters from memory to process each word. Dedicated graphics memory (VRAM) operates at massive bandwidths: an Nvidia RTX 5090 moves data at ~1,790 GB/sec (and RTX 4090 at 1,008 GB/sec). Standard system RAM, however, operates at only 50 to 90 GB/sec.
                         </p>
                         <p>
                             If a model's size fits entirely inside VRAM, generation is extremely fast (30 to 80 tokens per second). If the model exceeds the VRAM ceiling and spills into system RAM, the GPU must fetch weights over the slow PCIe system bus, causing output speed to crawl to 1-3 tokens per second—making it unusable for real-time applications.

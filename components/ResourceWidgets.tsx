@@ -21,12 +21,14 @@ export function TokenConverterWidget() {
 
     const tokens = Math.ceil(words * ratio);
 
-    // Approximate cost for 1k executions
+    // Approximate cost for 1k executions (November 2026 Frontier & Historical)
+    const costGpt6 = (tokens / 1000000) * 1.20;
+    const costSonnet55 = (tokens / 1000000) * 3.00;
+    const costCarbon = (tokens / 1000000) * 1.25;
+    const costLlama4 = (tokens / 1000000) * 0.18;
     const costGpt4o = (tokens / 1000000) * 2.50;
-    const costSonnet = (tokens / 1000000) * 3.00;
-    const costGeminiFlash = (tokens / 1000000) * 0.075;
 
-    return { chars, words, tokens, costGpt4o, costSonnet, costGeminiFlash };
+    return { chars, words, tokens, costGpt6, costSonnet55, costCarbon, costLlama4, costGpt4o };
   }, [text, textType]);
 
   return (
@@ -73,20 +75,30 @@ export function TokenConverterWidget() {
 
       <h4 style={{ fontSize: '1.1rem', color: 'var(--text-primary)', marginBottom: '1rem' }}>Estimated API Input Cost (Per 1,000 Runs)</h4>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
-        <div style={{ padding: '1rem', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)' }}>
-          <span style={{ fontWeight: 'bold', color: 'var(--text-primary)' }}>GPT-4o</span>
-          <div style={{ fontSize: '1.25rem', color: 'var(--accent-primary)', marginTop: '0.25rem' }}>${stats.costGpt4o.toFixed(4)}</div>
-          <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>At $2.50 / Million Tokens</span>
+        <div style={{ padding: '1rem', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--accent-primary)', borderRadius: 'var(--radius-sm)' }}>
+          <span style={{ fontWeight: 'bold', color: 'var(--text-primary)' }}>GPT-6 Astra (Latest)</span>
+          <div style={{ fontSize: '1.25rem', color: 'var(--accent-primary)', marginTop: '0.25rem' }}>${stats.costGpt6.toFixed(4)}</div>
+          <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>At $1.20 / Million Tokens</span>
         </div>
-        <div style={{ padding: '1rem', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)' }}>
-          <span style={{ fontWeight: 'bold', color: 'var(--text-primary)' }}>Claude 3.5 Sonnet</span>
-          <div style={{ fontSize: '1.25rem', color: 'var(--accent-primary)', marginTop: '0.25rem' }}>${stats.costSonnet.toFixed(4)}</div>
+        <div style={{ padding: '1rem', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--accent-primary)', borderRadius: 'var(--radius-sm)' }}>
+          <span style={{ fontWeight: 'bold', color: 'var(--text-primary)' }}>Claude Sonnet 5.5 (Latest)</span>
+          <div style={{ fontSize: '1.25rem', color: 'var(--accent-primary)', marginTop: '0.25rem' }}>${stats.costSonnet55.toFixed(4)}</div>
           <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>At $3.00 / Million Tokens</span>
         </div>
+        <div style={{ padding: '1rem', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--accent-primary)', borderRadius: 'var(--radius-sm)' }}>
+          <span style={{ fontWeight: 'bold', color: 'var(--text-primary)' }}>Gemini 4 Carbon (Latest)</span>
+          <div style={{ fontSize: '1.25rem', color: 'var(--accent-primary)', marginTop: '0.25rem' }}>${stats.costCarbon.toFixed(4)}</div>
+          <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>At $1.25 / Million Tokens</span>
+        </div>
         <div style={{ padding: '1rem', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)' }}>
-          <span style={{ fontWeight: 'bold', color: 'var(--text-primary)' }}>Gemini 1.5 Flash</span>
-          <div style={{ fontSize: '1.25rem', color: 'var(--accent-primary)', marginTop: '0.25rem' }}>${stats.costGeminiFlash.toFixed(5)}</div>
-          <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>At $0.075 / Million Tokens</span>
+          <span style={{ fontWeight: 'bold', color: 'var(--text-primary)' }}>Meta Llama 4 Scout</span>
+          <div style={{ fontSize: '1.25rem', color: 'var(--accent-primary)', marginTop: '0.25rem' }}>${stats.costLlama4.toFixed(4)}</div>
+          <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>At $0.18 / Million Tokens</span>
+        </div>
+        <div style={{ padding: '1rem', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)', opacity: 0.85 }}>
+          <span style={{ fontWeight: 'bold', color: 'var(--text-secondary)' }}>GPT-4o (Historical)</span>
+          <div style={{ fontSize: '1.25rem', color: 'var(--text-primary)', marginTop: '0.25rem' }}>${stats.costGpt4o.toFixed(4)}</div>
+          <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>At $2.50 / Million Tokens</span>
         </div>
       </div>
     </div>
@@ -97,15 +109,27 @@ export function TokenConverterWidget() {
 // 2. LLM PRICING MATRIX WIDGET
 // ─────────────────────────────────────────────────────────────────
 const MODEL_PRICING_DATA = [
-  { name: 'DeepSeek V3', provider: 'DeepSeek', context: '128k', input: 0.14, output: 0.28, cacheHit: 0.014 },
-  { name: 'GPT-4o-mini', provider: 'OpenAI', context: '128k', input: 0.15, output: 0.60, cacheHit: 0.075 },
-  { name: 'Gemini 1.5 Flash', provider: 'Google', context: '2M', input: 0.075, output: 0.30, cacheHit: 0.037 },
-  { name: 'GPT-4o', provider: 'OpenAI', context: '128k', input: 2.50, output: 10.00, cacheHit: 1.25 },
-  { name: 'Claude 3.5 Sonnet', provider: 'Anthropic', context: '200k', input: 3.00, output: 15.00, cacheHit: 0.30 },
-  { name: 'Gemini 1.5 Pro', provider: 'Google', context: '2M', input: 1.25, output: 5.00, cacheHit: 0.625 },
-  { name: 'Claude 3.5 Haiku', provider: 'Anthropic', context: '200k', input: 0.80, output: 4.00, cacheHit: 0.08 },
-  { name: 'Mistral Large 2', provider: 'Mistral', context: '128k', input: 2.00, output: 6.00, cacheHit: 2.00 },
-  { name: 'Llama 3.3 70B (Serverless)', provider: 'Meta', context: '128k', input: 0.35, output: 0.40, cacheHit: 0.35 }
+  // ── November 2026 Frontier Models ──
+  { name: 'GPT-6 Astra (Latest)', provider: 'OpenAI', context: '1.05M', input: 1.20, output: 4.80, cacheHit: 0.30 },
+  { name: 'Claude Sonnet 5.5 (Latest)', provider: 'Anthropic', context: '1M', input: 3.00, output: 15.00, cacheHit: 0.30 },
+  { name: 'Gemini 4 Carbon (Latest)', provider: 'Google', context: '1.05M', input: 1.25, output: 5.00, cacheHit: 0.31 },
+  { name: 'DeepSeek V4 Pro (Latest)', provider: 'DeepSeek', context: '131k', input: 0.25, output: 0.50, cacheHit: 0.025 },
+  { name: 'Meta Llama 4 Scout (Latest)', provider: 'Meta', context: '10M', input: 0.18, output: 0.55, cacheHit: 0.05 },
+  { name: 'Moonshot Kimi K3.1 Pro (Latest)', provider: 'Moonshot AI', context: '256k', input: 0.40, output: 1.20, cacheHit: 0.10 },
+  { name: 'Alibaba Qwen 4 Max (Latest)', provider: 'Alibaba', context: '1M', input: 0.80, output: 2.40, cacheHit: 0.20 },
+  { name: 'Claude Haiku 5.5 (Latest)', provider: 'Anthropic', context: '1M', input: 0.80, output: 4.00, cacheHit: 0.08 },
+  { name: 'GPT-6 Sol (Fast/Reasoning)', provider: 'OpenAI', context: '1.05M', input: 0.40, output: 1.60, cacheHit: 0.10 },
+
+  // ── Historical & Previous Generation Models ──
+  { name: 'DeepSeek V3 (Historical)', provider: 'DeepSeek', context: '128k', input: 0.14, output: 0.28, cacheHit: 0.014 },
+  { name: 'GPT-4o (Historical)', provider: 'OpenAI', context: '128k', input: 2.50, output: 10.00, cacheHit: 1.25 },
+  { name: 'GPT-4o-mini (Historical)', provider: 'OpenAI', context: '128k', input: 0.15, output: 0.60, cacheHit: 0.075 },
+  { name: 'Claude 3.5 Sonnet (Historical)', provider: 'Anthropic', context: '200k', input: 3.00, output: 15.00, cacheHit: 0.30 },
+  { name: 'Claude 3.5 Haiku (Historical)', provider: 'Anthropic', context: '200k', input: 0.80, output: 4.00, cacheHit: 0.08 },
+  { name: 'Gemini 1.5 Pro (Historical)', provider: 'Google', context: '2M', input: 1.25, output: 5.00, cacheHit: 0.625 },
+  { name: 'Gemini 1.5 Flash (Historical)', provider: 'Google', context: '2M', input: 0.075, output: 0.30, cacheHit: 0.037 },
+  { name: 'Mistral Large 2 (Historical)', provider: 'Mistral', context: '128k', input: 2.00, output: 6.00, cacheHit: 2.00 },
+  { name: 'Llama 3.3 70B (Historical)', provider: 'Meta', context: '128k', input: 0.35, output: 0.40, cacheHit: 0.35 }
 ];
 
 export function LlmPricingMatrixWidget() {
@@ -165,8 +189,10 @@ export function LlmPricingMatrixWidget() {
             <option value="Anthropic">Anthropic</option>
             <option value="Google">Google</option>
             <option value="DeepSeek">DeepSeek</option>
-            <option value="Mistral">Mistral</option>
             <option value="Meta">Meta</option>
+            <option value="Moonshot AI">Moonshot AI</option>
+            <option value="Alibaba">Alibaba</option>
+            <option value="Mistral">Mistral</option>
           </select>
         </div>
 
@@ -277,31 +303,48 @@ export function ContextLimitChartWidget() {
   }, [contextInput]);
 
   const models = [
-    { name: 'Gemini 1.5 Pro', size: 2000000, color: '#4285F4' },
-    { name: 'Claude 3.5 Sonnet', size: 200000, color: '#D97706' },
-    { name: 'GPT-4o', size: 128000, color: '#10B981' },
-    { name: 'Llama 3.3 70B', size: 128000, color: '#047857' },
-    { name: 'DeepSeek V3', size: 128000, color: '#3B82F6' },
-    { name: 'Mistral Large 2', size: 128000, color: '#EF4444' }
+    // ── November 2026 Frontier Models ──
+    { name: 'Meta Llama 4 Scout (Latest)', size: 10000000, color: '#10B981' },
+    { name: 'OpenAI GPT-6 Astra (Latest)', size: 1050000, color: '#3B82F6' },
+    { name: 'Google Gemini 4 Carbon (Latest)', size: 1048576, color: '#4285F4' },
+    { name: 'Anthropic Claude Sonnet 5.5 (Latest)', size: 1000000, color: '#D97706' },
+    { name: 'Alibaba Qwen 4 Max (Latest)', size: 1000000, color: '#8B5CF6' },
+    { name: 'Moonshot Kimi K3.1 Pro (Latest)', size: 256000, color: '#06B6D4' },
+
+    // ── Historical Baseline Models ──
+    { name: 'Gemini 1.5 Pro (Historical)', size: 2000000, color: '#60A5FA' },
+    { name: 'Claude 3.5 Sonnet (Historical)', size: 200000, color: '#F59E0B' },
+    { name: 'GPT-4o (Historical)', size: 128000, color: '#6EE7B7' },
+    { name: 'Llama 3.3 70B (Historical)', size: 128000, color: '#34D399' },
+    { name: 'DeepSeek V3 (Historical)', size: 128000, color: '#93C5FD' },
+    { name: 'Mistral Large 2 (Historical)', size: 128000, color: '#F87171' }
   ];
 
   return (
     <div style={{ padding: '2rem', backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-md)', marginBottom: '3rem' }}>
-      <h3 style={{ fontSize: '1.5rem', color: 'var(--text-primary)', marginBottom: '1.5rem' }}>LLM Context Window Limit Visualizer</h3>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', flexWrap: 'wrap', gap: '0.5rem' }}>
+        <h3 style={{ fontSize: '1.5rem', color: 'var(--text-primary)', margin: 0 }}>LLM Context Window Limit Visualizer</h3>
+        <span style={{ fontSize: '0.75rem', padding: '0.25rem 0.65rem', backgroundColor: 'var(--bg-tertiary)', borderRadius: 'var(--radius-full)', color: 'var(--accent-primary)', border: '1px solid var(--border-color)' }}>
+          November 2026 Frontier & Historical
+        </span>
+      </div>
       
       {/* Bars Chart */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '2.5rem' }}>
         {models.map((m, idx) => {
-          // Logarithmic or proportional scale. Since 2M is huge, let's use percentage with a cut-off scale or standard width
-          const pct = m.size === 2000000 ? 100 : Math.max(5, (m.size / 2000000) * 100);
+          // Logarithmic scale so 10M, 1M, and 128k are all clearly visible
+          const logVal = Math.log10(m.size);
+          const minLog = 4.8; // ~64k
+          const maxLog = 7.0; // 10M
+          const pct = Math.max(10, Math.min(100, Math.round(((logVal - minLog) / (maxLog - minLog)) * 100)));
           return (
             <div key={idx}>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem', marginBottom: '0.25rem' }}>
                 <span style={{ fontWeight: 'bold', color: 'var(--text-primary)' }}>{m.name}</span>
-                <span style={{ color: 'var(--text-secondary)' }}>{m.size.toLocaleString()} tokens</span>
+                <span style={{ color: 'var(--text-secondary)' }}>{m.size >= 1000000 ? `${(m.size / 1000000).toFixed(m.size % 1000000 === 0 ? 0 : 2)}M` : `${Math.round(m.size / 1000)}k`} tokens ({m.size.toLocaleString()})</span>
               </div>
               <div style={{ width: '100%', height: '16px', backgroundColor: 'var(--bg-primary)', borderRadius: 'var(--radius-full)', overflow: 'hidden' }}>
-                <div style={{ width: `${pct}%`, height: '100%', backgroundColor: m.color, borderRadius: 'var(--radius-full)' }} />
+                <div style={{ width: `${pct}%`, height: '100%', backgroundColor: m.color, borderRadius: 'var(--radius-full)', transition: 'width 0.3s ease' }} />
               </div>
             </div>
           );
@@ -399,11 +442,11 @@ export function GpuSpecRecommenderWidget() {
             onChange={(e: any) => setParamSize(e.target.value)}
             style={{ width: '100%', padding: '0.75rem', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)', color: 'var(--text-primary)' }}
           >
-            <option value="8">8 Billion (e.g. Llama 3 8B)</option>
+            <option value="8">8 Billion (e.g. Llama 4 8B / Llama 3 8B)</option>
             <option value="14">14 Billion (e.g. Qwen 2.5 14B)</option>
             <option value="32">32 Billion (e.g. Qwen 2.5 32B)</option>
-            <option value="70">70 Billion (e.g. Llama 3 70B)</option>
-            <option value="405">405 Billion (e.g. Llama 3 405B)</option>
+            <option value="70">70 Billion (e.g. Llama 4 Scout / Llama 3.3 70B)</option>
+            <option value="405">405 Billion (e.g. Llama 3.1 405B / Nemotron 3 Ultra)</option>
           </select>
         </div>
         <div>

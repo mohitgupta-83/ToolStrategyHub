@@ -7,7 +7,7 @@ import { trackUsage } from "@/lib/tracker";
 import pricingData from "@/lib/llmPricing.json";
 
 export default function LLMCostCalculator() {
-    const [modelSlug, setModelSlug] = useState("gpt-4o-mini");
+    const [modelSlug, setModelSlug] = useState("gpt-6-1-sol");
     const [inputTokens, setInputTokens] = useState(1000);
     const [outputTokens, setOutputTokens] = useState(500);
     const [requestsPerDay, setRequestsPerDay] = useState(1000);
@@ -85,7 +85,7 @@ export default function LLMCostCalculator() {
 
             <h3>Factors Affecting API Cost Scales</h3>
             <p>
-                API pricing is heavily linked to model scale. Lightweight models (e.g., <strong>GPT-4o mini</strong> or <strong>Gemini 1.5 Flash</strong>) cost fractions of a cent per request and are ideal for high-frequency classification tasks. Large, highly reasoning frontier models (e.g., <strong>Claude 3.5 Sonnet</strong> or <strong>GPT-4o</strong>) cost up to 20x more but are required for multi-step reasoning, agent execution, and complex coding assignments.
+                API pricing is heavily linked to model scale. Lightweight models (e.g., <strong>GPT-6 Luna</strong>, <strong>Gemini 3.8 Flash</strong>, or historical <strong>GPT-4o mini</strong>) cost fractions of a cent per request ($0.10/MTok) and are ideal for high-frequency classification tasks. Large, highly reasoning frontier models (e.g., <strong>Claude Sonnet 5.5</strong>, <strong>Claude Fable 5.2</strong>, or <strong>GPT-6 Astra</strong>) provide the deep intelligence required for autonomous multi-step reasoning, agent execution, and complex coding assignments.
             </p>
 
             <h3>How to Reduce API and Token Costs</h3>

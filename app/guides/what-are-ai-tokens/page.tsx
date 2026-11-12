@@ -104,10 +104,10 @@ export default function WhatAreAITokensGuide() {
                     <section>
                         <h2 style={{ fontSize: '2rem', color: 'var(--text-primary)', marginBottom: '1rem' }}>1. Introduction: The Concept of Tokenization</h2>
                         <p>
-                            Large Language Models (LLMs) like GPT-4, Claude 3.5, and Llama 3 are mathematical calculators. They do not read words as semantic letters, nor do they process characters individually. Processing individual characters would make sequence lengths too long for self-attention layers to handle (since self-attention complexity scales quadratically with sequence size). Conversely, treating every entire word as a distinct token would require a dictionary of millions of words, causing the model's embedding matrices to become impossibly bloated and unable to generalize to new or misspelled words.
+                            Large Language Models (LLMs) like GPT-6 Astra, Claude 5.5, Llama 4, and historical models like GPT-4 and Claude 3.5 are mathematical calculators. They do not read words as semantic letters, nor do they process characters individually. Processing individual characters would make sequence lengths too long for self-attention layers to handle (since self-attention complexity scales quadratically with sequence size). Conversely, treating every entire word as a distinct token would require a dictionary of millions of words, causing the model's embedding matrices to become impossibly bloated and unable to generalize to new or misspelled words.
                         </p>
                         <p>
-                            To solve this trade-off, developers use <strong>sub-word tokenization</strong>. Tokenization splits input text into common combinations of character segments. These segments are called **tokens**. Under this architecture, common words are represented as single tokens, while rarer words are broken down into logical sub-units (prefixes, roots, and suffixes). This allows the neural network to handle misspelled words, new vocabulary, and technical programming symbols efficiently.
+                            To solve this trade-off, developers use <strong>sub-word tokenization</strong>. Tokenization splits input text into common combinations of character segments. These segments are called <strong>tokens</strong>. Under this architecture, common words are represented as single tokens, while rarer words are broken down into logical sub-units (prefixes, roots, and suffixes). This allows the neural network to handle misspelled words, new vocabulary, and technical programming symbols efficiently.
                         </p>
                     </section>
 
@@ -145,20 +145,32 @@ export default function WhatAreAITokensGuide() {
                                 </thead>
                                 <tbody>
                                     <tr style={{ borderBottom: '1px solid var(--border-color)' }}>
-                                        <td style={{ padding: '0.75rem 1rem' }}>cl100k_base</td>
-                                        <td style={{ padding: '0.75rem 1rem' }}>GPT-4 / GPT-3.5</td>
-                                        <td style={{ padding: '0.75rem 1rem', fontFamily: 'var(--font-mono)' }}>100,277</td>
-                                        <td style={{ padding: '0.75rem 1rem', fontFamily: 'var(--font-mono)' }}>3.9</td>
+                                        <td style={{ padding: '0.75rem 1rem' }}>o200k_base (Enhanced)</td>
+                                        <td style={{ padding: '0.75rem 1rem' }}>OpenAI GPT-6 (Astra, Sol, Luna)</td>
+                                        <td style={{ padding: '0.75rem 1rem', fontFamily: 'var(--font-mono)' }}>200,000</td>
+                                        <td style={{ padding: '0.75rem 1rem', fontFamily: 'var(--font-mono)' }}>4.5</td>
+                                    </tr>
+                                    <tr style={{ borderBottom: '1px solid var(--border-color)' }}>
+                                        <td style={{ padding: '0.75rem 1rem' }}>Llama 4 Tokenizer</td>
+                                        <td style={{ padding: '0.75rem 1rem' }}>Meta Llama 4 (Scout, Maverick)</td>
+                                        <td style={{ padding: '0.75rem 1rem', fontFamily: 'var(--font-mono)' }}>128,256</td>
+                                        <td style={{ padding: '0.75rem 1rem', fontFamily: 'var(--font-mono)' }}>4.3</td>
                                     </tr>
                                     <tr style={{ borderBottom: '1px solid var(--border-color)' }}>
                                         <td style={{ padding: '0.75rem 1rem' }}>o200k_base</td>
-                                        <td style={{ padding: '0.75rem 1rem' }}>GPT-4o / GPT-4o-mini</td>
+                                        <td style={{ padding: '0.75rem 1rem' }}>GPT-4o / GPT-4o-mini (Historical)</td>
                                         <td style={{ padding: '0.75rem 1rem', fontFamily: 'var(--font-mono)' }}>200,000</td>
                                         <td style={{ padding: '0.75rem 1rem', fontFamily: 'var(--font-mono)' }}>4.4</td>
                                     </tr>
                                     <tr style={{ borderBottom: '1px solid var(--border-color)' }}>
+                                        <td style={{ padding: '0.75rem 1rem' }}>cl100k_base</td>
+                                        <td style={{ padding: '0.75rem 1rem' }}>GPT-4 / GPT-3.5 (Historical)</td>
+                                        <td style={{ padding: '0.75rem 1rem', fontFamily: 'var(--font-mono)' }}>100,277</td>
+                                        <td style={{ padding: '0.75rem 1rem', fontFamily: 'var(--font-mono)' }}>3.9</td>
+                                    </tr>
+                                    <tr style={{ borderBottom: '1px solid var(--border-color)' }}>
                                         <td style={{ padding: '0.75rem 1rem' }}>Llama 3 Tokenizer</td>
-                                        <td style={{ padding: '0.75rem 1rem' }}>Llama 3 / 3.3</td>
+                                        <td style={{ padding: '0.75rem 1rem' }}>Llama 3 / 3.3 (Historical)</td>
                                         <td style={{ padding: '0.75rem 1rem', fontFamily: 'var(--font-mono)' }}>128,256</td>
                                         <td style={{ padding: '0.75rem 1rem', fontFamily: 'var(--font-mono)' }}>4.1</td>
                                     </tr>

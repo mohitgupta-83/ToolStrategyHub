@@ -7,7 +7,7 @@ import { trackUsage } from "@/lib/tracker";
 import pricingData from "@/lib/llmPricing.json";
 
 export default function ContextWindowCalculator() {
-    const [modelSlug, setModelSlug] = useState("gpt-4o-mini");
+    const [modelSlug, setModelSlug] = useState("gpt-6-astra");
     const [systemPrompt, setSystemPrompt] = useState(1000);
     const [userPrompt, setUserPrompt] = useState(5000);
     const [memoryTokens, setMemoryTokens] = useState(4000);
@@ -57,7 +57,7 @@ export default function ContextWindowCalculator() {
         {
             question: "How does context size affect model accuracy?",
             question_id: "context-q2",
-            answer: "Although modern models boast massive context limits (e.g. Gemini 2M tokens), research shows recall accuracy degrades when key information is buried in the middle of long prompts. This is known as the 'lost in the middle' effect."
+            answer: "Although modern frontier models boast massive context limits (e.g. GPT-6 at 1.05M tokens, Claude 5.5 at 1M tokens, and Llama 4 Scout at 10M tokens), research shows recall accuracy can degrade when key information is buried in the middle of long prompts. This is known as the 'lost in the middle' effect."
         },
         {
             question: "How can I avoid context window overflow?",

@@ -161,14 +161,14 @@ export default function HowToReduceTokenCostsGuide() {
                     <section>
                         <h2 style={{ fontSize: '2rem', color: 'var(--text-primary)', marginBottom: '1rem' }}>4. Model Routing: The Router-Agent Architecture</h2>
                         <p>
-                            Not every query requires a $15 / MTok reasoning engine. A robust cost reduction architecture implements a **routing layer**:
+                            Not every query requires a $15 / MTok reasoning engine. A robust cost reduction architecture implements a <strong>routing layer</strong>:
                         </p>
                         <p>
-                            When a user query arrives, a cheap classifier model (such as GPT-4o mini or Llama 3.1 8B, costing $0.15 / MTok) evaluates the complexity:
+                            When a user query arrives, a cheap classifier model (such as GPT-6 Luna, Claude Haiku 5.5, or historical GPT-4o mini, costing $0.10 to $0.15 / MTok) evaluates the complexity:
                         </p>
                         <ul style={{ paddingLeft: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                            <li>If the query is a simple greeting or factual question: The classifier responds immediately or routes to the cheap model.</li>
-                            <li>If the query requires multi-step math or programming logic: The classifier routes the prompt to the premium model (Claude 3.5 Sonnet).</li>
+                            <li>If the query is a simple greeting or factual question: The classifier responds immediately or routes to the cheap tier model ($0.10/M).</li>
+                            <li>If the query requires multi-step math or programming logic: The classifier routes the prompt to the premium model (Claude Sonnet 5.5 or GPT-6 Astra).</li>
                         </ul>
                         <p>
                             By offloading 70% of low-complexity requests to lightweight models, the blended cost of operation drops dramatically without degrading perceived capability.

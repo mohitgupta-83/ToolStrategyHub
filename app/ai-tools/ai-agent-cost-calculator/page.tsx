@@ -11,7 +11,7 @@ export default function AIAgentCostCalculator() {
     const [messagesPerUser, setMessagesPerUser] = useState(20);
     const [promptSize, setPromptSize] = useState(1500);
     const [outputSize, setOutputSize] = useState(400);
-    const [modelSlug, setModelSlug] = useState("gpt-4o-mini");
+    const [modelSlug, setModelSlug] = useState("gpt-6-1-sol");
     const [daysActive, setDaysActive] = useState(20);
     const [infraCost, setInfraCost] = useState(150); // hosting server (EC2, Render)
     const [dbCost, setDbCost] = useState(70); // Vector DB (Pinecone, Qdrant)
