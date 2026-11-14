@@ -195,6 +195,16 @@ export default function HowMuchRAMForLocalLLMsGuide() {
                         <h3 style={{ fontSize: '1.5rem', color: 'var(--text-primary)', marginBottom: '1rem' }}>Related Local AI Hardware Guides & Tools</h3>
                         <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem', fontSize: '1rem' }}>Explore related GPU specs, bandwidth guides, and workstation builders:</p>
                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1rem' }}>
+                            <Link href="/compare/open-source-vs-api-model-costs" style={{ padding: '1.25rem', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)', textDecoration: 'none', transition: 'border-color 0.2s' }}>
+                                <div style={{ fontSize: '0.8rem', color: 'var(--accent-primary)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', fontWeight: 600 }}>TCO Analysis</div>
+                                <div style={{ color: 'var(--text-primary)', fontWeight: 600, marginBottom: '0.5rem' }}>Open Source vs API Costs</div>
+                                <div style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>Dedicated GPU lease math, break-even volume curves, and serverless hosting costs.</div>
+                            </Link>
+                            <Link href="/guides/best-llm-for-coding" style={{ padding: '1.25rem', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)', textDecoration: 'none', transition: 'border-color 0.2s' }}>
+                                <div style={{ fontSize: '0.8rem', color: 'var(--accent-primary)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', fontWeight: 600 }}>Developer Guide</div>
+                                <div style={{ color: 'var(--text-primary)', fontWeight: 600, marginBottom: '0.5rem' }}>Best LLM for Coding (2026)</div>
+                                <div style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>Local and cloud coding models compared across SWE-bench Pro and static security tests.</div>
+                            </Link>
                             <Link href="/compare/ram-vs-vram-for-ai" style={{ padding: '1.25rem', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)', textDecoration: 'none', transition: 'border-color 0.2s' }}>
                                 <div style={{ fontSize: '0.8rem', color: 'var(--accent-primary)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', fontWeight: 600 }}>Compare Hardware</div>
                                 <div style={{ color: 'var(--text-primary)', fontWeight: 600, marginBottom: '0.5rem' }}>RAM vs VRAM for AI Models</div>

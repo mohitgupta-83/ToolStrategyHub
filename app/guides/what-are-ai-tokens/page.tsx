@@ -241,6 +241,16 @@ export default function WhatAreAITokensGuide() {
                         <h3 style={{ fontSize: '1.5rem', color: 'var(--text-primary)', marginBottom: '1rem' }}>Related AI Guides & Comparisons</h3>
                         <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem', fontSize: '1rem' }}>Explore related technical references, unit cost comparisons, and token calculators:</p>
                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1rem' }}>
+                            <Link href="/guides/best-llm-for-coding" style={{ padding: '1.25rem', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)', textDecoration: 'none', transition: 'border-color 0.2s' }}>
+                                <div style={{ fontSize: '0.8rem', color: 'var(--accent-primary)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', fontWeight: 600 }}>Developer Guide</div>
+                                <div style={{ color: 'var(--text-primary)', fontWeight: 600, marginBottom: '0.5rem' }}>Best LLM for Coding (2026)</div>
+                                <div style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>SWE-bench Pro, Terminal-Bench, and Sonar code quality evaluations compared.</div>
+                            </Link>
+                            <Link href="/guides/which-llm-model-to-use" style={{ padding: '1.25rem', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)', textDecoration: 'none', transition: 'border-color 0.2s' }}>
+                                <div style={{ fontSize: '0.8rem', color: 'var(--accent-primary)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', fontWeight: 600 }}>Decision Matrix</div>
+                                <div style={{ color: 'var(--text-primary)', fontWeight: 600, marginBottom: '0.5rem' }}>Which LLM Should You Use?</div>
+                                <div style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>Task-based selection matrix across coding, multimodality, reasoning, and budget.</div>
+                            </Link>
                             <Link href="/compare/gpt-vs-claude-token-costs" style={{ padding: '1.25rem', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)', textDecoration: 'none', transition: 'border-color 0.2s' }}>
                                 <div style={{ fontSize: '0.8rem', color: 'var(--accent-primary)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', fontWeight: 600 }}>Compare Costs</div>
                                 <div style={{ color: 'var(--text-primary)', fontWeight: 600, marginBottom: '0.5rem' }}>GPT vs Claude Token Costs</div>

@@ -198,6 +198,16 @@ export default function HowLLMPricingWorksGuide() {
                         <h3 style={{ fontSize: '1.5rem', color: 'var(--text-primary)', marginBottom: '1rem' }}>Related LLM Pricing Guides & Tools</h3>
                         <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem', fontSize: '1rem' }}>Explore related pricing formulas, provider comparisons, and budget modeling tools:</p>
                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1rem' }}>
+                            <Link href="/guides/cheapest-llm-api" style={{ padding: '1.25rem', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)', textDecoration: 'none', transition: 'border-color 0.2s' }}>
+                                <div style={{ fontSize: '0.8rem', color: 'var(--accent-primary)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', fontWeight: 600 }}>Budget Guide</div>
+                                <div style={{ color: 'var(--text-primary)', fontWeight: 600, marginBottom: '0.5rem' }}>Cheapest LLM APIs (2026)</div>
+                                <div style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>Ultra-low-cost models from Gemini Flash, GPT-6 Luna, and DeepSeek compared.</div>
+                            </Link>
+                            <Link href="/resources/llm-benchmark-comparison" style={{ padding: '1.25rem', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)', textDecoration: 'none', transition: 'border-color 0.2s' }}>
+                                <div style={{ fontSize: '0.8rem', color: 'var(--accent-primary)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', fontWeight: 600 }}>Leaderboard</div>
+                                <div style={{ color: 'var(--text-primary)', fontWeight: 600, marginBottom: '0.5rem' }}>LLM Benchmark Comparison</div>
+                                <div style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>MMLU-Pro, GPQA Diamond, SWE-bench Pro, and MATH-500 verified leaderboard.</div>
+                            </Link>
                             <Link href="/guides/how-to-calculate-llm-api-token-costs" style={{ padding: '1.25rem', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)', textDecoration: 'none', transition: 'border-color 0.2s' }}>
                                 <div style={{ fontSize: '0.8rem', color: 'var(--accent-primary)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', fontWeight: 600 }}>Formulas & Math</div>
                                 <div style={{ color: 'var(--text-primary)', fontWeight: 600, marginBottom: '0.5rem' }}>How to Calculate LLM API Costs</div>

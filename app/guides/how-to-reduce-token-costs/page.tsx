@@ -202,6 +202,16 @@ export default function HowToReduceTokenCostsGuide() {
                         <h3 style={{ fontSize: '1.5rem', color: 'var(--text-primary)', marginBottom: '1rem' }}>Related Cost Optimization Guides & Tools</h3>
                         <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem', fontSize: '1rem' }}>Explore related pricing breakdowns, token calculators, and cost-reduction playbooks:</p>
                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1rem' }}>
+                            <Link href="/guides/cheapest-llm-api" style={{ padding: '1.25rem', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)', textDecoration: 'none', transition: 'border-color 0.2s' }}>
+                                <div style={{ fontSize: '0.8rem', color: 'var(--accent-primary)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', fontWeight: 600 }}>Lowest Rates</div>
+                                <div style={{ color: 'var(--text-primary)', fontWeight: 600, marginBottom: '0.5rem' }}>Cheapest LLM APIs in 2026</div>
+                                <div style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>Blended per-million token pricing across Gemini Flash, GPT-6 Luna, DeepSeek, and open weights.</div>
+                            </Link>
+                            <Link href="/guides/llm-prompt-caching-explained" style={{ padding: '1.25rem', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)', textDecoration: 'none', transition: 'border-color 0.2s' }}>
+                                <div style={{ fontSize: '0.8rem', color: 'var(--accent-primary)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', fontWeight: 600 }}>Technical Guide</div>
+                                <div style={{ color: 'var(--text-primary)', fontWeight: 600, marginBottom: '0.5rem' }}>Prompt Caching Explained</div>
+                                <div style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>How prompt caching works under the hood and how to save up to 90% on input token costs.</div>
+                            </Link>
                             <Link href="/guides/how-to-calculate-llm-api-token-costs" style={{ padding: '1.25rem', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)', textDecoration: 'none', transition: 'border-color 0.2s' }}>
                                 <div style={{ fontSize: '0.8rem', color: 'var(--accent-primary)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', fontWeight: 600 }}>Formulas & Math</div>
                                 <div style={{ color: 'var(--text-primary)', fontWeight: 600, marginBottom: '0.5rem' }}>How to Calculate LLM API Costs</div>
